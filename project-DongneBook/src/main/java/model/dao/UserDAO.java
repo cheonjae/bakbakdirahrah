@@ -21,7 +21,7 @@ public class UserDAO {
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO USERINFO VALUES (?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {user.getUserId(), user.getPassword(), 
 						user.getName(), user.getEmail(), user.getPhone(), 
 						user.getLocation()};				
@@ -44,7 +44,7 @@ public class UserDAO {
 	 * 기존의 사용자 정보를 수정.
 	 */
 	public int update(User user) throws SQLException {
-		String sql = "UPDATE USERINFO "
+		String sql = "UPDATE USERS "
 					+ "SET password=?, name=?, email=?, phone=?, location=? "
 					+ "WHERE user_id=?";
 		Object[] param = new Object[] {user.getPassword(), user.getName(), 
@@ -70,7 +70,7 @@ public class UserDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int remove(String userId) throws SQLException {
-		String sql = "DELETE FROM USERINFO WHERE user_id=?";		
+		String sql = "DELETE FROM USERS WHERE user_id=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
