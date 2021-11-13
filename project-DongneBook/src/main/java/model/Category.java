@@ -1,9 +1,9 @@
 public class Category {
-    
-    private long cateId;
-    private String cateName;
+	
+	private long cateId;
+	private String cateName;
 
-    public Category() { }		// 기본 생성자
+	public Category() { }		// 기본 생성자
 	
 	public Category(long cateId, String cateName) {
 		this.cateId = cateId;
