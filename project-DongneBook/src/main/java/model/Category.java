@@ -2,21 +2,21 @@ package model;
 
 public class Category {
 	
-	private long cateId;
+	private int cateId;
 	private String cateName;
 
 	public Category() { }		// 기본 생성자
 	
-	public Category(long cateId, String cateName) {
+	public Category(int cateId, String cateName) {
 		this.cateId = cateId;
 		this.cateName = cateName;
 	}
 
-	public long getCateId() {
+	public int getCateId() {
 		return cateId;
 	}
 
-	public void setCateId(long cateId) {
+	public void setCateId(int cateId) {
 		this.cateId = cateId;
 	}
 
