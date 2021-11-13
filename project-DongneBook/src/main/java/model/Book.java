@@ -4,40 +4,48 @@ package model;
 import java.util.Date;
 
 public class Book {
-	private int userId;
+	private int bookId;
+	private String userId;
 	private int cateId;
 	private String title;
 	private String authors;
 	private String publisher;
 	private Date publicationDate;
-	private String productidentifier;
 	private int price;
 	private String description;
 	private String image;
 	
 	public Book() {} 	// 기본 생성자
 	
-	public Book(int userId, int cateId, String title, String authors, String publisher, Date publicationDate,
-			String productidentifier, int price, String description,
-			String image) {
+	public Book(int bookId, String userId, int cateId, String title, String authors,
+			String publisher, Date publicationDate,
+			int price, String description, String image) {
+		this.bookId = bookId;
 		this.userId = userId;
 		this.cateId = cateId;
 		this.title = title;
 		this.authors = authors;
 		this.publisher = publisher;
 		this.publicationDate = publicationDate;
-		this.productidentifier = productidentifier;
 		this.price = price;
 		this.description = description;
 		this.image = image;
 	
 	}
+	
+	public int getBookId() {
+		return bookId;
+	}
 
-	public int getUserId() {
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -81,14 +89,6 @@ public class Book {
 		this.publicationDate = publicationDate;
 	}
 
-	public String getProductidentifier() {
-		return productidentifier;
-	}
-
-	public void setProductidentifier(String productidentifier) {
-		this.productidentifier = productidentifier;
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -115,8 +115,9 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [userId=" + userId + ", cateId=" + cateId + ", title=" + title + ", authors=" + authors
-				+ ", publisher=" + publisher + ", publicationDate=" + publicationDate + ", productidentifier="
-				+ productidentifier + ", price=" + price + ", description=" + description + ", image=" + image + "]";
+		return "Book [bookId=" + bookId + ", userId=" + userId + ", cateId=" + cateId + ", title=" + title
+				+ ", authors=" + authors + ", publisher=" + publisher + ", publicationDate=" + publicationDate
+				+ ", price=" + price + ", description=" + description + ", image=" + image + "]";
 	}
+	
 }
