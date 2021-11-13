@@ -4,6 +4,8 @@ package model;
 import java.util.Date;
 
 public class Book {
+	private int userId;
+	private int cateId;
 	private String title;
 	private String authors;
 	private String publisher;
@@ -15,9 +17,11 @@ public class Book {
 	
 	public Book() {} 	// 기본 생성자
 	
-	public Book(String title, String authors, String publisher, Date publicationDate,
+	public Book(int userId, int cateId, String title, String authors, String publisher, Date publicationDate,
 			String productidentifier, int price, String description,
 			String image) {
+		this.userId = userId;
+		this.cateId = cateId;
 		this.title = title;
 		this.authors = authors;
 		this.publisher = publisher;
@@ -27,6 +31,22 @@ public class Book {
 		this.description = description;
 		this.image = image;
 	
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getCateId() {
+		return cateId;
+	}
+
+	public void setCateId(int cateId) {
+		this.cateId = cateId;
 	}
 
 	public String getTitle() {
@@ -95,8 +115,8 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", authors=" + authors + ", publisher=" + publisher + ", publicationDate="
-				+ publicationDate + ", productidentifier=" + productidentifier + ", price=" + price + ", description="
-				+ description + ", image=" + image + "]";
-	}	
+		return "Book [userId=" + userId + ", cateId=" + cateId + ", title=" + title + ", authors=" + authors
+				+ ", publisher=" + publisher + ", publicationDate=" + publicationDate + ", productidentifier="
+				+ productidentifier + ", price=" + price + ", description=" + description + ", image=" + image + "]";
+	}
 }
