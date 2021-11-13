@@ -1,4 +1,7 @@
-//Ã¥ °ü¸®¸¦ À§ÇØ ÇÊ¿äÇÑ µµ¸ŞÀÎ Å¬·¡½º.
+//ì±… ê´€ë¦¬ë¥¼ ìœ„í•´ í•„ìš”í•œ ë„ë©”ì¸ í´ë˜ìŠ¤.
+package model;
+
+import java.util.Date;
 
 public class Book {
 	private String title;
@@ -10,7 +13,7 @@ public class Book {
 	private String description;
 	private String image;
 	
-	public Book() {} 	// ±âº» »ı¼ºÀÚ
+	public Book() {} 	// ê¸°ë³¸ ìƒì„±ì
 	
 	public Book(String title, String authors, String publisher, Date publicationDate,
 			String productidentifier, int price, String description,
@@ -25,31 +28,75 @@ public class Book {
 		this.image = image;
 	
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getAuthors() {
 		return authors;
 	}
-	public int Publisher() {
+
+	public void setAuthors(String authors) {
+		this.authors = authors;
+	}
+
+	public String getPublisher() {
 		return publisher;
 	}
-	public String Productidentifier() {
-		return productidentifier;
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
 	}
+
 	public Date getPublicationDate() {
 		return publicationDate;
 	}
+
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
+	}
+
+	public String getProductidentifier() {
+		return productidentifier;
+	}
+
+	public void setProductidentifier(String productidentifier) {
+		this.productidentifier = productidentifier;
+	}
+
 	public int getPrice() {
 		return price;
 	}
-	public int getDescription() {
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
 		return description;
 	}
-	public int getImage() {
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
 		return image;
 	}
 
+	public void setImage(String image) {
+		this.image = image;
+	}
 
+	@Override
+	public String toString() {
+		return "Book [title=" + title + ", authors=" + authors + ", publisher=" + publisher + ", publicationDate="
+				+ publicationDate + ", productidentifier=" + productidentifier + ", price=" + price + ", description="
+				+ description + ", image=" + image + "]";
+	}	
 }
