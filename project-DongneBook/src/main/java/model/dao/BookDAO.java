@@ -41,6 +41,31 @@ public class BookDAO {
 		return 0;	
 	}
 	
+	//책 정보 수정 (user_id와 book_id는 수정 불가능)
+	public int update(Book book) throws SQLException {
+		String sql = "UPDATE book "
+					+ "SET title=?, author=?, publisher=?, publication_date=?, 
+						price=?, description=?, image=?, category_id=?, sold=? "
+					+ "WHERE book_id=?";
+		Object[] param = new Object[] {book.getTitle(), book.getAuthor(), 
+					book.getPublisher(), book.getPublicationDate(), 
+					book.getPrice(), book.getDescription(), book.getImage(), 
+					book.getCateId(), book.getSold(), book.getBookId()};				
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
+			
+		try {				
+			int result = jdbcUtil.executeUpdate();	// update 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+	}
 	
 	//메인에서 이용할 책 찾기 (책 이미지, 제목, 가격) -> findUerList 참고함.
 	public List<Book> findBookMain() throws SQLException {
@@ -71,7 +96,6 @@ public class BookDAO {
 		}
 		return null;
 	}
-	
 	
 	//책 상세정보 보기에서 사용할 Find. (user_id를 포함한 책 정보 전부)
 	public Book findBookDetails(String book_id) throws SQLException {
@@ -129,6 +153,71 @@ public class BookDAO {
 		return 0;
 	}
 	
+	//마이페이지에 내가 등록한 책들을 페이지별로(4 * 4) 나열
+	public List<Book> findMyBookList(int currentPage, int countPerPage, String userId) throws SQLException {
+		String sql = "SELECT book_id, title, price, image "
+        			+ "FROM book "
+        			+ "WHERE user_id=? ";   
 
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId},		// JDBCUtil에 query문 설정
+				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
+				ResultSet.CONCUR_READ_ONLY);					
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();				// query 실행			
+			int start = ((currentPage-1) * countPerPage) + 1;	// 출력을 시작할 행 번호 계산
+			if ((start >= 0) && rs.absolute(start)) {			// 커서를 시작 행으로 이동
+				List<Book> myBookList = new ArrayList<Book>();	// 내 등록 책들의 리스트 생성
+				do {
+					Book book = new Book(			// Book 객체를 생성하여 책 정보를 저장
+						rs.getInt("book_id"),
+						rs.getString("title"),
+						rs.getInt("price"),
+						rs.getString("image"));
+					myBookList.add(book);			// 리스트에 Book 객체 저장
+				} while ((rs.next()) && (--countPerPage > 0));		
+				return myBookList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+	
+	//제목으로 검색한 책들을 나열
+	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException {
+		String keyword = "%" + title + "%";
+        		String sql = "SELECT book_id, title, price, image "
+        			+ "FROM book "
+        			+ "WHERE title LIKE ?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword},		// JDBCUtil에 query문과 매개 변수 설정
+				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
+				ResultSet.CONCUR_READ_ONLY);					
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();				// query 실행			
+			int start = ((currentPage-1) * countPerPage) + 1;	// 출력을 시작할 행 번호 계산
+			if ((start >= 0) && rs.absolute(start)) {			// 커서를 시작 행으로 이동
+				List<Book> searchBookList = new ArrayList<Book>();	// 내 등록 책들의 리스트 생성
+				do {
+					Book book = new Book(			// Book 객체를 생성하여 책 정보를 저장
+						rs.getInt("book_id"),
+						rs.getString("title"),
+						rs.getInt("price"),
+						rs.getString("image"));
+					searchBookList.add(book);			// 리스트에 Book 객체 저장
+				} while ((rs.next()) && (--countPerPage > 0));		
+				return searchBookList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
 	
 }
