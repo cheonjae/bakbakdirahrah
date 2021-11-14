@@ -113,6 +113,29 @@ public class BookDAO {
 		return null;
 	}
 	
+	/**
+	 * 북 ID에 해당하는 사용자를 삭제.
+	 */
+	public int remove(String bookId) throws SQLException {
+		String sql = "DELETE book, condition "
+				+ "FROM book JOIN condition USING(book_id) "
+				+ "WHERE book_id=?";		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 delete문과 매개 변수 설정
+
+		try {				
+			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+	}
+	
 
 	
 }
