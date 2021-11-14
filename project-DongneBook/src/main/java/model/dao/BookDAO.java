@@ -8,107 +8,88 @@ import java.util.List;
 import model.User;
 
 /**
- * ì±… ê´€ë¦¬ë¥¼ ìœ„í•´ ë°ì´í„°ë² ì´ìŠ¤ ì‘ì—…ì„ ì „ë‹´í•˜ëŠ” DAO í´ë˜ìŠ¤
- * BookInfo í…Œì´ë¸”ì— ì±… ì •ë³´ë¥¼ ì¶”ê°€, ìˆ˜ì •, ì‚­ì œ(ì»¨ë””ì…˜í¬í•¨), ê²€ìƒ‰ ìˆ˜í–‰ 
+ * Ã¥ °ü¸®¸¦ À§ÇØ µ¥ÀÌÅÍº£ÀÌ½º ÀÛ¾÷À» Àü´ãÇÏ´Â DAO Å¬·¡½º
+ * BookInfo Å×ÀÌºí¿¡ Ã¥ Á¤º¸¸¦ Ãß°¡, ¼öÁ¤, »èÁ¦(ÄÁµğ¼ÇÆ÷ÇÔ), °Ë»ö ¼öÇà 
 */
 
 public class BookDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public BookDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil ê°ì²´ ìƒì„±
+		jdbcUtil = new JDBCUtil();	// JDBCUtil °´Ã¼ »ı¼º
 	}
 		
-	// ìƒˆë¡œìš´ ì±… ìƒì„±	
+	// »õ·Î¿î Ã¥ »ı¼º	
 	public int create(Book book) throws SQLException {
-		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object [] param = new Object[] { book.getTitle(), book.getAuthor(),
-						book.getPublisher(), book.getPublicationDate(), book.getBookId(), book.getPrice(),
-						book.getDescription(), book.getImage(), book.getUserId(), book.getCateId(), book.getSold() }; 
+		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object [] param = new Object[] { book.getTitle(), book.getauthor(),
+						book.getPublisher(), book.getPublicationDate(), book.getPrice(),
+						book.getDescription(), book.getImage(), book.getgetCateId(), book.getUserId(), book.getBookId() }; 
 		
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ì— insertë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
 		
 		try {				
-			int result = jdbcUtil.executeUpdate();	// insert ë¬¸ ì‹¤í–‰
+			int result = jdbcUtil.executeUpdate();	// insert ¹® ½ÇÇà
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ë°˜í™˜
+			jdbcUtil.close();	// resource ¹İÈ¯
 		}		
 		return 0;	
 	}
 	
-	//ì±… ì •ë³´ ìˆ˜ì • (user_idì™€ book_idëŠ” ìˆ˜ì • ë¶ˆê°€ëŠ¥)
-	public int update(Book book) throws SQLException {
-		String sql = "UPDATE book "
-					+ "SET title=?, author=?, publisher=?, publication_date=?, 
-						price=?, description=?, image=?, category_id=?, sold=? "
-					+ "WHERE book_id=?";
-		Object[] param = new Object[] {book.getTitle(), book.getAuthor(), 
-					book.getPublisher(), book.getPublicationDate(), 
-					book.getPrice(), book.getDescription(), book.getImage(), 
-					book.getCateId(), book.getSold(), book.getBookId()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtilì— updateë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
-			
-		try {				
-			int result = jdbcUtil.executeUpdate();	// update ë¬¸ ì‹¤í–‰
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ë°˜í™˜
-		}		
-		return 0;
-	}
 	
-	//ë©”ì¸ì—ì„œ ì´ìš©í•  ì±… ì°¾ê¸° (ì±… ì´ë¯¸ì§€, ì œëª©, ê°€ê²©) -> findUerList ì°¸ê³ í•¨.
-	public List<Book> findBookMain() throws SQLException {
-		// BOOKì—ì„œ .. book_idë¥¼ í†µí•´ ì´ë¯¸ì§€(ì£¼ì†Œ), ì œëª©, ê°€ê²© ê°€ì ¸ì˜¨ë‹¤.
-		// ì¿¼ë¦¬ë¬¸ì´~ í™•ì‹¤ì¹˜ ì•Šì•„ìš”~
+	//¸ŞÀÎ¿¡¼­ ÀÌ¿ëÇÒ Ã¥ Ã£±â. ÆäÀÌÁö´ç Ãâ·ÂÇÒ Ã¥ ¼ö Ãß°¡
+	//(Ã¥ ÀÌ¹ÌÁö, Á¦¸ñ, °¡°İ) -> findUerList Âü°íÇÔ.
+	public List<Book> findBookMain(int currentPage, int countPerPage) throws SQLException {
+		// BOOK¿¡¼­ .. book_id¸¦ ÅëÇØ ÀÌ¹ÌÁö(ÁÖ¼Ò), Á¦¸ñ, °¡°İ °¡Á®¿Â´Ù.
+		// Äõ¸®¹®ÀÌ~ È®½ÇÄ¡ ¾Ê¾Æ¿ä~
         String sql = "SELECT image, title, price "  
         		   + "FROM BOOK "
         		+ "WHERE book_id=? "; 
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtilì— queryë¬¸ ì„¤ì •
+		jdbcUtil.setSqlAndParameters(sql, null, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll °¡´É
+				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil¿¡ query¹® ¼³Á¤
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ì‹¤í–‰			
-			List<User> BookMainList = new ArrayList<User>();	// Userë“¤ì˜ ë¦¬ìŠ¤íŠ¸ ìƒì„±
-			while (rs.next()) {
-				Book user = new Book(			// User ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ í˜„ì¬ í–‰ì˜ ì •ë³´ë¥¼ ì €ì¥
+			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà		
+			int start = ((currentPage-1) * countPerPage) + 1;	// Ãâ·ÂÀ» ½ÃÀÛÇÒ Çà ¹øÈ£ °è»ê
+			if ((start >= 0) && rs.absolute(start)) {			// Ä¿¼­¸¦ ½ÃÀÛ ÇàÀ¸·Î ÀÌµ¿
+			List<User> BookMainList = new ArrayList<User>();	// UserµéÀÇ ¸®½ºÆ® »ı¼º
+			do {
+				Book user = new Book(			// User °´Ã¼¸¦ »ı¼ºÇÏ¿© ÇöÀç ÇàÀÇ Á¤º¸¸¦ ÀúÀå
 					rs.getString("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
-				BookMainList.add(book);				// Listì— Book ê°ì²´ ì €ì¥
-			}		
+				BookMainList.add(book);				// List¿¡ Book °´Ã¼ ÀúÀå
+			}	while((rs.next()) && (--countPerPage > 0));
 			return BookMainList;					
-			
+		}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ë°˜í™˜
+			jdbcUtil.close();		// resource ¹İÈ¯
 		}
 		return null;
 	}
 	
-	//ì±… ìƒì„¸ì •ë³´ ë³´ê¸°ì—ì„œ ì‚¬ìš©í•  Find. (user_idë¥¼ í¬í•¨í•œ ì±… ì •ë³´ ì „ë¶€)
+	
+	//Ã¥ »ó¼¼Á¤º¸ º¸±â¿¡¼­ »ç¿ëÇÒ Find. (user_id¸¦ Æ÷ÇÔÇÑ Ã¥ Á¤º¸ ÀüºÎ)
 	public Book findBookDetails(String book_id) throws SQLException {
         String sql = "SELECT user_id, book_id, category_id, title, author, publisher,"
         		+ " publicationdate, price, description, image "
         			+ "FROM BOOK "
         			+ "WHERE book_id=? ";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {book_id});	// JDBCUtilì— queryë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {book_id});	// JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ì‹¤í–‰
-			if (rs.next()) {						// ì±… ì •ë³´ ë°œê²¬
-				Book book = new Book(		// User ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ í•™ìƒ ì •ë³´ë¥¼ ì €ì¥
+			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà
+			if (rs.next()) {						// Ã¥ Á¤º¸ ¹ß°ß
+				Book book = new Book(		// User °´Ã¼¸¦ »ı¼ºÇÏ¿© ÇĞ»ı Á¤º¸¸¦ ÀúÀå
 					book_id,
 					rs.getInt("user_id"),
 					rs.getString("category_id"),
@@ -125,22 +106,23 @@ public class BookDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ë°˜í™˜
+			jdbcUtil.close();		// resource ¹İÈ¯
 		}
 		return null;
 	}
 	
 	/**
-	 * ë¶ IDì— í•´ë‹¹í•˜ëŠ” ì‚¬ìš©ìë¥¼ ì‚­ì œ. 
+	 * ºÏ ID¿¡ ÇØ´çÇÏ´Â »ç¿ëÀÚ¸¦ »èÁ¦. 
 	 */
 	public int deleteBook(String book_id) throws SQLException {
-		//ë³´ë¥˜
-		String sql = "DELETE FROM condition WHERE book_id=?; "
-				+ "DELETE FROM book WHERE book_id=?";	
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {book_id});	// JDBCUtilì— deleteë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
+		//º¸·ù
+		String sql = "DELETE book, condition "
+				+ "FROM book JOIN condition USING(book_id) "
+				+ "WHERE book_id=?";		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {book_id});	// JDBCUtil¿¡ delete¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete ë¬¸ ì‹¤í–‰
+			int result = jdbcUtil.executeUpdate();	// delete ¹® ½ÇÇà
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -148,76 +130,11 @@ public class BookDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ë°˜í™˜
+			jdbcUtil.close();	// resource ¹İÈ¯
 		}		
 		return 0;
 	}
 	
-	//ë§ˆì´í˜ì´ì§€ì— ë‚´ê°€ ë“±ë¡í•œ ì±…ë“¤ì„ í˜ì´ì§€ë³„ë¡œ(4 * 4) ë‚˜ì—´
-	public List<Book> findMyBookList(int currentPage, int countPerPage, String userId) throws SQLException {
-		String sql = "SELECT book_id, title, price, image "
-        			+ "FROM book "
-        			+ "WHERE user_id=? ";   
 
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId},		// JDBCUtilì— queryë¬¸ ì„¤ì •
-				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll ê°€ëŠ¥
-				ResultSet.CONCUR_READ_ONLY);					
-		
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();				// query ì‹¤í–‰			
-			int start = ((currentPage-1) * countPerPage) + 1;	// ì¶œë ¥ì„ ì‹œì‘í•  í–‰ ë²ˆí˜¸ ê³„ì‚°
-			if ((start >= 0) && rs.absolute(start)) {			// ì»¤ì„œë¥¼ ì‹œì‘ í–‰ìœ¼ë¡œ ì´ë™
-				List<Book> myBookList = new ArrayList<Book>();	// ë‚´ ë“±ë¡ ì±…ë“¤ì˜ ë¦¬ìŠ¤íŠ¸ ìƒì„±
-				do {
-					Book book = new Book(			// Book ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ ì±… ì •ë³´ë¥¼ ì €ì¥
-						rs.getInt("book_id"),
-						rs.getString("title"),
-						rs.getInt("price"),
-						rs.getString("image"));
-					myBookList.add(book);			// ë¦¬ìŠ¤íŠ¸ì— Book ê°ì²´ ì €ì¥
-				} while ((rs.next()) && (--countPerPage > 0));		
-				return myBookList;
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource ë°˜í™˜
-		}
-		return null;
-	}
-	
-	//ì œëª©ìœ¼ë¡œ ê²€ìƒ‰í•œ ì±…ë“¤ì„ ë‚˜ì—´
-	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException {
-		String keyword = "%" + title + "%";
-        		String sql = "SELECT book_id, title, price, image "
-        			+ "FROM book "
-        			+ "WHERE title LIKE ?";
-
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword},		// JDBCUtilì— queryë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
-				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll ê°€ëŠ¥
-				ResultSet.CONCUR_READ_ONLY);					
-		
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();				// query ì‹¤í–‰			
-			int start = ((currentPage-1) * countPerPage) + 1;	// ì¶œë ¥ì„ ì‹œì‘í•  í–‰ ë²ˆí˜¸ ê³„ì‚°
-			if ((start >= 0) && rs.absolute(start)) {			// ì»¤ì„œë¥¼ ì‹œì‘ í–‰ìœ¼ë¡œ ì´ë™
-				List<Book> searchBookList = new ArrayList<Book>();	// ë‚´ ë“±ë¡ ì±…ë“¤ì˜ ë¦¬ìŠ¤íŠ¸ ìƒì„±
-				do {
-					Book book = new Book(			// Book ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ ì±… ì •ë³´ë¥¼ ì €ì¥
-						rs.getInt("book_id"),
-						rs.getString("title"),
-						rs.getInt("price"),
-						rs.getString("image"));
-					searchBookList.add(book);			// ë¦¬ìŠ¤íŠ¸ì— Book ê°ì²´ ì €ì¥
-				} while ((rs.next()) && (--countPerPage > 0));		
-				return searchBookList;
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource ë°˜í™˜
-		}
-		return null;
-	}
 	
 }
