@@ -1,4 +1,4 @@
-//책 관리를 위해 필요한 도메인 클래스.
+//梨� 愿�由щ�� �쐞�빐 �븘�슂�븳 �룄硫붿씤 �겢�옒�뒪.
 package model;
 
 import java.util.Date;
@@ -8,23 +8,24 @@ public class Book {
 	private String userId;
 	private int cateId;
 	private String title;
-	private String authors;
+	private String author;
 	private String publisher;
 	private Date publicationDate;
 	private int price;
 	private String description;
 	private String image;
+	private int sold;
 	
-	public Book() {} 	// 기본 생성자
+	public Book() {} 	// 기본 생성자 
 	
-	public Book(int bookId, String userId, int cateId, String title, String authors,
+	public Book(int bookId, String userId, int cateId, String title, String author,
 			String publisher, Date publicationDate,
 			int price, String description, String image) {
 		this.bookId = bookId;
 		this.userId = userId;
 		this.cateId = cateId;
 		this.title = title;
-		this.authors = authors;
+		this.author = author;
 		this.publisher = publisher;
 		this.publicationDate = publicationDate;
 		this.price = price;
@@ -32,6 +33,15 @@ public class Book {
 		this.image = image;
 	
 	}
+	
+	//책 제목, 가격, 이미지만 보여주기 위해서 만든..생성자..
+	public Book(int bookId, String title, int price, String image) {
+		this.bookId = bookId;
+		this.title = title;
+		this.price = price;
+		this.image = image;
+		}
+
 	
 	public int getBookId() {
 		return bookId;
@@ -65,12 +75,12 @@ public class Book {
 		this.title = title;
 	}
 
-	public String getAuthors() {
-		return authors;
+	public String getauthor() {
+		return author;
 	}
 
-	public void setAuthors(String authors) {
-		this.authors = authors;
+	public void setauthor(String author) {
+		this.author = author;
 	}
 
 	public String getPublisher() {
@@ -112,11 +122,19 @@ public class Book {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public int getSold() {
+		return sold;
+	}
+	
+	pubilc void setSold(int sold) {
+		this.sold = sold;
+	}
 
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", userId=" + userId + ", cateId=" + cateId + ", title=" + title
-				+ ", authors=" + authors + ", publisher=" + publisher + ", publicationDate=" + publicationDate
+				+ ", author=" + author + ", publisher=" + publisher + ", publicationDate=" + publicationDate
 				+ ", price=" + price + ", description=" + description + ", image=" + image + "]";
 	}
 	
