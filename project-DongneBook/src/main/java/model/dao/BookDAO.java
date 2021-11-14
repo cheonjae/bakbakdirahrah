@@ -67,28 +67,33 @@ public class BookDAO {
 		return 0;
 	}
 	
-	//메인에서 이용할 책 찾기 (책 이미지, 제목, 가격) -> findUerList 참고함.
-	public List<Book> findBookMain() throws SQLException {
+	//메인에서 이용할 책 찾기. 페이지당 출력할 책 수 추가
+	//(책 이미지, 제목, 가격) -> findUerList 참고함.
+	public List<Book> findBookMain(int currentPage, int countPerPage) throws SQLException {
 		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
 		// 쿼리문이~ 확실치 않아요~
         String sql = "SELECT image, title, price "  
         		   + "FROM BOOK "
         		+ "WHERE book_id=? "; 
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
+		jdbcUtil.setSqlAndParameters(sql, null, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
+				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행		
+			int start = ((currentPage-1) * countPerPage) + 1;	// 출력을 시작할 행 번호 계산
+			if ((start >= 0) && rs.absolute(start)) {			// 커서를 시작 행으로 이동
 			List<User> BookMainList = new ArrayList<User>();	// User들의 리스트 생성
-			while (rs.next()) {
+			do {
 				Book user = new Book(			// User 객체를 생성하여 현재 행의 정보를 저장
 					rs.getString("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
 				BookMainList.add(book);				// List에 Book 객체 저장
-			}		
+			}	while((rs.next()) && (--countPerPage > 0));
 			return BookMainList;					
-			
+		}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -129,6 +134,7 @@ public class BookDAO {
 		}
 		return null;
 	}
+	
 	
 	/**
 	 * 북 ID에 해당하는 사용자를 삭제. 
