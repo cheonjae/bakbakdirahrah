@@ -2,16 +2,38 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import model.Book;
+import model.Condition;
 import model.dao.BookDAO;
+import model.dao.ConditionDAO;
 
 public class BookManager {
+	private static BookManager bookMan = new BookManager();
 	private BookDAO bookDAO;
+	private ConditionDAO conditionDAO;
+	
+	public static BookManager getInstance() {
+		return bookMan;
+	}
+	
+	public int create(Book book) throws SQLException {
+		return bookDAO.create(book);
+	}
+	
+	public int insertCondition(Condition condition) throws SQLException {
+		return conditionDAO.insert(condition);		
+	}
+
+	public List<Book> mainBookList(int currentPage, int countPerPage)
+			throws SQLException {
+				return bookDAO.mainBookList(currentPage, countPerPage);
+		}
 	
 	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException, BookNotFoundException {
 		List<Book> book = bookDAO.searchBookList(currentPage, countPerPage, title);
 		if (book == null) {
-			throw new BookNotFoundException(title + "ÀÇ °Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.");
+			throw new BookNotFoundException(title + "ì˜ ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		}
 		return book;
 	}
@@ -19,7 +41,7 @@ public class BookManager {
 	public List<Book> findMyBookList(int currentPage, int countPerPage, String userId) throws SQLException, BookNotFoundException {
 		List<Book> book = bookDAO.searchBookList(currentPage, countPerPage, userId);
 		if (book == null) {
-			throw new BookNotFoundException("µî·ÏÇÑ Ã¥ÀÌ ¾ø½À´Ï´Ù.");
+			throw new BookNotFoundException("ë“±ë¡í•œ ì±…ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 		return book;
 	}
