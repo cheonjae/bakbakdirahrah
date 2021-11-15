@@ -68,7 +68,7 @@ public class BookDAO {
 	
 	//메인에서 이용할 책 찾기. 페이지당 출력할 책 수 추가
 	//(책 이미지, 제목, 가격) -> findUerList 참고함.
-	public List<Book> findBookMain(int currentPage, int countPerPage) throws SQLException {
+	public List<Book> mainBookList(int currentPage, int countPerPage) throws SQLException {
 		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
 		// 쿼리문이~ 확실치 않아요~
         String sql = "SELECT image, title, price "  
