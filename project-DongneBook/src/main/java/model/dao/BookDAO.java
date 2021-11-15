@@ -1,11 +1,11 @@
 package model.dao;
-import java.awt.print.Book;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.User;
+import model.Book;
 
 /**
  * 책 관리를 위해 데이터베이스 작업을 전담하는 DAO 클래스
@@ -22,7 +22,7 @@ public class BookDAO {
 	// 새로운 책 생성	
 	public int create(Book book) throws SQLException {
 		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object [] param = new Object[] { book.getTitle(), book.getAuthor(),
+		Object [] param = new Object[] { book.getTitle(), book.getauthor(),
 						book.getPublisher(), book.getPublicationDate(), book.getBookId(), book.getPrice(),
 						book.getDescription(), book.getImage(), book.getUserId(), book.getCateId(), book.getSold() }; 
 		
@@ -44,10 +44,9 @@ public class BookDAO {
 	//책 정보 수정 (user_id와 book_id는 수정 불가능)
 	public int update(Book book) throws SQLException {
 		String sql = "UPDATE book "
-					+ "SET title=?, author=?, publisher=?, publication_date=?, 
-						price=?, description=?, image=?, category_id=?, sold=? "
+					+ "SET title=?, author=?, publisher=?, publication_date=?, price=?, description=?, image=?, category_id=?, sold=? "
 					+ "WHERE book_id=?";
-		Object[] param = new Object[] {book.getTitle(), book.getAuthor(), 
+		Object[] param = new Object[] {book.getTitle(), book.getauthor(), 
 					book.getPublisher(), book.getPublicationDate(), 
 					book.getPrice(), book.getDescription(), book.getImage(), 
 					book.getCateId(), book.getSold(), book.getBookId()};				
@@ -83,10 +82,10 @@ public class BookDAO {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행		
 			int start = ((currentPage-1) * countPerPage) + 1;	// 출력을 시작할 행 번호 계산
 			if ((start >= 0) && rs.absolute(start)) {			// 커서를 시작 행으로 이동
-			List<User> BookMainList = new ArrayList<User>();	// User들의 리스트 생성
+			List<Book> BookMainList = new ArrayList<Book>();	// User들의 리스트 생성
 			do {
-				Book user = new Book(			// User 객체를 생성하여 현재 행의 정보를 저장
-					rs.getString("book_id"),
+				Book book = new Book(			// User 객체를 생성하여 현재 행의 정보를 저장
+					rs.getInt("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
@@ -103,9 +102,9 @@ public class BookDAO {
 	}
 	
 	//책 상세정보 보기에서 사용할 Find. (user_id를 포함한 책 정보 전부)
-	public Book findBookDetails(String book_id) throws SQLException {
-        String sql = "SELECT user_id, book_id, category_id, title, author, publisher,"
-        		+ " publicationdate, price, description, image "
+	public Book findBookDetails(int book_id) throws SQLException {
+        String sql = "SELECT user_id, category_id, title, author, publisher,"
+        		+ " publicationdate, price, description, image, sold "
         			+ "FROM BOOK "
         			+ "WHERE book_id=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {book_id});	// JDBCUtil에 query문과 매개 변수 설정
@@ -115,15 +114,16 @@ public class BookDAO {
 			if (rs.next()) {						// 책 정보 발견
 				Book book = new Book(		// User 객체를 생성하여 학생 정보를 저장
 					book_id,
-					rs.getInt("user_id"),
-					rs.getString("category_id"),
+					rs.getString("user_id"),
+					rs.getInt("category_id"),
 					rs.getString("title"),
 					rs.getString("author"),
 					rs.getString("publisher"),					
 					rs.getDate("publication_date"),
 					rs.getInt("price"),
 					rs.getString("description"),
-					rs.getString("image")
+					rs.getString("image"),
+					rs.getInt("sold")
 					);
 				return book;
 			}
