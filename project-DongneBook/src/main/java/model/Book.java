@@ -18,12 +18,11 @@ public class Book {
 	
 	public Book() {} 	// 기본 생성자 
 	
-	public Book(int bookId, String userId, int cateId, String title, String author,
+	public Book(int bookId, String userId, String title, String author,
 			String publisher, Date publicationDate,
-			int price, String description, String image, int sold) {
+			int price, String description, String image, int sold, int cateId) {
 		this.bookId = bookId;
 		this.userId = userId;
-		this.cateId = cateId;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
@@ -32,6 +31,7 @@ public class Book {
 		this.description = description;
 		this.image = image;
 		this.sold = sold;
+		this.cateId = cateId;
 	}
 	
 	//책 제목, 가격, 이미지만 보여주기 위해서 만든..생성자..
