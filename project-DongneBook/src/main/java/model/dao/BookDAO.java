@@ -226,4 +226,36 @@ public class BookDAO {
 		return null;
 	}
 	
+	//카테고리 아이디별로 책들을 나열(분류)
+	public List<Book> cateBookList(int currentPage, int countPerPage, int cateId) throws SQLException {
+        		String sql = "SELECT book_id, title, price, image "
+        			+ "FROM book "
+        			+ "WHERE category_id=?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {cateId},	// JDBCUtil에 query문과 매개 변수 설정
+				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
+				ResultSet.CONCUR_READ_ONLY);					
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();				// query 실행			
+			int start = ((currentPage-1) * countPerPage) + 1;	// 출력을 시작할 행 번호 계산
+			if ((start >= 0) && rs.absolute(start)) {			// 커서를 시작 행으로 이동
+				List<Book> cateBookList = new ArrayList<Book>();	// 내 등록 책들의 리스트 생성
+				do {
+					Book book = new Book(			// Book 객체를 생성하여 책 정보를 저장
+						rs.getInt("book_id"),
+						rs.getString("title"),
+						rs.getInt("price"),
+						rs.getString("image"));
+					cateBookList.add(book);			// 리스트에 Book 객체 저장
+				} while ((rs.next()) && (--countPerPage > 0));		
+				return cateBookList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
 }
