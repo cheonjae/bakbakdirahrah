@@ -30,6 +30,10 @@ public class BookManager {
 				return bookDAO.mainBookList(currentPage, countPerPage);
 		}
 	
+	public List findBookDetails(int book_id) throws SQLException {
+	return BookDAO.findBookDetails(book_id);
+	}
+	
 	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException, BookNotFoundException {
 		List<Book> book = bookDAO.searchBookList(currentPage, countPerPage, title);
 		if (book == null) {
