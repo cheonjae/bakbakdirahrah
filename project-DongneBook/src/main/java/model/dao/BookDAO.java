@@ -139,7 +139,7 @@ public class BookDAO {
 	/**
 	 * 북 ID에 해당하는 사용자를 삭제. 
 	 */
-	public int deleteBook(String book_id) throws SQLException {
+	public int deleteBook(int book_id) throws SQLException {
 		//보류
 		String sql = "DELETE FROM condition WHERE book_id=?; "
 				+ "DELETE FROM book WHERE book_id=?";	
