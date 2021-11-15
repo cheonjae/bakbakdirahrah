@@ -49,4 +49,8 @@ public class BookManager {
 		}
 		return book;
 	}
+	
+	public int deleteBook(int bookId) throws SQLException, BookNotFoundException {
+		return bookDAO.deleteBook(bookId);
+	}
 }
