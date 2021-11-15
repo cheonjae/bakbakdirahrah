@@ -23,8 +23,16 @@ public class BookManager {
 	
 	public int insertCondition(Condition condition) throws SQLException {
 		return conditionDAO.insert(condition);		
-	}
+	}	
 
+	// 북 정보변경
+	public int update(Book book) throws SQLException, BookNotFoundException {
+		if (book == null) {
+			throw new BookNotFoundException("등록한 책이 없습니다.");
+		}
+		return bookDAO.update(book);
+	}
+	
 	public List<Book> mainBookList(int currentPage, int countPerPage)
 			throws SQLException {
 				return bookDAO.mainBookList(currentPage, countPerPage);
@@ -48,6 +56,10 @@ public class BookManager {
 			throw new BookNotFoundException("등록한 책이 없습니다.");
 		}
 		return book;
+	}
+	
+	public List<Book> cateBookList(int currentPage, int countPerPage, int cateId) throws SQLException {
+		return bookDAO.cateBookList(currentPage, countPerPage, cateId);
 	}
 	
 	public int deleteBook(int bookId) throws SQLException, BookNotFoundException {
