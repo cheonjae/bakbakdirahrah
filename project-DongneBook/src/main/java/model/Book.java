@@ -20,7 +20,7 @@ public class Book {
 	
 	public Book(int bookId, String userId, int cateId, String title, String author,
 			String publisher, Date publicationDate,
-			int price, String description, String image) {
+			int price, String description, String image, int sold) {
 		this.bookId = bookId;
 		this.userId = userId;
 		this.cateId = cateId;
@@ -31,7 +31,7 @@ public class Book {
 		this.price = price;
 		this.description = description;
 		this.image = image;
-	
+		this.sold = sold;
 	}
 	
 	//책 제목, 가격, 이미지만 보여주기 위해서 만든..생성자..
@@ -40,7 +40,7 @@ public class Book {
 		this.title = title;
 		this.price = price;
 		this.image = image;
-		}
+	}
 
 	
 	public int getBookId() {
@@ -127,7 +127,7 @@ public class Book {
 		return sold;
 	}
 	
-	pubilc void setSold(int sold) {
+	public void setSold(int sold) {
 		this.sold = sold;
 	}
 
@@ -135,7 +135,7 @@ public class Book {
 	public String toString() {
 		return "Book [bookId=" + bookId + ", userId=" + userId + ", cateId=" + cateId + ", title=" + title
 				+ ", author=" + author + ", publisher=" + publisher + ", publicationDate=" + publicationDate
-				+ ", price=" + price + ", description=" + description + ", image=" + image + "]";
+				+ ", price=" + price + ", description=" + description + ", image=" + image + ", sold=" + sold + "]";
 	}
 	
 }
