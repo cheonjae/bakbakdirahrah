@@ -74,7 +74,7 @@ public class BookDAO {
         String sql = "SELECT image, title, price "  
         		   + "FROM BOOK "
         		+ "WHERE book_id=?"; 
-		jdbcUtil.setSqlAndParameters(sql, bookId, 
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId}, 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
 					
@@ -107,7 +107,7 @@ public class BookDAO {
         		+ " publicationdate, price, description, image, sold "
         			+ "FROM BOOK "
         			+ "WHERE book_id=?";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {book_id});	// JDBCUtil에 query문과 매개 변수 설정
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
