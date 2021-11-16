@@ -33,9 +33,9 @@ public class BookManager {
 		return bookDAO.update(book);
 	}
 	
-	public List<Book> mainBookList(int currentPage, int countPerPage)
+	public List<Book> mainBookList(int currentPage, int countPerPage, int bookId)
 			throws SQLException {
-				return bookDAO.mainBookList(currentPage, countPerPage);
+				return bookDAO.mainBookList(currentPage, countPerPage, bookId);
 		}
 	
 	public Book findBookDetails(int book_id) throws SQLException {
