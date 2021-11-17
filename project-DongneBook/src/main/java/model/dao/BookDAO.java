@@ -21,15 +21,21 @@ public class BookDAO {
 		
 	// 새로운 책 생성	
 	public int create(Book book) throws SQLException {
-		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?)";
 		Object [] param = new Object[] { book.getTitle(), book.getauthor(),
-						book.getPublisher(), book.getPublicationDate(), book.getBookId(), book.getPrice(),
+						book.getPublisher(), book.getPublicationDate(), book.getPrice(),
 						book.getDescription(), book.getImage(), book.getUserId(), book.getSold(), book.getCateId() }; 
 		
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 		
-		try {				
-			int result = jdbcUtil.executeUpdate();	// insert 문 실행
+		String key[] = {"book_id"}; 
+		try {
+			int result = jdbcUtil.executeUpdate(key);     // insert 문 실행
+			ResultSet rs = jdbcUtil.getGeneratedKeys();    // 생성된 PK 값을 포함한 result set 객체 반환
+		   	if(rs.next()) {
+		   		int generatedKey = rs.getInt("book_id");
+		   		book.setBookId(generatedKey);
+		   	}
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
