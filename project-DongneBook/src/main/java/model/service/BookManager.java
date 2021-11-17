@@ -38,8 +38,8 @@ public class BookManager {
 				return bookDAO.mainBookList(currentPage, countPerPage, bookId);
 		}
 	
-	public Book findBookDetails(int book_id) throws SQLException {
-		return bookDAO.findBookDetails(book_id);
+	public Book findBookDetails(int bookId) throws SQLException {
+		return bookDAO.findBookDetails(bookId);
 	}
 	
 	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException, BookNotFoundException {
