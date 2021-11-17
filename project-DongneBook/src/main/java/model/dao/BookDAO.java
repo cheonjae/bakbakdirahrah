@@ -74,13 +74,12 @@ public class BookDAO {
 	
 	//메인에서 이용할 책 찾기. 페이지당 출력할 책 수 추가
 	//(책 이미지, 제목, 가격) -> findUerList 참고함.
-	public List<Book> mainBookList(int currentPage, int countPerPage, int bookId) throws SQLException {
+	public List<Book> mainBookList(int currentPage, int countPerPage) throws SQLException {
 		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
 		// 쿼리문이~ 확실치 않아요~
-        String sql = "SELECT image, title, price "  
-        		   + "FROM BOOK "
-        		+ "WHERE book_id=?"; 
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId}, 
+        String sql = "SELECT book_id, title, price, image "  
+        		   + "FROM book"; 
+		jdbcUtil.setSqlAndParameters(sql, null, 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
 					
@@ -91,7 +90,7 @@ public class BookDAO {
 			List<Book> mainBookList = new ArrayList<Book>();	// User들의 리스트 생성
 			do {
 				Book book = new Book(			// User 객체를 생성하여 현재 행의 정보를 저장
-					bookId,
+					rs.getInt("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
