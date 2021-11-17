@@ -15,7 +15,7 @@ public class BookDetailController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(BookDetailController.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	String bookId = request.getParameter("bookId");
     	log.debug("BookDetail's BookId : {}", bookId);
 
