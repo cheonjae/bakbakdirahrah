@@ -19,7 +19,7 @@ public class Book {
 
 //	condition info
 	private int pageDiscoloration; // 페이지 변색 - 0(없음) or 1(있음)
-	private int coverDamage; // 겉표지 - 0(깨끗하지 않음) or 1(깨끗함)
+	private int coverDamage; // 겉표지 - 0(깨끗함) or 1(깨끗하지 )
 	private int pageDamage; // 페이지 훼손 - 0(없음) or 1(있음)
 	private int writing; // 필기 흔적 - 0(없음) or 1(연필/샤프) or 2(볼펜/형광펜)
 
