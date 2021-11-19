@@ -63,6 +63,10 @@ public class BookManager {
 		return bookDAO.cateBookList(cateId);
 	}
 	
+	public List<Category> findCategoryList() throws SQLException {
+		return bookDAO.findCategoryList();
+	}
+	
 	public int deleteBook(int bookId) throws SQLException, BookNotFoundException {
 		return bookDAO.deleteBook(bookId);
 	}
