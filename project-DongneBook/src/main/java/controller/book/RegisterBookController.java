@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.Book;
-import model.service.BookInfoException;
+import model.Category;
 import model.service.BookManager;
-
+import model.service.UserManager;
 import controller.book.RegisterBookController;
 
 public class RegisterBookController implements Controller {
@@ -29,6 +29,16 @@ public class RegisterBookController implements Controller {
        		log.debug("BookUpdateForm Request");
    			return "/book/bookUpdateForm.jsp"; 
        	} 
+       	
+       	if (request.getMethod().equals("GET")) {	
+    		// GET request: 회원정보 등록 form 요청	
+    		log.debug("RegisterForm Request");
+
+    		List<Category> cateList = BookManager.getInstance().findCategoryList();	// 커뮤니티 리스트 검색
+			request.setAttribute("commList", cateList);	
+		
+			return "/user/registerForm.jsp";   // 검색한 사용자 정보를 update form으로 전송     	
+	    }	
        	
        	//book 정보 전달
        	Book book = new Book(
