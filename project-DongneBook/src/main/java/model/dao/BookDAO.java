@@ -257,7 +257,7 @@ public class BookDAO {
 	public List<Category> findCategoryList() throws SQLException {
 		String sql = "SELECT category_id, cd_name "
      		   + "FROM category "
-     		   + "ORDER BY cName";        
+     		   + "ORDER BY cd_name";        
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
 		try {
