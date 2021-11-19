@@ -4,14 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Book;
-import model.Condition;
 import model.dao.BookDAO;
-import model.dao.ConditionDAO;
 
 public class BookManager {
 	private static BookManager bookMan = new BookManager();
 	private BookDAO bookDAO;
-	private ConditionDAO conditionDAO;
 	
 	public static BookManager getInstance() {
 		return bookMan;
@@ -20,10 +17,6 @@ public class BookManager {
 	public int create(Book book) throws SQLException {
 		return bookDAO.create(book);
 	}
-	
-	public int insertCondition(Condition condition) throws SQLException {
-		return conditionDAO.insert(condition);		
-	}	
 
 	// 북 정보변경
 	public int update(Book book) throws SQLException, BookNotFoundException {
@@ -33,13 +26,13 @@ public class BookManager {
 		return bookDAO.update(book);
 	}
 	
-	public List<Book> mainBookList(int currentPage, int countPerPage)
+	public List<Book> mainBookList(int currentPage, int countPerPage, int bookId)
 			throws SQLException {
-				return bookDAO.mainBookList(currentPage, countPerPage);
+				return bookDAO.mainBookList(currentPage, countPerPage, bookId);
 		}
 	
-	public Book findBookDetails(int bookId) throws SQLException {
-		return bookDAO.findBookDetails(bookId);
+	public Book findBookDetails(int book_id) throws SQLException {
+		return bookDAO.findBookDetails(book_id);
 	}
 	
 	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException, BookNotFoundException {
