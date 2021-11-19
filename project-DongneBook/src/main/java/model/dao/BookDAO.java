@@ -102,7 +102,7 @@ public class BookDAO {
 	}
 	
 	//책 상세정보 보기에서 사용할 Find. (user_id를 포함한 책 정보 전부)
-	public Book findBookDetails(int bookId) throws SQLException,  {
+	public Book findBookDetails(int bookId) throws SQLException  {
         String sql = "SELECT user_id, title, author, publisher, "
         		+ "price, description, image, sold, category_id, "
 			+ "page_discoloration, cover_damage, page_damage, writing "
