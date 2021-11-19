@@ -26,33 +26,33 @@ public class BookManager {
 		return bookDAO.update(book);
 	}
 	
-	public List<Book> mainBookList(int currentPage, int countPerPage, int bookId)
+	public List<Book> mainBookList()
 			throws SQLException {
-				return bookDAO.mainBookList(currentPage, countPerPage, bookId);
+				return bookDAO.mainBookList();
 		}
 	
 	public Book findBookDetails(int book_id) throws SQLException {
 		return bookDAO.findBookDetails(book_id);
 	}
 	
-	public List<Book> searchBookList(int currentPage, int countPerPage, String title) throws SQLException, BookNotFoundException {
-		List<Book> book = bookDAO.searchBookList(currentPage, countPerPage, title);
+	public List<Book> searchBookList(String title) throws SQLException, BookNotFoundException {
+		List<Book> book = bookDAO.searchBookList(title);
 		if (book == null) {
 			throw new BookNotFoundException(title + "의 검색 결과가 없습니다.");
 		}
 		return book;
 	}
 	
-	public List<Book> findMyBookList(int currentPage, int countPerPage, String userId) throws SQLException, BookNotFoundException {
-		List<Book> book = bookDAO.searchBookList(currentPage, countPerPage, userId);
+	public List<Book> findMyBookList(String userId) throws SQLException, BookNotFoundException {
+		List<Book> book = bookDAO.searchBookList(userId);
 		if (book == null) {
 			throw new BookNotFoundException("등록한 책이 없습니다.");
 		}
 		return book;
 	}
 	
-	public List<Book> cateBookList(int currentPage, int countPerPage, int cateId) throws SQLException {
-		return bookDAO.cateBookList(currentPage, countPerPage, cateId);
+	public List<Book> cateBookList(int cateId) throws SQLException {
+		return bookDAO.cateBookList(cateId);
 	}
 	
 	public int deleteBook(int bookId) throws SQLException, BookNotFoundException {
