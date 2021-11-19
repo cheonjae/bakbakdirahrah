@@ -10,40 +10,41 @@ import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
-    // °¢ ¿äÃ» uri¿¡ ´ëÇÑ controller °´Ã¼¸¦ ÀúÀåÇÒ HashMap »ı¼º
+    // ê° ìš”ì²­ uriì— ëŒ€í•œ controller ê°ì²´ë¥¼ ì €ì¥í•  HashMap ìƒì„±
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// °¢ uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ »ı¼º ¹× ÀúÀå
+    	// ê° uriì— ëŒ€ì‘ë˜ëŠ” controller ê°ì²´ë¥¼ ìƒì„± ë° ì €ì¥
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         
-        // È¸¿ø °¡ÀÔ Æû ¿äÃ»°ú °¡ÀÔ ¿äÃ» Ã³¸® º´ÇÕ (Æû¿¡ Ä¿¹Â´ÏÆ¼ ¼±ÅÃ ¸Ş´º Ãß°¡¸¦ À§ÇÔ)
+        // íšŒì› ê°€ì… í¼ ìš”ì²­ê³¼ ê°€ì… ìš”ì²­ ì²˜ë¦¬ ë³‘í•© (í¼ì— ì»¤ë®¤ë‹ˆí‹° ì„ íƒ ë©”ë‰´ ì¶”ê°€ë¥¼ ìœ„í•¨)
 //      mappings.put("/user/register/form", new ForwardController("/user/registerForm.jsp"));
 //      mappings.put("/user/register", new RegisterUserController());
         mappings.put("/user/register", new RegisterUserController());
 
-        // »ç¿ëÀÚ Á¤º¸ ¼öÁ¤ Æû ¿äÃ»°ú ¼öÁ¤ ¿äÃ» Ã³¸® º´ÇÕ
+        // ì‚¬ìš©ì ì •ë³´ ìˆ˜ì • í¼ ìš”ì²­ê³¼ ìˆ˜ì • ìš”ì²­ ì²˜ë¦¬ ë³‘í•©
 //      mappings.put("/user/update/form", new UpdateUserFormController());
 //      mappings.put("/user/update", new UpdateUserController());        
         mappings.put("/user/update", new UpdateUserController());
         
         mappings.put("/user/delete", new DeleteUserController());
         
-        // book °ü·Ã request URI Ãß°¡ ¼öÁ¤ÇØ¾ßÇÔ
+        // book ê´€ë ¨ request URI ì¶”ê°€ ìˆ˜ì •í•´ì•¼í•¨
 //        mappings.put("/community/list", new ListCommunityController());
 //        mappings.put("/community/view", new ViewCommunityController());
 //        mappings.put("/community/create/form", new ForwardController("/community/creationForm.jsp"));
 //        mappings.put("/community/create", new CreateCommunityController());
 //        mappings.put("/community/update", new UpdateCommunityController());
+          mappings.put("/book/list, new MainBookListController());
         
         logger.info("Initialized Request Mapping!");
     }
 
     public Controller findController(String uri) {	
-    	// ÁÖ¾îÁø uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ Ã£¾Æ ¹İÈ¯
+    	// ì£¼ì–´ì§„ uriì— ëŒ€ì‘ë˜ëŠ” controller ê°ì²´ë¥¼ ì°¾ì•„ ë°˜í™˜
         return mappings.get(uri);
     }
 }
