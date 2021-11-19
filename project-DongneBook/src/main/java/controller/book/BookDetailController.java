@@ -16,14 +16,20 @@ public class BookDetailController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	int bookId = Integer.parseInt(request.getParameter("bookId"));
-    	log.debug("BookDetail's BookId : {}", bookId);
+	BookManager manager = BookManager.getInstance();
+	int bookId = Integer.parseInt(request.getParameter("bookId"));
 
-		BookManager manager = BookManager.getInstance();
-		Book book = manager.findBookDetails(bookId);
-		request.setAttribute("book", book);	
+	log.debug("BookDetail's BookId : {}", bookId);
+
+    	Book book = null;
+    	try {
+		book = manager.findBookDetails(bookId);
+	} catch (BookNotFoundException e) {				
+	        return "redirect:/user/list";
+	}	
 		
-		// 북 디테일 화면으로 이동(forwarding)
-		return "/book/detail.jsp";
+	// 북 디테일 화면으로 이동(forwarding)
+    	request.setAttribute("book", book);					
+	return "/user/details.jsp";
     }
 }
