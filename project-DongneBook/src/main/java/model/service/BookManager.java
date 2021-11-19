@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Book;
+import model.Category;
 import model.dao.BookDAO;
 
 public class BookManager {
@@ -12,7 +13,7 @@ public class BookManager {
 	
 	private BookManager() {
 		try {
-			ookDAO = new BookDAO();
+			bookDAO = new BookDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
