@@ -26,10 +26,11 @@ public class Book {
 	} // 기본 생성
 
 	// 업뎃용 생성자
-	public Book(int bookId, int price, String description) {
+	public Book(int bookId, int price, String description, int sold) {
 		this.bookId = bookId;
 		this.price = price;
-		this.image = image;
+		this.description = description;
+		this.sold = sold;
 	}
 	
 	// 책 제목, 가격, 이미지만 보여주기 위해서 만든..생성자..
