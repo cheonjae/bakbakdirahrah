@@ -11,12 +11,10 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Book;
-import model.User;
-import model.sercive.BookManager;
-import model.service.UserManager;
+
+import model.service.BookManager;
 
 public class UpdateBookController implements Controller{
-	private static final Logger log = LoggerFactory.getLogger(UpdateBookController.class);
 	@Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
 		if (request.getMethod().equals("GET")) {	
@@ -30,7 +28,7 @@ public class UpdateBookController implements Controller{
     		BookManager bookmanager = BookManager.getInstance();
     		
     		// 수정하려는 책 정보를 Bookmanager에 findBookDetails를 통해서 불러옴.
-			Book book = bookmanager.findBookDetails(updateId);	
+			Book book = bookmanager.findBookDetails(Integer.parseInt(updateId));	
 			// ↑그 수정하려는 책 정보가 들어있는 book 객체
 			request.setAttribute("book", book);		
 			
@@ -52,11 +50,11 @@ public class UpdateBookController implements Controller{
 		
 		// POST request. Book 도클에 있는 가격 설명 팔림 생성자 이용함
     	Book updateBook = new Book(
-    		Integer.parseInt(request.getParameter("bookId"),
-    		Integer.parseInt(request.getParameter("price"),
+    		Integer.parseInt(request.getParameter("bookId")),
+    		Integer.parseInt(request.getParameter("price")),
     		request.getParameter("description"),
-    		Integer.parseInt(request.getParameter("sold"));
-			);
+    		Integer.parseInt(request.getParameter("sold"))
+		);
 
     	//log.debug("Update User : {}", updateUser);
 
