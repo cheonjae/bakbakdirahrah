@@ -253,4 +253,29 @@ public class BookDAO {
 		}
 		return null;
 	}
+	
+	public List<Category> findCategoryList() throws SQLException {
+		String sql = "SELECT category_id, cd_name "
+     		   + "FROM category "
+     		   + "ORDER BY cName";        
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Category> categoryList = new ArrayList<Category>();	// Community들의 리스트 생성
+			while (rs.next()) {
+				Category cate = new Category(			// Community 객체를 생성하여 현재 행의 정보를 저장
+						rs.getInt("cateId"),
+						rs.getString("cateName"));
+				categoryList.add(cate);				// List에 Community 객체 저장
+			}		
+			return categoryList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
 }
