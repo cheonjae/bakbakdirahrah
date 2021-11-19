@@ -10,6 +10,14 @@ public class BookManager {
 	private static BookManager bookMan = new BookManager();
 	private BookDAO bookDAO;
 	
+	private BookManager() {
+		try {
+			BookDAO = new BookDAO();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}			
+	}
+	
 	public static BookManager getInstance() {
 		return bookMan;
 	}
