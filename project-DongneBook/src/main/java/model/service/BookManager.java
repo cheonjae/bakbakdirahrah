@@ -12,7 +12,7 @@ public class BookManager {
 	
 	private BookManager() {
 		try {
-			BookDAO = new BookDAO();
+			ookDAO = new BookDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
