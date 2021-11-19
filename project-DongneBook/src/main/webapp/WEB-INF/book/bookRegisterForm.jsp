@@ -1,13 +1,229 @@
+<%-- <% response.sendRedirect(request.getContextPath() + "/book/bookRegisterForm"); %> --%>
+
 <%@page contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>동네북</title>
-<link rel=stylesheet href="<c:url value='/css/bookRegisterForm.css' />"
-	type="text/css">
-<link rel="stylesheet" href="../../../css/bookRegisterForm.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>동네북</title>
+	<link rel=stylesheet href="<c:url value='/css/bookRegisterForm.css' />"
+		type="text/css">
+	<style>
+		@charset "UTF-8";
+
+		#article {
+            margin: 0 15% 5%;
+            font-family: 'Malgun Gothic';
+            text-align: center;
+        }
+
+        #logo {
+            color:rgb(147, 176, 255);
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* 헤더 테이블 */
+        .headtable {
+            width: 1000px;
+            font-size: 14px;
+            border-spacing: 5px;
+        }
+
+        /*헤더 검색창, 버튼*/
+        .newlist-button, .sales-button {
+            margin: 0;
+            width: 160px;
+            height: 40px;
+            border: 1px solid #999999; /*보더 삭제*/
+            box-sizing: border-box;
+            border-radius: 6px;
+            font-size: 0;
+
+            -webkit-appearance: none;
+            border-radius: 6px;
+            box-sizing: border-box;
+            border: 1px solid #CED4DA;
+            color: #212529;
+            text-align: center;
+            font-weight: 700;
+            background-color: #fff;
+            margin: 1.6rem 0;
+            text-decoration: none;
+        }
+        .button-text {
+            color: #4D5159;
+            font-size: 16px;
+        }
+        #fixed-bar-search {
+            left: 150px;
+            top: 16px;
+            border-radius: 5px;
+            border: solid 3px #e9ecef;
+            text-decoration: none;
+            padding: 0 1.6rem;
+            height: 40px;
+            box-sizing: border-box;
+        }
+        .search-input-wrap {
+            display: flex;
+                    justify-content: space-between;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                border: 0;
+        }
+
+        .fixed-search-input {
+            display: block;
+            width: 300px;
+            border: none;
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            color: #212529;
+            background-color: transparent;
+        }
+
+        #header-search-button {
+            border: none;
+            margin: 0;
+            background-color: transparent;
+        }
+        /*헤더 끝*/
+
+        /* 카테고리 */
+        aside#left {
+            float: left;
+            width: 12em;
+            margin-right: 1em;
+            text-align: left;
+        }
+
+        aside#left ul {
+            list-style: none
+        }
+
+        aside#left ul li {
+            font-size: 14px;
+            background-color: white;
+            padding: 5px 10px;
+            border-bottom: 1px solid black;
+        }
+
+        aside#left ul li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        aside#left ul li:hover {
+            background-color: rgb(255, 245, 190);
+        }
+
+        .cat-header {
+            pointer-events: none;
+        }
+
+        aside#main {
+            float: left;
+        }
+
+        button.btn1 {
+            position: absolute;
+            top: 24%;
+            left: 42%;
+        }
+
+        button.btn2 {
+            position: absolute;
+            top: 24%;
+            left: 53%;
+        }
+
+        button.btn3 {
+            position: absolute;
+            top: 24%;
+            left: 64.5%;
+        }
+
+        button.btn4 {
+            position: absolute;
+            top: 24%;
+            left: 77%;
+        }
+
+        button.btn5 {
+            position: absolute;
+            top: 57.5%;
+            left: 42%;
+        }
+
+        button.btn6 {
+            position: absolute;
+            top: 57.5%;
+            left: 53%;
+        }
+
+        button.btn7 {
+            position: absolute;
+            top: 57.5%;
+            left: 64.5%;
+        }
+
+        button.btn8 {
+            position: absolute;
+            top: 57.5%;
+            left: 77%;
+        }
+
+        button.btn9 {
+            position: absolute;
+            top: 91%;
+            left: 42%;
+        }
+
+        button.btn10 {
+            position: absolute;
+            top: 91%;
+            left: 53%;
+        }
+
+        button.btn11 {
+            position: absolute;
+            top: 91%;
+            left: 64.5%;
+        }
+
+        button.btn12 {
+            position: absolute;
+            top: 91%;
+            left: 77%;
+        }
+        
+        /* 책 정보 입력 */
+        #page-info {
+        	text-align: left;
+        	font-size: 18pt; 
+        	font-weight: bold;
+			color: white; 
+			background-color: rgb(147, 176, 255);
+        }
+        #detail {
+            text-align: center;
+        }
+        
+        #book {
+        	display: inline-block;
+        }
+	</style>
 </head>
 <body style="margin: 0 auto">
 	<header>
@@ -127,17 +343,15 @@
 
 
 			<div id="detail">
+				<div align="left"><span id="page-info">&nbsp;&nbsp;👉&nbsp;판매 등록 &nbsp;</span></div>
+				<br>
 				<div id="book">
-					<form name="book-regi" method="POST" action="<c:url value='/book/register' />">
-						<table>
-							<tr>
-								<td class="title">&nbsp;&nbsp;<b>판매할 책 정보 입력</b>&nbsp;&nbsp;</td>
-							</tr>
-						</table>
+					<form name="book-regi" method="POST"
+						action="<c:url value='/book/register' />">
 						<c:if test="${registerFailed}">
 							<font color="red"><c:out value="${exception.getMessage()}" /></font>
 						</c:if>
-						<br>
+						<h3>기본 정보 입력</h3>
 						<table class="info">
 							<tr>
 								<td>제목</td>
@@ -164,8 +378,48 @@
 								</td>
 							</tr>
 						</table>
+						<div>
+							<h3>필기 흔적</h3>
+							<input type="radio" name="writing" value="0">없음 <input
+								type="radio" name="writing" value="1">연필/샤프 <input
+								type="radio" name="writing" value="2">볼펜/형광펜 <br>
+							<br>
+							<h3>페이지 변색</h3>
+							<input type="radio" name="pageDiscoloration" value="0">없음
+							<input type="radio" name="pageDiscoloration" value="1">있음
+							<br>
+							<br>
+							<h3>페이지 훼손</h3>
+							<input type="radio" name="pageDamage" value="0">없음 <input
+								type="radio" name="pageDamage" value="1">있음 <br>
+							<br>
+							<h3>겉표지</h3>
+							<input type="radio" name="coverDamage" value="0">깨끗함 <input
+								type="radio" name="coverDamage" value="1">깨끗하지 않음 <br>
+							<br>
+						</div>
+						<div>
+							<h3>책 설명</h3>
+							<textarea name="description" cols="50" rows="8">이 책은 4번 정도 본 것 외에 하자가 없습니다.</textarea>
+						</div>
+						<!-- 사진 업로드 부분...사진 업로드를 form 태그 이용해서 해야 하는데
+						한 페이지에 폼태그는 하나밖에 사용 못 한다고 함...
+						그럼..... 어카지
+						<div>
+							<h3>사진 등록</h3>
+							
+						</div> -->
+						<table style="width: 100%">
+							<tr>
+								<td align="left">
+									<input type="button" value="책 등록" onClick="userCreate()"> &nbsp;
+									<input type="button" value="취소" onClick="userList('<c:url value='/user/list' />')">
+								</td>
+							</tr>
+						</table>
+
 					</form>
-					
+
 				</div>
 			</div>
 
