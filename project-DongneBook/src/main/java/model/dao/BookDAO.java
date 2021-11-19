@@ -51,11 +51,9 @@ public class BookDAO {
 	//책 정보 수정 (user_id와 book_id는 수정 불가능)
 	public int update(Book book) throws SQLException {
 		String sql = "UPDATE book "
-					+ "SET title=?, author=?, publisher=?, publication_date=?, price=?, description=?, image=?, category_id=?, sold=? "
-					+ "WHERE book_id=?";
-		Object[] param = new Object[] {book.getTitle(), book.getauthor(), 
-					book.getPublisher(), book.getPrice(), book.getDescription(), book.getImage(), 
-					book.getCateId(), book.getSold(), book.getBookId()};				
+				+ "SET price=?, description=?, sold=? "
+				+ "WHERE book_id=?";
+		Object[] param = new Object[] {book.getPrice(), book.getDescription(), book.getSold(), book.getBookId()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
 		try {				
@@ -104,9 +102,10 @@ public class BookDAO {
 	}
 	
 	//책 상세정보 보기에서 사용할 Find. (user_id를 포함한 책 정보 전부)
-	public Book findBookDetails(int bookId) throws SQLException {
-        String sql = "SELECT user_id, category_id, title, author, publisher,"
-        		+ " price, description, image, sold, page_discoloration, page_damage, cover_damage, writing "
+	public Book findBookDetails(int bookId) throws SQLException,  {
+        String sql = "SELECT user_id, title, author, publisher, "
+        		+ "price, description, image, sold, category_id, "
+			+ "page_discoloration, cover_damage, page_damage, writing "
         			+ "FROM BOOK "
         			+ "WHERE book_id=?";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 query문과 매개 변수 설정
@@ -125,7 +124,7 @@ public class BookDAO {
 					rs.getString("image"),
 					rs.getInt("sold"),
 					rs.getInt("category_id"),
-					rs.getInt("page_discorolation"),
+					rs.getInt("page_discoloration"),
 					rs.getInt("cover_damage"),
 					rs.getInt("page_damage"),
 					rs.getInt("writing")
