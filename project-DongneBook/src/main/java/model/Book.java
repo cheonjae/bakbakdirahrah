@@ -50,11 +50,20 @@ public class Book {
 	public Book(int bookId, String userId, String title, String author, String publisher,
 				int price, String description, String image, int sold, int cateId,
 				int pageDiscoloration, int coverDamage, int pageDamage, int writing) {
-		this(bookId, userId, title, author, publisher, price, description, image, sold, cateId);
-		pageDiscoloration = this.pageDiscoloration;
-		coverDamage = this.coverDamage;
-		pageDamage = this.pageDamage;
-		writing = this.writing;
+		this.bookId = bookId;
+		this.userId = userId;
+		this.title = title;
+		this.author = author;
+		this.publisher = publisher;
+		this.price = price;
+		this.description = description;
+		this.image = image;
+		this.sold = sold;
+		this.cateId = cateId;
+		this.pageDiscoloration = pageDiscoloration;
+		this.coverDamage = coverDamage;
+		this.pageDamage = pageDamage;
+		this.writing = writing;
 	}
 
 	public int getBookId() {
