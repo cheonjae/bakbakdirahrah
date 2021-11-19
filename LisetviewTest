@@ -4,15 +4,6 @@
 <%@page import="java.util.*" %>
 <%@page import="model.*" %>
 <% Book book = (Book)request.getAttribute("book"); %>
-<%
-	int currentPage = 1, countPerPage = 10;
-	String currentPageStr = request.getParameter("currentPage");
-	if( (currentPageStr != null) &&  (!currentPageStr.equals("")) )
-		currentPage = Integer.parseInt(currentPageStr);
-	
-	BookManager manager = BookManager.getInstance();
-	List<Book> bookList = manager.mainBookList(currentPage, countPerPage);
-	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +16,7 @@
 <table class="tg">
 
 
-<c:forEach var="user" items="${userList}">
+<c:forEach var="book" items="${bookList}">
   <tr>
     <td class="tg-0lax">
 	<a href="<c:url value='/book/detail'>
