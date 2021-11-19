@@ -374,7 +374,18 @@
 							<tr>
 								<td>가격</td>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									<input type="text" style="width: 240;" name="price">
+									<input type="text" style="width: 240;" name="price">원
+								</td>
+							</tr>
+							<tr>
+								<td>카테고리</td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10">
+									<select name="cateId" style="width: 240">
+										<option value="0">카테고리를 선택하세요.</option>
+										<%-- <c:forEach var="cate" items="${cateList}}">
+											<option value="${cate.cateId}"></option>
+										</c:forEach> --%>
+									</select>			
 								</td>
 							</tr>
 						</table>
