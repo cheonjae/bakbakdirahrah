@@ -30,6 +30,6 @@ public class BookDetailController implements Controller {
 		
 	// 북 디테일 화면으로 이동(forwarding)
     	request.setAttribute("book", book);					
-	return "/user/details.jsp";
+	return "/book/detail.jsp";
     }
 }
