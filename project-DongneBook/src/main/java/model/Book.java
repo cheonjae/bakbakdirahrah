@@ -11,7 +11,6 @@ public class Book {
 	private String title;
 	private String author;
 	private String publisher;
-	private Date publicationDate;
 	private int price;
 	private String description;
 	private String image;
@@ -34,14 +33,13 @@ public class Book {
 		this.image = image;
 	}
 
-	public Book(int bookId, String userId, String title, String author, String publisher, Date publicationDate,
+	public Book(int bookId, String userId, String title, String author, String publisher,
 			int price, String description, String image, int sold, int cateId) {
 		this.bookId = bookId;
 		this.userId = userId;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
-		this.publicationDate = publicationDate;
 		this.price = price;
 		this.description = description;
 		this.image = image;
@@ -49,10 +47,10 @@ public class Book {
 		this.cateId = cateId;
 	}
 
-	public Book(int bookId, String userId, String title, String author, String publisher, Date publicationDate,
+	public Book(int bookId, String userId, String title, String author, String publisher,
 				int price, String description, String image, int sold, int cateId,
 				int pageDiscoloration, int coverDamage, int pageDamage, int writing) {
-		this(bookId, userId, title, author, publisher, publicationDate, price, description, image, sold, cateId);
+		this(bookId, userId, title, author, publisher, price, description, image, sold, cateId);
 		pageDiscoloration = this.pageDiscoloration;
 		coverDamage = this.coverDamage;
 		pageDamage = this.pageDamage;
@@ -105,14 +103,6 @@ public class Book {
 
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
-	}
-
-	public Date getPublicationDate() {
-		return publicationDate;
-	}
-
-	public void setPublicationDate(Date publicationDate) {
-		this.publicationDate = publicationDate;
 	}
 
 	public int getPrice() {
@@ -182,7 +172,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", userId=" + userId + ", cateId=" + cateId + ", title=" + title + ", author="
-				+ author + ", publisher=" + publisher + ", publicationDate=" + publicationDate + ", price=" + price
+				+ author + ", publisher=" + publisher + ", price=" + price
 				+ ", description=" + description + ", image=" + image + ", sold=" + sold + "]";
 	}
 
