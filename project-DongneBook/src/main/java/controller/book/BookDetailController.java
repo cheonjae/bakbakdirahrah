@@ -16,7 +16,7 @@ public class BookDetailController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	String bookId = request.getParameter("bookId");
+    	int bookId = Integer.parseInt(request.getParameter("bookId"));
     	log.debug("BookDetail's BookId : {}", bookId);
 
 		BookManager manager = BookManager.getInstance();
