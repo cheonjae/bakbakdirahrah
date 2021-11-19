@@ -15,6 +15,6 @@ public class MainBookListController implements Controller {
 		List<Book> bookList = manager.mainBookList();
 		
 		request.setAttribute("bookList", bookList);				
-		return "/user/main.jsp";   
+		return "/book/list.jsp";   
     }
 }
