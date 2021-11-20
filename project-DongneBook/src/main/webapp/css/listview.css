@@ -1,3 +1,9 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+	/*구글 웹 폰트 적용*/
+* {
+	font-family: Nanum Gothic; /*웹 폰트 지정*/
+}
+
 .tg 
  {
  	border-collapse:collapse;
