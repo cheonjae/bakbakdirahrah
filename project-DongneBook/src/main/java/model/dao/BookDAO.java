@@ -20,24 +20,26 @@ public class BookDAO {
 	}
 		
 	// 새로운 책 생성	
-	public int create(Book book) throws SQLException {
-		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object [] param = new Object[] { book.getTitle(), book.getauthor(), book.getPublisher(),
-						book.getPrice(), book.getDescription(), book.getImage(),
-						book.getUserId(), book.getSold(), book.getCateId(),
-						book.getPageDiscoloration(), book.getCoverDamage(), book.getPageDamage(), book.getWriting()}; 
+	public Book create(Book book) throws SQLException {
+		String sql = "INSERT INTO book VALUES (?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object [] param = new Object[] { book.getTitle(), book.getAuthor(), book.getPublisher(),
+						book.getPrice(), book.getDescription(), book.getImage(), book.getUserId(), book.getSold(), 
+						book.getPageDiscoloration(), book.getCoverDamage(), book.getPageDamage(), book.getWriting(), book.getCateId()}; 
 		
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 		
 		String key[] = {"book_id"}; 
 		try {
-			int result = jdbcUtil.executeUpdate(key);     // insert 문 실행
+			jdbcUtil.executeUpdate(key);     // insert 문 실행
 			ResultSet rs = jdbcUtil.getGeneratedKeys();    // 생성된 PK 값을 포함한 result set 객체 반환
-		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt("book_id");
+		   	
+			//int generatedKey = 0;
+			if(rs.next()) {
+				//generatedKey = rs.getInt("book_id"); - 틀린 구문
+				int generatedKey = rs.getInt(1);
 		   		book.setBookId(generatedKey);
 		   	}
-			return result;
+			return book;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
@@ -45,7 +47,7 @@ public class BookDAO {
 			jdbcUtil.commit();
 			jdbcUtil.close();	// resource 반환
 		}		
-		return 0;	
+		return null;	
 	}
 	
 	//책 정보 수정 (user_id와 book_id는 수정 불가능)
