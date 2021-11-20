@@ -34,7 +34,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <c:if test="${not empty userId}">
-    	<a href="<c:url value='/book/register' />" class="btn btn-info" role="button" >판매 등록</a>
+    	<a href="<c:url value='/book/register/form' />" class="btn btn-info" role="button" >판매 등록</a>
 	</c:if>
     <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
     	
