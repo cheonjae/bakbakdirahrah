@@ -39,6 +39,7 @@ public class RequestMapping {
 //        mappings.put("/community/create", new CreateCommunityController());
 //        mappings.put("/community/update", new UpdateCommunityController());
           mappings.put("/book/list, new MainBookListController());
+          mappings.put("/book/updateForm, new UpdateBookController());
         
         logger.info("Initialized Request Mapping!");
     }
