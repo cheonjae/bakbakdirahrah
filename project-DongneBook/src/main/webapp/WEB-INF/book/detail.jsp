@@ -27,7 +27,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href="<c:url value='/css/book.css' />" type="text/css">
+	<link rel=stylesheet href="<c:url value='css/detail.css' />" type="text/css">
 	<script>
 function userRemove() {
 	if(confirm("정말 삭제하시겠습니까?")) {
