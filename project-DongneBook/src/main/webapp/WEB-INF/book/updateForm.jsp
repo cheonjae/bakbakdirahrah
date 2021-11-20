@@ -21,8 +21,23 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>동네북</title>
-	<link rel=stylesheet href="<c:url value='/css/bookRegisterForm.css' />" type="text/css">
+    <!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
+	<script>
+function userCreate() {
+	form.submit();
+}
 
+function userList(targetUri) {
+	form.action = targetUri;
+	form.submit();
+}
+
+</script> 
 </head>
 <body style="margin: 0 auto">
 <%@include file="/WEB-INF/navbar.jsp" %> 
@@ -32,7 +47,8 @@
 				<br><br>
 				<div id="book">
 					<form name="book-update" method="POST"
-						action="<c:url value='/book/updateForm' /> "enctype="multipart/form-data">
+						action="<c:url value='/book/update' />">
+						<input type="hidden" name="bookId" value="${book.bookId}"/>	  //조팔..
 						<h3>기본 정보 입력</h3>
 						<table class="info">
 							<tr>
@@ -56,7 +72,7 @@
 							<tr>
 								<td>가격</td>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									<input type="text" style="width: 240;" name="price" value='${book.publisher}'>원
+									<input type="text" style="width: 240;" name="price" value='${book.price}'>원
 								</td>
 							</tr>
 							<tr>
@@ -96,15 +112,11 @@
 						<br><br>
 						<div>
 							<h3>책 설명</h3>
-							<textarea name="description" cols="50" rows="8" value='${book.description}'></textarea>
+							<textarea name="description" cols="50" rows="8">${book.description}</textarea>
 						</div>
 						<br><br>
 						<div>
-							<h3>사진 등록</h3>
-							<input type="file" name="picture" accept="image/*" size="20"/>
-						</div>
-						<div>
-						<input type="radio" name = "sale" value="0" checked="checked">판매중
+						<input type="radio" name = "sold" value="0" checked="checked">판매중
 						<input type="radio" name = "sold" value="1">판매완료
 						</div>
 						<br><br><br><br>
