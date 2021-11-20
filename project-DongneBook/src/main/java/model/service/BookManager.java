@@ -68,7 +68,7 @@ public class BookManager {
 		return bookDAO.findCategoryList();
 	}
 	
-	public int deleteBook(int bookId) throws SQLException, BookNotFoundException {
-		return bookDAO.deleteBook(bookId);
+	public int deleteBook(int bookId, String userId) throws SQLException, BookNotFoundException {
+		return bookDAO.deleteBook(bookId, userId);
 	}
 }
