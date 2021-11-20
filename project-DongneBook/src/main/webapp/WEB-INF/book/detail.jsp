@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@page import="java.util.*" %>
+<%@page import="javax.servlet.*" %>
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
@@ -8,10 +9,12 @@
 	String str3 = "없음";
 	String str4 = "깨끗함";
 %>
+
 <%
 	@SuppressWarnings("unchecked") 
 	Book book = (Book)request.getAttribute("book");
-	
+	HttpSession session1 = request.getSession();	
+	String userId = (String) session.getAttribute("userId");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -19,42 +22,62 @@
 <head>
     <meta charset="UTF-8">
     <title>동네북</title>
+    <!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel=stylesheet href="<c:url value='/css/book.css' />" type="text/css">
+	<script>
+function userRemove() {
+	if(confirm("정말 삭제하시겠습니까?")) {
+		if(userId != book.getUserId()) {
+			alert('타인의 어쩌고.');
+		} else {
+			alert('삭제 되었습니다.');
+		}
+	} else {
+		alert('취소되었습니다');
+	}	
+}
+</script>
 </head>
-
-<body>
-    <!-- home.html의 헤더 재사용 -->
-    <header>
-        
-    </header>
+<%@include file="/WEB-INF/navbar.jsp" %> 
+<body class="detail-body">
 
     <section>
             <div id="detail">
                 <div id="book">
                     <!-- 책 정보 -->
                     <h3>${book.title}</h3>
-                    <table class="info">
+                    <table class="detail-info">
                         <tr>
-                            <td rowspan="4"><img src="${book.image}" width="150" height="200"></td>
-                            <td class="info-header">저자</td>
-                            <td> | ${book.author} </td>
+                        
+                            <td rowspan="5"><img src="${pageContext.request.contextPath}/${book.image}" width="200" height="250"></td>
+                            <td>저자</td>
+                            <td> |&ensp;${book.author} </td>
                         </tr>
                         <tr>
-                            <td class="info-header">출판사</td>
-                            <td> | ${book.publisher}</td>
+                            <td>출판사</td>
+                            <td> |&ensp;${book.publisher}</td>
                         </tr>
                         <tr>
-                            <td class="info-header">가격</td>
-                            <td> | ${book.price}</td>
+                            <td>가격</td>
+                            <td> |&ensp;${book.price}</td>
                         </tr>
                         <tr>
-                            <td style="text-align:left;">
+                            <td >판매자</td>
+                            <td> |&ensp;${book.userId}</td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <button class="detail-button">
-                                    <span class="button-text">찜</span>
+                                    <span class="detail-button-text">찜</span>
                                 </button>
                             </td>
-                            <td style="text-align:left;">
+                            <td>
                                 <button class="detail-button">
-                                    <span class="button-text">채팅</span>
+                                    <span class="detail-button-text">채팅</span>
                                 </button>
                             </td>
                         </tr>
@@ -62,9 +85,9 @@
 
                     <!-- 책 상태 -->
                     <h3>책 상태</h3>
-                    <table class="info2">
+                    <table class="detail-info2">
                         <thead>
-                            <tr>
+                            <tr> 
                                 <th><b>필기 흔적</b></th>
                                 <th><b>페이지 변색</b></th>
                                 <th><b>페이지 훼손</b></th>
@@ -102,9 +125,23 @@
 
                     <!-- 책 상세 보기 -->
                     <h3>책 상세 보기</h3>
-                    <textarea name="content" cols="50" rows="8">${book.description}</textarea>
+                    <textarea name="content" cols="50" rows="8" readonly>${book.description}</textarea>
                 </div>
             </div>
     </section>
+    <%
+    	if(userId.equals(book.getUserId())) {
+    %>
+     <a class="detail-btn-primary" 
+    	href="<c:url value='/book/update' >
+     		     <c:param name='userId' value='${user.userId}'/>
+		 	  </c:url>">수정</a>
+    <a class="detail-btn-warning" 
+   		href="<c:url value='/book/delete'>
+		     	 <c:param name='bookId' value='${book.bookId}'/>
+		     	 <c:param name='userId' value='${user.userId}' />
+	 	      </c:url>" onclick="return userRemove();">삭제</a>
+	<% 
+		} 
+	%>
 </body>
-
