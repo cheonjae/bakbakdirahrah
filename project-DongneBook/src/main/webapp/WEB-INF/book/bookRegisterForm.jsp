@@ -11,7 +11,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href="<c:url value='/css/bookRegisterForm.css' />" type="text/css">
+	<link rel=stylesheet href="<c:url value='/css/listview.css' />" type="text/css">
 	<script>
 function userCreate() {
 	form.submit();
@@ -25,23 +25,25 @@ function userList(targetUri) {
 </script>
 </head>
 <body>
-	<%@include file="/WEB-INF/navbar.jsp" %> 
-	<!-- 카테고리: 예스24 베스트셀러 참고 -->
+	<%@include file="/WEB-INF/navbar.jsp" %>
 	<section>
-		<div id="article">
-			<div id="detail">
+		<div id="article" style="margin: 0 15% 5%; text-align: center;">
+			<div id="detail" style="text-align: center;">
 				<div align="left" style="margin-top: 50px;">
-					<span id="page-info">&nbsp;&nbsp;👉&nbsp;판매 등록 &nbsp;</span>
+					<span id="page-info" style="text-align: left; font-size: 18pt; font-weight: bold;
+												color: white; background-color: rgb(147, 176, 255); margin-left: 20px;">
+						&nbsp;&nbsp;👉&nbsp;판매 등록 &nbsp;
+					</span>
 				</div>
 				<br><br>
-				<div id="book">
+				<div id="book" style="display: inline-block;">
 					<form name="book-regi" method="POST"
 						action="<c:url value='/book/register' /> "enctype="multipart/form-data">
 						<c:if test="${registerFailed}">
 							<font color="red"><c:out value="${exception.getMessage()}" /></font>
 						</c:if>
 						<h4>기본 정보 입력</h4><br>
-						<table class="info">
+						<table class="info" style=" margin-left:auto; margin-right:auto;">
 							<tr>
 								<td>제목</td>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
@@ -71,34 +73,19 @@ function userList(targetUri) {
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
 									<select name="cateId" style="width: 240">
 										<option value="">카테고리를 선택하세요.</option>
-										<%-- <c:forEach var="cate" items="${cateList}}">
-											<option value="${cate.cateId}" ${cate.cateId == user.cateId ? 'selected="selected"' : '' }>${cate.cateName}</option>
-										</c:forEach> --%>
-										<option value="1">경제/경영</option>
-										<option value="2">예술</option>
-										<option value="3">어린이</option>
-										<option value="4">학술</option>
-										<option value="5">만화</option>
-										<option value="6">기술</option>
-										<option value="7">요리</option>
-										<option value="8">취미</option>
-										<option value="9">교육</option>
-										<option value="10">공학</option>
-										<option value="11">건강</option>
-										<option value="12">역사</option>
-										<option value="13">문학</option>
-										<option value="14">의학</option>
-										<option value="15">미스터리/스릴러</option>
-										<option value="16">사회/정치</option>
-										<option value="17">종교</option>
-										<option value="18">과학</option>
-										<option value="19">수학</option>
-										<option value="20">자기계발</option>
-										<option value="21">스포츠</option>
-										<option value="22">청소년</option>
-										<option value="23">여행</option>
-										<option value="24">잡지</option>
-										<option value="25">인문</option>
+										<%
+											String[] cName = {"건강", "경제/경영", "공학", "과학", "교육", "기술",
+													"만화", "문학", "미스터리/스릴러", "사회/정치", "수학", "스포츠", "어린이", "여행", "역사",
+													"예술", "요리", "의학", "인문", "자기계발", "잡지", "종교", "청소년", "취미", "학술"};
+											for(int i = 1; i <= 25; i++) {
+												String str_i = Integer.toString(i);
+										%>
+												<option value="<%=str_i%>">
+													<%=cName[i - 1] %>
+												</option>
+										<%
+											}
+										%>
 									</select>			
 								</td>
 							</tr>
@@ -143,13 +130,9 @@ function userList(targetUri) {
 								</td>
 							</tr>
 						</table>
-
 					</form>
-
 				</div>
 			</div>
-
-
 		</div>
 	</section>
 </body>
