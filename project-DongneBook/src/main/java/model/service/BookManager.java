@@ -23,7 +23,7 @@ public class BookManager {
 		return bookMan;
 	}
 	
-	public int create(Book book) throws SQLException {
+	public Book create(Book book) throws SQLException {
 		return bookDAO.create(book);
 	}
 
