@@ -7,113 +7,40 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>동네북</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/bookRegisterForm.css' />" type="text/css">
-</head>
-<body style="margin: 0 auto">
-	<header>
-		<title></title>
-		<div align=center>
-			<form name="frm1">
-				<table class="headtable">
-					<!--보더 삭제-->
-					<!--총 11칸-->
-					<tr>
-						<td rowspan="2" colspan="2"><a id="logo">동네북</a> <!--로고 이미지-->
-						</td>
-						<td colspan="6">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
-						<td>로그인 <!--@@님 반갑습니다!-->
-						</td>
-						<td>회원가입 <!--마이페이지-->
-						</td>
-						<td>마이페이지 <!--로그아웃-->
-						</td>
-					</tr>
-					<tr>
-						<td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
-						<td colspan="5">
-							<form name="search" method="get" action="a.jsp"
-								onsubmit="return check()">
-								<section id="fixed-bar-search">
-									<div class="search-input-wrap">
-										<span class="sr-only">검색</span> <input type="text"
-											name="header-search-input" id="header-search-input"
-											class="fixed-search-input" placeholder="책 이름을 검색해보세요!">
-										<button id="header-search-button">
-											<img class="fixed-search-icon" alt="Search"
-												src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/search-icon-7008edd4f9aaa32188f55e65258f1c1905d7a9d1a3ca2a07ae809b5535380f14.svg">
-										</button>
-									</div>
-								</section>
-							</form>
-						</td>
-						<td colspan="3">&emsp;&emsp;&emsp;&emsp;&emsp;</td>
-					</tr>
-				</table>
-				<table class="headtable">
-					<!--보더 삭제-->
-					<!--총 11칸-->
-					<tr>
-						<td style="text-align: left;">
-							<button class="newlist-button">
-								<span class="button-text">실시간 판매 목록</span>
-							</button>
-						</td>
-						<td colspan="9">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
-						<td style="text-align: right;">
-							<button class="sales-button">
-								<span class="button-text">판매 등록</span>
-							</button>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</header>
+	<script>
+function userCreate() {
+	form.submit();
+}
 
+function userList(targetUri) {
+	form.action = targetUri;
+	form.submit();
+}
+
+</script>
+</head>
+<body>
+	<%@include file="/WEB-INF/navbar.jsp" %> 
 	<!-- 카테고리: 예스24 베스트셀러 참고 -->
 	<section>
 		<div id="article">
-			<aside id="left">
-				<h5 style="margin-left: 50px;">카테고리</h5>
-				<ul>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					<li><a href="./computer.html" target="iframe1">경제/경영</a></li>
-					
-				</ul>
-			</aside>
-
 			<div id="detail">
-				<div align="left"><span id="page-info">&nbsp;&nbsp;👉&nbsp;판매 등록 &nbsp;</span></div>
+				<div align="left" style="margin-top: 50px;">
+					<span id="page-info">&nbsp;&nbsp;👉&nbsp;판매 등록 &nbsp;</span>
+				</div>
 				<br><br>
 				<div id="book">
 					<form name="book-regi" method="POST"
-						action="<c:url value='/book/register' />">
+						action="<c:url value='/book/register' /> "enctype="multipart/form-data">
 						<c:if test="${registerFailed}">
 							<font color="red"><c:out value="${exception.getMessage()}" /></font>
 						</c:if>
-						<h3>기본 정보 입력</h3>
+						<h4>기본 정보 입력</h4><br>
 						<table class="info">
 							<tr>
 								<td>제목</td>
@@ -178,32 +105,31 @@
 						</table>
 						<br><br>
 						<div>
-							<h3>필기 흔적</h3>
+							<h4>필기 흔적</h4><br>
 							<input type="radio" name="writing" value="0">없음 <input
 								type="radio" name="writing" value="1">연필/샤프 <input
 								type="radio" name="writing" value="2">볼펜/형광펜 <br>
-							<br>
-							<h3>페이지 변색</h3>
+							<br><br>
+							<h4>페이지 변색</h4><br>
 							<input type="radio" name="pageDiscoloration" value="0">없음
 							<input type="radio" name="pageDiscoloration" value="1">있음
-							<br>
-							<br>
-							<h3>페이지 훼손</h3>
+							<br><br>
+							<h4>페이지 훼손</h4><br>
 							<input type="radio" name="pageDamage" value="0">없음 <input
 								type="radio" name="pageDamage" value="1">있음 <br>
-							<br>
-							<h3>겉표지</h3>
+							<br><br>
+							<h4>겉표지</h4><br>
 							<input type="radio" name="coverDamage" value="0">깨끗함 <input
 								type="radio" name="coverDamage" value="1">깨끗하지 않음 <br>
 						</div>
 						<br><br>
 						<div>
-							<h3>책 설명</h3>
-							<textarea name="description" cols="50" rows="8">이 책은 4번 정도 본 것 외에 하자가 없습니다.</textarea>
+							<h4>책 설명</h4><br>
+							<textarea name="description" cols="50" rows="8"></textarea>
 						</div>
 						<br><br>
 						<div>
-							<h3>사진 등록</h3>
+							<h4>사진 등록</h4><br>
 							<input type="file" name="picture" accept="image/*" size="20"/>
 						</div>
 						<br><br><br><br>
