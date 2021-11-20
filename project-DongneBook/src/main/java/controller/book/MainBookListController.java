@@ -11,10 +11,6 @@ import model.service.BookManager;
 public class MainBookListController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
-		
-    	if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login/form";
-        }
     	
     	BookManager manager = BookManager.getInstance();
 		List<Book> bookList = manager.mainBookList();
