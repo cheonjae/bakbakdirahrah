@@ -15,7 +15,8 @@ public class SearchBookListController implements Controller {
 		
 		List<Book> bookList = manager.findMyBookList(title);
 		
-		request.setAttribute("bookList", bookList);				
-		return "/book/bookSearchView.jsp";   
+		request.setAttribute("bookList", bookList);
+		request.setAttribute("searchWord", title);	
+		return "/user/main.jsp";   
     }
 }
