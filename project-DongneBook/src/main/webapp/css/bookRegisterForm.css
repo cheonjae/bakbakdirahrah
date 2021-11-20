@@ -1,236 +1,223 @@
 @charset "UTF-8";
 
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+	/*구글 웹 폰트 적용*/
+* {
+	font-family: Nanum Gothic; /*웹 폰트 지정*/
+}
+
 #article {
-            margin: 0 15% 5%;
-            font-family: 'Malgun Gothic';
-            text-align: center;
-        }
+	margin: 0 15% 5%;
+	font-family: 'Malgun Gothic';
+	text-align: center;
+}
 
-        #logo {
-            color:rgb(147, 176, 255);
-            font-size: 30px;
-            font-weight: bold;
-        }
+#logo {
+	color: rgb(147, 176, 255);
+	font-size: 30px;
+	font-weight: bold;
+}
 
-        /* 헤더 테이블 */
-        .headtable {
-            width: 1000px;
-            font-size: 14px;
-            border-spacing: 5px;
-        }
+/* 헤더 테이블 */
+.headtable {
+	width: 1000px;
+	font-size: 14px;
+	border-spacing: 5px;
+}
 
-        /*헤더 검색창, 버튼*/
-        .newlist-button, .sales-button {
-            margin: 0;
-            width: 160px;
-            height: 40px;
-            border: 1px solid #999999; /*보더 삭제*/
-            box-sizing: border-box;
-            border-radius: 6px;
-            font-size: 0;
+/*헤더 검색창, 버튼*/
+.newlist-button, .sales-button {
+	margin: 0;
+	width: 160px;
+	height: 40px;
+	border: 1px solid #999999; /*보더 삭제*/
+	box-sizing: border-box;
+	border-radius: 6px;
+	font-size: 0;
+	-webkit-appearance: none;
+	border-radius: 6px;
+	box-sizing: border-box;
+	border: 1px solid #CED4DA;
+	color: #212529;
+	text-align: center;
+	font-weight: 700;
+	background-color: #fff;
+	margin: 1.6rem 0;
+	text-decoration: none;
+}
 
-            -webkit-appearance: none;
-            border-radius: 6px;
-            box-sizing: border-box;
-            border: 1px solid #CED4DA;
-            color: #212529;
-            text-align: center;
-            font-weight: 700;
-            background-color: #fff;
-            margin: 1.6rem 0;
-            text-decoration: none;
-        }
-        .button-text {
-            color: #4D5159;
-            font-size: 16px;
-        }
-        #fixed-bar-search {
-            left: 150px;
-            top: 16px;
-            border-radius: 5px;
-            border: solid 3px #e9ecef;
-            text-decoration: none;
-            padding: 0 1.6rem;
-            height: 40px;
-            box-sizing: border-box;
-        }
-        .search-input-wrap {
-            display: flex;
-                    justify-content: space-between;
-        }
+.button-text {
+	color: #4D5159;
+	font-size: 16px;
+}
 
-        .sr-only {
-            position: absolute;
-            width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0 0 0 0);
-                border: 0;
-        }
+#fixed-bar-search {
+	left: 150px;
+	top: 16px;
+	border-radius: 5px;
+	border: solid 3px #e9ecef;
+	text-decoration: none;
+	padding: 0 1.6rem;
+	height: 40px;
+	box-sizing: border-box;
+}
 
-        .fixed-search-input {
-            display: block;
-            width: 300px;
-            border: none;
-            padding: 0;
-            margin: 0;
-            font-size: 16px;
-            color: #212529;
-            background-color: transparent;
-        }
+.search-input-wrap {
+	display: flex;
+	justify-content: space-between;
+}
 
-        #header-search-button {
-            border: none;
-            margin: 0;
-            background-color: transparent;
-        }
-        /*헤더 끝*/
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
 
-        /* 최근 상품 영역 */
-        #books {
-            display: inline-block;
-        }
+.fixed-search-input {
+	display: block;
+	width: 300px;
+	border: none;
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+	color: #212529;
+	background-color: transparent;
+}
 
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            margin: auto;
-        }
+#header-search-button {
+	border: none;
+	margin: 0;
+	background-color: transparent;
+}
+/*헤더 끝*/
 
-        .tg td {
-            border-color: rgb(255, 255, 255);
-            border-style: solid;
-            border-width: 1px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
+/* 카테고리 */
+aside#left {
+	float: left;
+	width: 12em;
+	margin-right: 1em;
+	text-align: left;
+}
 
-        .tg th {
-            border-color: rgb(255, 255, 255);
-            border-style: solid;
-            border-width: 1px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
+aside#left ul {
+	list-style: none
+}
 
-        .tg .tg-0lax {
-            text-align: left;
-            vertical-align: top;
-        }
+aside#left ul li {
+	font-size: 14px;
+	background-color: white;
+	padding: 5px 10px;
+	border-bottom: 1px solid black;
+}
 
-        /* 카테고리 */
-        aside#left {
-            float: left;
-            width: 12em;
-            margin-right: 1em;
-            text-align: left;
-        }
+aside#left ul li a {
+	color: black;
+	text-decoration: none;
+}
 
-        aside#left ul {
-            list-style: none
-        }
+aside#left ul li:hover {
+	background-color: rgb(255, 245, 190);
+}
 
-        aside#left ul li {
-            font-size: 14px;
-            background-color: white;
-            padding: 5px 10px;
-            border-bottom: 1px solid black;
-        }
+.cat-header {
+	pointer-events: none;
+}
 
-        aside#left ul li a {
-            color: black;
-            text-decoration: none;
-        }
+aside#main {
+	float: left;
+}
 
-        aside#left ul li:hover {
-            background-color: rgb(255, 245, 190);
-        }
+button.btn1 {
+	position: absolute;
+	top: 24%;
+	left: 42%;
+}
 
-        .cat-header {
-            pointer-events: none;
-        }
+button.btn2 {
+	position: absolute;
+	top: 24%;
+	left: 53%;
+}
 
-        aside#main {
-            float: left;
-        }
+button.btn3 {
+	position: absolute;
+	top: 24%;
+	left: 64.5%;
+}
 
-        button.btn1 {
-            position: absolute;
-            top: 24%;
-            left: 42%;
-        }
+button.btn4 {
+	position: absolute;
+	top: 24%;
+	left: 77%;
+}
 
-        button.btn2 {
-            position: absolute;
-            top: 24%;
-            left: 53%;
-        }
+button.btn5 {
+	position: absolute;
+	top: 57.5%;
+	left: 42%;
+}
 
-        button.btn3 {
-            position: absolute;
-            top: 24%;
-            left: 64.5%;
-        }
+button.btn6 {
+	position: absolute;
+	top: 57.5%;
+	left: 53%;
+}
 
-        button.btn4 {
-            position: absolute;
-            top: 24%;
-            left: 77%;
-        }
+button.btn7 {
+	position: absolute;
+	top: 57.5%;
+	left: 64.5%;
+}
 
-        button.btn5 {
-            position: absolute;
-            top: 57.5%;
-            left: 42%;
-        }
+button.btn8 {
+	position: absolute;
+	top: 57.5%;
+	left: 77%;
+}
 
-        button.btn6 {
-            position: absolute;
-            top: 57.5%;
-            left: 53%;
-        }
+button.btn9 {
+	position: absolute;
+	top: 91%;
+	left: 42%;
+}
 
-        button.btn7 {
-            position: absolute;
-            top: 57.5%;
-            left: 64.5%;
-        }
+button.btn10 {
+	position: absolute;
+	top: 91%;
+	left: 53%;
+}
 
-        button.btn8 {
-            position: absolute;
-            top: 57.5%;
-            left: 77%;
-        }
+button.btn11 {
+	position: absolute;
+	top: 91%;
+	left: 64.5%;
+}
 
-        button.btn9 {
-            position: absolute;
-            top: 91%;
-            left: 42%;
-        }
+button.btn12 {
+	position: absolute;
+	top: 91%;
+	left: 77%;
+}
 
-        button.btn10 {
-            position: absolute;
-            top: 91%;
-            left: 53%;
-        }
+/* 책 정보 입력 */
+#page-info {
+	text-align: left;
+	font-size: 18pt;
+	font-weight: bold;
+	color: white;
+	background-color: rgb(147, 176, 255);
+	margin-left: 20px;
+}
 
-        button.btn11 {
-            position: absolute;
-            top: 91%;
-            left: 64.5%;
-        }
+#detail {
+	text-align: center;
+}
 
-        button.btn12 {
-            position: absolute;
-            top: 91%;
-            left: 77%;
-        }
+#book {
+	display: inline-block;
+}
