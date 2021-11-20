@@ -37,7 +37,7 @@
     <br>
     ${book.title}
     <br>
-    ${book.price}</a>
+    ${book.price}원</a>
     </td>
 <% if(count % 4 == 3){ %>
   </tr>
