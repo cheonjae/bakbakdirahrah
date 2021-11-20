@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Book;
+import model.Category;
 
 /**
  * 책 관리를 위해 데이터베이스 작업을 전담하는 DAO 클래스
