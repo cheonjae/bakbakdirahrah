@@ -21,7 +21,7 @@ public class BookDAO {
 		
 	// 새로운 책 생성	
 	public int create(Book book) throws SQLException {
-		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // 카테id도 sequence 
+		String sql = "INSERT INTO BOOK VALUES (?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // 카테id도 sequence 
 		Object [] param = new Object[] { book.getTitle(), book.getauthor(),
 						book.getPublisher(), book.getBookId(), book.getPrice(),
 						book.getDescription(), book.getImage(), book.getUserId(), book.getSold(), book.getCateId(),
