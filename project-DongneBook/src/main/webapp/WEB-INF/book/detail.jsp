@@ -134,7 +134,7 @@ function userRemove() {
     %>
      <a class="detail-btn-primary" 
     	href="<c:url value='/book/update' >
-     		     <c:param name='userId' value='${user.userId}'/>
+     		     <c:param name='bookId' value='${book.bookId}'/>
 		 	  </c:url>">수정</a>
     <a class="detail-btn-warning" 
    		href="<c:url value='/book/delete'>
