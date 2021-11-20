@@ -136,7 +136,8 @@ public class RegisterBookController implements Controller {
 			
 			System.out.println("RegisterBookController: "+ book.getTitle());
 			
-			request.setAttribute("bookId", book.getBookId());
+			request.setAttribute("dir", dir);
+			request.setAttribute("filename", filename);
 		}		
         
 		return "redirect:/user/main";
