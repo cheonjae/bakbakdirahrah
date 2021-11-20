@@ -6,46 +6,42 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.user.*;
+import controller.book.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
-    // 각 요청 uri에 대한 controller 객체를 저장할 HashMap 생성
+    // 占쏙옙 占쏙옙청 uri占쏙옙 占쏙옙占쏙옙 controller 占쏙옙체占쏙옙 占쏙옙占쏙옙占쏙옙 HashMap 占쏙옙占쏙옙
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// 각 uri에 대응되는 controller 객체를 생성 및 저장
-        mappings.put("/", new ForwardController("index.jsp"));
+    	// 占쏙옙 uri占쏙옙 占쏙옙占쏙옙占실댐옙 controller 占쏙옙체占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙
+//        mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
+     
         
-        // 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
-//      mappings.put("/user/register/form", new ForwardController("/user/registerForm.jsp"));
-//      mappings.put("/user/register", new RegisterUserController());
-        mappings.put("/user/register", new RegisterUserController());
+        // 회占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙청占쏙옙 占쏙옙占쏙옙 占쏙옙청 처占쏙옙 占쏙옙占쏙옙 (占쏙옙占쏙옙 커占승댐옙티 占쏙옙占쏙옙 占쌨댐옙 占쌩곤옙占쏙옙 占쏙옙占쏙옙)
+      mappings.put("/book/register/form", new ForwardController("/book/bookRegisterForm.jsp"));
+      mappings.put("/book/register", new RegisterBookController());
+//        mappings.put("/user/register", new RegisterUserController());
 
-        // 사용자 정보 수정 폼 요청과 수정 요청 처리 병합
+        // 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙청占쏙옙 占쏙옙占쏙옙 占쏙옙청 처占쏙옙 占쏙옙占쏙옙
 //      mappings.put("/user/update/form", new UpdateUserFormController());
 //      mappings.put("/user/update", new UpdateUserController());        
-        mappings.put("/user/update", new UpdateUserController());
+//        mappings.put("/user/update", new UpdateUserController());
         
-        mappings.put("/user/delete", new DeleteUserController());
+        mappings.put("/user/main", new MainBookListController());
         
-        // book 관련 request URI 추가 수정해야함
-//        mappings.put("/community/list", new ListCommunityController());
-//        mappings.put("/community/view", new ViewCommunityController());
-//        mappings.put("/community/create/form", new ForwardController("/community/creationForm.jsp"));
-//        mappings.put("/community/create", new CreateCommunityController());
-//        mappings.put("/community/update", new UpdateCommunityController());
-          mappings.put("/book/list, new MainBookListController());
-          mappings.put("/book/updateForm, new UpdateBookController());
+        mappings.put("/book/delete", new DeleteBookController());
+        mappings.put("/book/detail", new BookDetailController());
         
         logger.info("Initialized Request Mapping!");
     }
 
     public Controller findController(String uri) {	
-    	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
+    	// 占쌍억옙占쏙옙 uri占쏙옙 占쏙옙占쏙옙占실댐옙 controller 占쏙옙체占쏙옙 찾占쏙옙 占쏙옙환
         return mappings.get(uri);
     }
 }
