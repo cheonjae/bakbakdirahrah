@@ -1,21 +1,25 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<head>
+<link rel=stylesheet href="<c:url value='/css/navbar.css' />" type="text/css">
+</head>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- Links -->
-<script type="text/javaScript">
-function moveSale()
-{
-     location.href = "www.yoursite.com";
-} 
-</script>
-<a id="logo" style="color:rgb(147, 176, 255); font-size: 30px; font-weight: bold;" href="<c:url value='/user/main' />">
-	동네북
-</a>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;      
+	<a id="logo" style="color:rgb(147, 176, 255); font-size: 30px; font-weight: bold;" href="<c:url value='/user/main' />">
+		동네북
+	</a>
+
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;      
 	<c:url value="/book/search" var="searchUrl" />
 	<form class="d-flex" style="padding-top:1%; padding-bottom:1%;" action="${searchUrl}">
-		<input class="form-control me-2" type="search" name="title" aria-label="Search" placeholder="책 이름을 검색해보세요!">
-		<button class="btn btn-outline-success" type="submit" style="width:100px; background-color:rgb(147, 176, 255); color:white">
+		<div class="col-md-push-3" style="width:350px;">
+			<input class="form-control" type="search" name="title" aria-label="Search" 
+			    <c:if test="${empty searchWord}">
+    				placeholder="책 제목을 입력해주세요"
+				</c:if>
+				value="${searchWord}">
+		</div>
+		<button class="btn btn-outline-success" type="submit" style="background-color:rgb(147, 176, 255); color:white">
 			검색
 		</button>
 	</form>
@@ -55,12 +59,12 @@ function moveSale()
 			</c:choose> 
         </ul>
     </div>
-  </nav>
+</nav>
 <body>
 	<div id="article" style="float:left;">
             <aside id="left">
 	            <ul>
-	            	<li class="cat-header"><b>국내도서</b></li>
+	            	<li class="cat-header"><b>카테고리</b></li>
 				     <%
 						String[] categoryName = {"건강", "경제/경영", "공학", "과학", "교육", "기술",
 								"만화", "문학", "미스터리/스릴러", "사회/정치", "수학", "스포츠", "어린이", "여행", "역사",
