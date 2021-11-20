@@ -21,7 +21,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/navbar.jsp" %> 
-<table class="tg" border="1">
+<table class="tg" style="width:70%; height:auto; margin-left:auto; margin-right:auto; border-collapse : collapse;">
 
 
 <c:forEach var="book" items="${bookList}">
