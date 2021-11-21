@@ -93,9 +93,7 @@ public String Catename(int cateId) {
 	String str4 = "깨끗함";
 	
 	//기존 책 데이터
-	Book book = (Book)request.getAttribute("book");
-	//업뎃 내용 넘겨줄 객체
-	
+	Book book = (Book)request.getAttribute("book");	
 %>
 
 	
@@ -110,17 +108,6 @@ public String Catename(int cateId) {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/update.css' />" type="text/css">
-	<script>
-function userCreate() {
-	form.submit();
-}
-
-function userList(targetUri) {
-	form.action = targetUri;
-	form.submit();
-}
-
-</script> 
 </head>
 <body style="margin: 0 auto">
 <%@include file="/WEB-INF/navbar.jsp" %> 
@@ -219,9 +206,8 @@ function userList(targetUri) {
 						<table style="width: 100%">
 							<tr>
 								<td>
-									<input type="button" value="취소" onClick="userList('<c:url value='/book/bookListView' />')">
-
-									<input type="submit" value="수정" onClick="userCreate()"> &nbsp;
+									<a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >취소</a>
+									<input type="submit" value="수정"> &nbsp;
 								</td>
 							</tr>
 						</table>
