@@ -115,82 +115,71 @@ public String Catename(int cateId) {
 			<div id="detail">
 				<br><br>
 				<div id="book">
-					<form name="book-update" method="POST"
-						action="<c:url value='/book/update' />">
+					<form name="book-update" method="POST" action="<c:url value='/book/update' />">
 						<input type="hidden" name="bookId" value="${book.bookId}"/>	  
 						<h3><b>책 정보 수정</b></h3>
 						<table class="update-info">
 							<tr>
 								<td>제목</td>
-								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									|&ensp;${book.title}
-								</td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp;${book.title} </td>
 							</tr>
 							<tr>
 								<td>저자</td>
-								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									|&ensp;${book.author}
-								</td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp;${book.author} </td>
 							</tr>
 							<tr>
 								<td>출판사</td>
-								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									|&ensp;${book.publisher}
-								</td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp;${book.publisher} </td>
 							</tr>
 							<tr>
 								<td>가격</td>
-								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									|&ensp;<input type="text" style="width: 240;" name="price" value='${book.price}'>원
-								</td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp;<input type="text" style="width: 240;" name="price" value='${book.price}'> 원 </td>
 							</tr>
 							<tr>
 								<td>카테고리</td>
-								<td width="250" bgcolor="ffffff" style="padding-left: 10">							
-								|&ensp; <%= Catename(book.getCateId()) %>
-								</td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp; <%= Catename(book.getCateId()) %> </td>
 							</tr>
 						</table>
 						<br><br>
 						<div>
 							<h3><b>책 상태</b></h3>
 							<table class="update-info2">
-                        <thead>
-                            <tr> 
-                                <th><b>필기 흔적</b></th>
-                                <th><b>페이지 변색</b></th>
-                                <th><b>페이지 훼손</b></th>
-                                <th><b>겉표지</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <%
-                            	if(book.getWriting() == 1) {
-                            		str1 = "연필/샤프";
-                            	} else if(book.getWriting() == 2) {
-                            		str1 = "볼펜/형광펜";
-                            	}
-                            
-                            	if(book.getPageDiscoloration() == 1) {
-                            		str2 = "있음";
-                            	}
-                            	
-                            	if(book.getPageDamage() == 1) {
-                            		str3 = "있음";
-                            	}
-                            	
-                            	if(book.getCoverDamage() == 1) {
-                            		str4 = "깨끗하지않음";
-                            	}
-                            %>
-                            	<td><%=str1%></td>
-                                <td><%=str2%></td>
-                                <td><%=str3%></td>
-                                <td><%=str4%></td>
-                            </tr>
-                        </tbody>
-                    </table>
+								<thead>
+								    <tr> 
+									<th><b>필기 흔적</b></th>
+									<th><b>페이지 변색</b></th>
+									<th><b>페이지 훼손</b></th>
+									<th><b>겉표지</b></th>
+								    </tr>
+								</thead>
+								<tbody>
+								    <tr>
+								    <%
+									if(book.getWriting() == 1) {
+										str1 = "연필/샤프";
+									} else if(book.getWriting() == 2) {
+										str1 = "볼펜/형광펜";
+									}
+
+									if(book.getPageDiscoloration() == 1) {
+										str2 = "있음";
+									}
+
+									if(book.getPageDamage() == 1) {
+										str3 = "있음";
+									}
+
+									if(book.getCoverDamage() == 1) {
+										str4 = "깨끗하지않음";
+									}
+								    %>
+									<td><%=str1%></td>
+									<td><%=str2%></td>
+									<td><%=str3%></td>
+									<td><%=str4%></td>
+								    </tr>
+								</tbody>
+							</table>
 						</div>
 						<br><br>
 						<div>
