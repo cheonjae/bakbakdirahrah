@@ -33,7 +33,7 @@
 	String userId = (String) session.getAttribute("userId");
 	if(userId == null) {
 	%>
-	<a href="javascript:alert('메롱ㅋ');" onfocus="this.blur()">
+	<a href="javascript:alert('로그인 후 이용하세요.');" onfocus="this.blur()">
 	<%
 	}
 	else {
