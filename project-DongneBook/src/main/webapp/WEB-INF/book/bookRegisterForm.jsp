@@ -115,7 +115,7 @@
 									<a href="<c:url value='/user/main' />" class="btn btn-link" role="button" >취소</a>  
 								</td>
 								<td align="right">
-									<a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >등록</a> &nbsp;
+									<input type="submit" value="등록" onClick="userCreate()"> &nbsp;
 								</td>
 							</tr>
 						</table>
