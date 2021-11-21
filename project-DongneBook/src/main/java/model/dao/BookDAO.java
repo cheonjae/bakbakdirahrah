@@ -57,10 +57,10 @@ public class BookDAO {
 				+ "SET price=?, description=?, sold=? "
 				+ "WHERE book_id=?";
 		Object[] param = new Object[] {book.getPrice(), book.getDescription(), book.getSold(), book.getBookId()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
+		jdbcUtil.setSqlAndParameters(sql, param);
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update 문 실행
+			int result = jdbcUtil.executeUpdate();
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -68,7 +68,7 @@ public class BookDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
+			jdbcUtil.close();
 		}		
 		return 0;
 	}
