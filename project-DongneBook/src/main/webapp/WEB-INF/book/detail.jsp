@@ -57,7 +57,7 @@ function userRemove() {
                     <table class="detail-info">
                         <tr>
                         
-                            <td rowspan="5"><img src="${pageContext.request.contextPath}/${book.image}" width="200" height="250"></td>
+                            <td rowspan="5"><img src="${pageContext.request.contextPath}/upload/${book.image}" width="100" height="150"></td>
                             <td>저자</td>
                             <td> |&ensp;${book.author} </td>
                         </tr>
