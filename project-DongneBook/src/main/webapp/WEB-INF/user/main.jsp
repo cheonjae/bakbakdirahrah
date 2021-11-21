@@ -45,6 +45,7 @@
     	count++;
     %>
   </c:forEach>
+<% count = 0; %>
 </table>
 
 </body>
