@@ -27,16 +27,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
 	<script>
-function userRemove() {
-	if(confirm("정말 삭제하시겠습니까?")) {
-		if(userId != book.getUserId()) {
-			alert('타인의 어쩌고.');
-		} else {
-			alert('삭제 되었습니다.');
-		}
-	} else {
-		alert('취소되었습니다');
-	}	
+function bookRemove() {
+	return confirm("정말 삭제하시겠습니까?");		
 }
 </script>
 
@@ -123,7 +115,7 @@ function userRemove() {
 				href="<c:url value='/book/delete'>
 				 <c:param name='bookId' value='${book.bookId}'/>
 				 <c:param name='userId' value='${user.userId}' />
-			      </c:url>" onclick="return userRemove();">삭제</a>
+			      </c:url>" onclick="return bookRemove();">삭제</a>
 		</c:if>
 	</section>
 	<br><br><br><br><br>
