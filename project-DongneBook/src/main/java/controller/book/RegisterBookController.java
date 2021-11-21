@@ -84,7 +84,7 @@ public class RegisterBookController implements Controller {
                 	}
                 	else {
                 		if(item.getFieldName().equals("picture")) {
-                			filename = item.getName();//占쎈솁占쎌뵬 占쎌뵠�뵳占� 占쎌돴占쎈굣 (占쎌쁽占쎈짗 占쎈립疫뀐옙 力μ꼶�봺 占쎈쭡)
+                			filename = item.getName();
                 			if(filename == null || filename.trim().length() == 0) continue;
                 			filename = filename.substring(filename.lastIndexOf("\\") + 1);
                 			File file = new File(dir, filename);
