@@ -112,21 +112,18 @@ function userRemove() {
                     <textarea name="content" cols="50" rows="8" readonly>${book.description}</textarea>
                 </div>
             </div>
-    <%
-    	if(userId.equals(book.getUserId())) {
-    %>
-     <a class="detail-btn-primary" 
-    	href="<c:url value='/book/update' >
-     		     <c:param name='bookId' value='${book.bookId}'/>
-		 	  </c:url>">수정</a>
-    <a class="detail-btn-warning" 
-   		href="<c:url value='/book/delete'>
-		     	 <c:param name='bookId' value='${book.bookId}'/>
-		     	 <c:param name='userId' value='${user.userId}' />
-	 	      </c:url>" onclick="return userRemove();">삭제</a>
-	<% 
-		} 
-	%>
-	   </section>
-		<br><br><br><br><br>
+	    
+		<c:if test="${userId eq book.getUserId()}">
+			<a class="detail-btn-primary" 
+			href="<c:url value='/book/update' >
+			     <c:param name='bookId' value='${book.bookId}'/>
+				  </c:url>">수정</a>
+		<a class="detail-btn-warning" 
+				href="<c:url value='/book/delete'>
+				 <c:param name='bookId' value='${book.bookId}'/>
+				 <c:param name='userId' value='${user.userId}' />
+			      </c:url>" onclick="return userRemove();">삭제</a>
+		</c:if>
+	</section>
+	<br><br><br><br><br>
 </body>
