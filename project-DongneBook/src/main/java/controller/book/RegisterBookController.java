@@ -115,10 +115,11 @@ public class RegisterBookController implements Controller {
 			
 			System.out.println("RegisterBookController: "+ book.getTitle());
 			
+			equest.setAttribute("book", book);
 			request.setAttribute("dir", dir);
 			request.setAttribute("filename", filename);
 		}		
         
-		return "redirect:/user/main";
+		return "/book/detail.jsp";
     }
 }
