@@ -49,7 +49,7 @@
     ${book.title}
     <br>
     ${book.price}원</a>
-    <td>
+    </td>
 <% if(count % 4 == 3){ %>
   </tr>
 <% }
@@ -58,7 +58,5 @@
   </c:forEach>
 <% count = 0; %>
 </table>
-
-
 </body>
 </html>
