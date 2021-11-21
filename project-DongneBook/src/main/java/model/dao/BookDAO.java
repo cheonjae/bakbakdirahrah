@@ -24,8 +24,8 @@ public class BookDAO {
 	public Book create(Book book) throws SQLException {
 		String sql = "INSERT INTO book VALUES (?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object [] param = new Object[] { book.getTitle(), book.getAuthor(), book.getPublisher(),
-						book.getPrice(), book.getDescription(), book.getImage(), book.getUserId(), book.getSold(), 
-						book.getPageDiscoloration(), book.getCoverDamage(), book.getPageDamage(), book.getWriting(), book.getCateId()}; 
+					book.getPrice(), book.getDescription(), book.getImage(), book.getUserId(), book.getSold(), 
+					book.getPageDiscoloration(), book.getCoverDamage(), book.getPageDamage(), book.getWriting(), book.getCateId()}; 
 		
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 		
