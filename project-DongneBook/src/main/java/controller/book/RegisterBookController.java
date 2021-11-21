@@ -115,7 +115,7 @@ public class RegisterBookController implements Controller {
 			
 			System.out.println("RegisterBookController: "+ book.getTitle());
 			
-			equest.setAttribute("book", book);
+			request.setAttribute("book", book);
 			request.setAttribute("dir", dir);
 			request.setAttribute("filename", filename);
 		}		
