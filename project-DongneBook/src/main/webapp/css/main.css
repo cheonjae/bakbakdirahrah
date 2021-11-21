@@ -1,2 +1,1 @@
-
-td, th { border: none; }
+table, td, th { padding-top: 30px; padding-bottom: 30px;} 
