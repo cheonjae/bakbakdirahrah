@@ -67,7 +67,7 @@ function userRemove() {
                         </tr>
                         <tr>
                             <td>가격</td>
-                            <td> |&ensp;${book.price}</td>
+                            <td> |&ensp;${book.price}원</td>
                         </tr>
                         <tr>
                             <td >판매자</td>
