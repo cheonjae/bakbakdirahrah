@@ -1,1 +1,15 @@
-table, td, th { padding-top: 30px; padding-bottom: 30px;} 
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+/*구글 웹 폰트 적용*/
+* {
+	font-family: Nanum Gothic; /*웹 폰트 지정*/
+}
+
+table, td, th {
+	padding-bottom: 30px;
+	padding-top: 30px;
+	/* border-style: solid; */
+}
+
+td {
+        text-align: center;
+      } 
