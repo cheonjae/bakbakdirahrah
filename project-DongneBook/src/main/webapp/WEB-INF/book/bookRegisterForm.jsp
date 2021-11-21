@@ -12,17 +12,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/listview.css' />" type="text/css">
-	<script>
-function userCreate() {
-	form.submit();
-}
-
-function userList(targetUri) {
-	form.action = targetUri;
-	form.submit();
-}
-
-</script>
 </head>
 <body>
 	<%@include file="/WEB-INF/navbar.jsp" %>
@@ -123,10 +112,10 @@ function userList(targetUri) {
 						<table style="width: 100%">
 							<tr>
 								<td align="left">
-									<input type="button" value="취소" onClick="userList('<c:url value='/book/bookListView' />')">
+									<a href="<c:url value='/user/main' />" class="btn btn-link" role="button" >취소</a>  
 								</td>
 								<td align="right">
-									<input type="submit" value="등록" onClick="userCreate()"> &nbsp;
+									<a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >등록</a> &nbsp;
 								</td>
 							</tr>
 						</table>
