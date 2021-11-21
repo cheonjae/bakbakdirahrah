@@ -4,12 +4,11 @@
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
-	String str1 = "없음";
-	String str2 = "없음";
-	String str3 = "없음";
-	String str4 = "깨끗함";
+	String[] writing = {"없음", "연필/샤프", "볼펜/형광펜"};
+	String[] discolor = {"없음", "있음"};
+	String[] pageDamage = {"없음", "있음"};
+	String[] coverDamage = {"없음", "깨끗하지않음"};
 %>
-
 <%
 	@SuppressWarnings("unchecked") 
 	Book book = (Book)request.getAttribute("book");
@@ -49,8 +48,6 @@ function userRemove() {
                 <div id="book">
                     <!-- 책 정보 -->
                     <br><br>
-                    <%
-                    %>
                     <b><%= categoryName[book.getCateId() - 1] %></b>
                     <br>
                     <h3><b>${book.title}</b></h3>
@@ -101,25 +98,6 @@ function userRemove() {
                         </thead>
                         <tbody>
                             <tr>
-                            <%
-                            	if(book.getWriting() == 1) {
-                            		str1 = "연필/샤프";
-                            	} else if(book.getWriting() == 2) {
-                            		str1 = "볼펜/형광펜";
-                            	}
-                            
-                            	if(book.getPageDiscoloration() == 1) {
-                            		str2 = "있음";
-                            	}
-                            	
-                            	if(book.getPageDamage() == 1) {
-                            		str3 = "있음";
-                            	}
-                            	
-                            	if(book.getCoverDamage() == 1) {
-                            		str4 = "깨끗하지않음";
-                            	}
-                            %>
                             	<td><%=str1%></td>
                                 <td><%=str2%></td>
                                 <td><%=str3%></td>
