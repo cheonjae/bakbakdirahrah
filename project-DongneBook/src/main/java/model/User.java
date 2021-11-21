@@ -1,7 +1,7 @@
 package model;
 
 /**
- * »ç¿ëÀÚ °ü¸®¸¦ À§ÇØ ÇÊ¿äÇÑ µµ¸ŞÀÎ Å¬·¡½º. USERINFO Å×ÀÌºí°ú ´ëÀÀµÊ
+ * ì‚¬ìš©ì ê´€ë¦¬ë¥¼ ìœ„í•´ í•„ìš”í•œ ë„ë©”ì¸ í´ë˜ìŠ¤. USERINFO í…Œì´ë¸”ê³¼ ëŒ€ì‘ë¨
  */
 public class User {
 	private String userId;
@@ -11,31 +11,31 @@ public class User {
 	private String phone;
 	private String location;
 
-	public User() { }		// ±âº» »ı¼ºÀÚ
+	public User() { }		// ê¸°ë³¸ ìƒì„±ì
 	
-	public User(String userId, String password, String name, String email, String phone, String location) {
+	public User(String userId, String password, String name, String location, String phone, String email) {
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
-		this.email = email;
-		this.phone = phone;
 		this.location = location;
+		this.phone = phone;
+		this.email = email;
 	}
 
-	public User(String userId, String name, String email, String phone, String location) {
+	public User(String userId, String name, String location, String phone, String email) {
 		this.userId = userId;
 		this.name = name;
-		this.email = email;
-		this.phone = phone;	
 		this.location = location;
+		this.phone = phone;
+		this.email = email;
 	}
 	
 	public void update(User updateUser) {
-        this.password = updateUser.password;
-        this.name = updateUser.name;
-        this.email = updateUser.email;
-        this.phone = updateUser.phone;
-        this.location = updateUser.location;
+		this.password = updateUser.password;
+		this.name = updateUser.name;
+		this.location = updateUser.location;
+		this.phone = updateUser.phone;
+		this.email = updateUser.email;
     }
 	
 	public String getUserId() {
@@ -62,12 +62,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public String getPhone() {
@@ -77,17 +77,16 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
 	
-	/* ºñ¹Ğ¹øÈ£ °Ë»ç */
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	/* ë¹„ë°€ë²ˆí˜¸ ê²€ì‚¬ */
 	public boolean matchPassword(String password) {
 		if (password == null) {
 			return false;
