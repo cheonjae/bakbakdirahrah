@@ -33,7 +33,7 @@
 					   <c:param name='bookId' value='${book.bookId}'/>
 			 		 </c:url>">
     <!--  이미지 일단 보류 -->
-    <img src="${pageContext.request.contextPath}/${book.image}" width="100" height="150">
+    <img src="${pageContext.request.contextPath}/upload/${book.image}" width="100" height="150">
     <br>
     ${book.title}
     <br>
