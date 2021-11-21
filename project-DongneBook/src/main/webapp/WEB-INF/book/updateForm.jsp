@@ -197,8 +197,8 @@ public String Catename(int cateId) {
 						<table style="width: 100%">
 							<tr>
 								<td>
-									<a href="<c:url value='/user/main' />" class="btn btn-primary"" role="button" >취소</a> 
-									<input type="submit" class="btn btn-primary" value="수정" onClick="userCreate()"> &nbsp;
+									<a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >취소</a>
+									<input type="submit" class="btn btn-primary" value="수정"onclick="return bookUpdate();"> &nbsp;
 								</td>
 							</tr>
 						</table>
