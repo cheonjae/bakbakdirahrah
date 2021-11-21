@@ -10,6 +10,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+	function bookCreate() {
+		return alert("책이 등록되었습니다.");		
+	}
+	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/listview.css' />" type="text/css">
 </head>
@@ -115,7 +120,7 @@
 									<a href="<c:url value='/user/main' />" class="btn btn-link" role="button" >취소</a>  
 								</td>
 								<td align="right">
-									<input type="submit" value="등록" onClick="userCreate()"> &nbsp;
+									<input type="submit" value="등록" onClick="bookCreate()"> &nbsp;
 								</td>
 							</tr>
 						</table>
