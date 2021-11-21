@@ -30,9 +30,9 @@ public class RegisterUserController implements Controller {
        	User user = new User(
 			userId, password, 
 			request.getParameter("name"),
-			request.getParameter("email"),
+			request.getParameter("location"),
 			request.getParameter("phone"),
-			request.getParameter("location"));
+			request.getParameter("email"));
 		
         log.debug("Create User : {}", user);
 
