@@ -98,10 +98,10 @@ function userRemove() {
                         </thead>
                         <tbody>
                             <tr>
-                            	<td><%=str1%></td>
-                                <td><%=str2%></td>
-                                <td><%=str3%></td>
-                                <td><%=str4%></td>
+                               <td><%= writing[book.getWriting()] %></td>
+                        	<td><%= discolor[book.getPageDiscoloration()] %></td>
+                        	<td><%= pageDamage[book.getPageDamage()] %></td>
+                        	<td><%= coverDamage[book.getCoverDamage()] %></td>
                             </tr>
                         </tbody>
                     </table>
