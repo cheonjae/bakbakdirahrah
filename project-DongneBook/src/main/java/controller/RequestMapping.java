@@ -21,19 +21,17 @@ public class RequestMapping {
         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
+        mappings.put("/user/register/form", new ForwardController("/user/userRegisterForm.jsp"));
+        mappings.put("/user/register", new RegisterUserController());
      
-        
         // �쉶�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕泥��뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕泥� 泥섇뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 (�뜝�룞�삕�뜝�룞�삕 而ㅵ뜝�듅�뙋�삕�떚 �뜝�룞�삕�뜝�룞�삕 �뜝�뙣�뙋�삕 �뜝�뙥怨ㅼ삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕)
         mappings.put("/book/register/form", new ForwardController("/book/bookRegisterForm.jsp"));
         mappings.put("/book/register", new RegisterBookController());
         mappings.put("/book/delete", new DeleteBookController());
         mappings.put("/book/detail", new BookDetailController());
-        
-        
-        mappings.put("/user/register/form", new ForwardController("/user/userRegisterForm.jsp"));
-        mappings.put("/user/register", new RegisterUserController());
         mappings.put("/book/search", new SearchBookListController());
-        mappings.put("/book/cate", new CateBookListController()); 
+        mappings.put("/book/cate", new CateBookListController());
+        mappings.put("/book/update", new UpdateBookController()); 
         
         logger.info("Initialized Request Mapping!");
     }
