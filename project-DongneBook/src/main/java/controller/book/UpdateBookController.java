@@ -15,10 +15,9 @@ import model.Book;
 import model.service.BookManager;
 
 public class UpdateBookController implements Controller{
-	private static final Logger log = LoggerFactory.getLogger(UpdateBookController.class);
 	
-	@Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	if (request.getMethod().equals("GET")) {	
     		String updateId = request.getParameter("bookId"); 
 		
