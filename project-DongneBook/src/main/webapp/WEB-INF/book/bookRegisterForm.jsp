@@ -117,10 +117,10 @@
 						<table style="width: 100%">
 							<tr>
 								<td align="left">
-									<a href="<c:url value='/user/main' />" class="btn btn-link" role="button" >취소</a>  
+									<a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >취소</a>  
 								</td>
 								<td align="right">
-									<input type="submit" value="등록" onClick="bookCreate()"> &nbsp;
+									<input type="submit" class="btn btn-primary" value="등록" onClick="userCreate()"> &nbsp;
 								</td>
 							</tr>
 						</table>
