@@ -88,27 +88,27 @@ function userCreate() {
 	        		<c:if test="${registerFailed}">value="${user.name}"</c:if> > 
 	        </div>
 	    </div>
-	    <div class="form-group row">  
-	        <label for="email" class="col-lg-2 col-form-label">이메일 주소</label>
+	    <div class="form-group row">   
+	        <label for="location" class="col-lg-2 col-form-label">주소</label>
 	        <div class="col-lg-10">
-	        	<input type="text" name="email" class="form-control" placeholder="you@example.com"
-	        		<c:if test="${registerFailed}">value="${user.email}"</c:if> >  
-	        </div>
-	    </div> 
+	        	<input type="text" name="location" class="form-control" placeholder="주소"
+	        		<c:if test="${registerFailed}">value="${user.location}"</c:if> > 
+	    	</div>
+	    </div>
 	    <div class="form-group row">  
 	        <label for="phone" class="col-lg-2 col-form-label">전화번호</label>
 	        <div class="col-lg-10">
 	        	<input type="text" name="phone" class="form-control" placeholder="010-XXXX-YYYY"
 	        		<c:if test="${registerFailed}">value="${user.phone}"</c:if> >  
 	        </div>
-	    </div> 
-		<div class="form-group row">   
-	        <label for="location" class="col-lg-2 col-form-label">주소</label>
+	    </div>
+	    <div class="form-group row">  
+	        <label for="email" class="col-lg-2 col-form-label">이메일 주소</label>
 	        <div class="col-lg-10">
-	        	<input type="text" name="location" class="form-control" placeholder="주소"
-	        		<c:if test="${registerFailed}">value="${user.location}"</c:if> > 
+	        	<input type="text" name="email" class="form-control" placeholder="you@example.com"
+	        		<c:if test="${registerFailed}">value="${user.email}"</c:if> >  
 	        </div>
-	    </div>  
+	    </div>
    		<br>
 		<div class="form-group">        
 			<input type="button" class="btn btn-primary" value="가입" onClick="userCreate()">
