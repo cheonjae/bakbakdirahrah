@@ -27,7 +27,7 @@
 <% if(count % 4 == 0) { %>
   <tr>
 <% } %>
-    <td class="tg-0lax">
+    <td class="tg-0lax" style="width:1%">
     <%
 	HttpSession session1 = request.getSession();	
 	String userId = (String) session.getAttribute("userId");
