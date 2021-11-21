@@ -133,7 +133,9 @@ public String Catename(int cateId) {
 							</tr>
 							<tr>
 								<td>가격</td>
-								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp;<input type="text" style="width: 240;" name="price" value='${book.price}'> 원 </td>
+								<td width="250" bgcolor="ffffff" style="padding-left: 10"> |&ensp;
+									<input type="text" style="width: 240;" name="price" value='${book.price}'> 원
+								</td>
 							</tr>
 							<tr>
 								<td>카테고리</td>
