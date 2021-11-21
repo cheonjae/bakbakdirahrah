@@ -8,88 +8,6 @@
 	String str2 = "없음";
 	String str3 = "없음";
 	String str4 = "깨끗함";
-	String cateName = "";
-	public String Catename(int cateId) {
-		String cateN = " ";
-		switch(cateId) {
-
-		case 1:  cateN = "건강";
-			break;
-		case 2:
-			cateN = "경제/경영";
-			break;
-		case 3:
-			cateN = "공학";
-			break;
-		case 4:
-			cateN = "과학";
-			break;
-		case 5:
-			cateN = "교육";
-			break;
-		case 6:
-			cateN = "기술";
-			break;
-		case 7:
-			cateN = "만화";
-			break;
-		case 8:
-			cateN = "문학";
-			break;
-		case 9:
-			cateN = "미스터리/스릴러";
-			break;
-		case 10:
-			cateN = "사회/정치";
-			break;
-		case 11:
-			cateN = "수학";
-			break;
-		case 12:
-			cateN = "스포츠";
-			break;
-		case 13:
-			cateN = "어린이";
-			break;
-		case 14:
-			cateN = "여행";
-			break;
-		case 15:
-			cateN = "역사";
-			break;
-		case 16:
-			cateN = "예술";
-			break;
-		case 17:
-			cateN = "요리";
-			break;
-		case 18:
-			cateN = "의학";
-			break;
-		case 19:
-			cateN = "인문";
-			break;
-		case 20:
-			cateN = "자기계발";
-			break;
-		case 21:
-			cateN = "잡지";
-			break;
-		case 22:
-			cateN = "종교";
-			break;
-		case 23:
-			cateN = "청소년";
-			break;
-		case 24:
-			cateN = "취미";
-			break;
-		case 25:
-			cateN = "학술";
-			break;
-	}
-		return cateN;
-	}
 %>
 
 <%
@@ -133,7 +51,7 @@ function userRemove() {
                     <br><br>
                     <%
                     %>
-                    <b>국내도서/<%= Catename(book.getCateId()) %></b>
+                    <b><%= categoryName[book.getCateId() - 1] %></b>
                     <br>
                     <h3><b>${book.title}</b></h3>
                     <table class="detail-info">
