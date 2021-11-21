@@ -44,6 +44,7 @@ function userRemove() {
 <body class="detail-body">
 <%@include file="/WEB-INF/navbar.jsp" %> 
     <section class="detail-section">
+	<center>
             <div id="detail">
                 <div id="book">
                     <!-- 책 정보 -->
