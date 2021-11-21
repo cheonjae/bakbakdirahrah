@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.*" %>
+<%@page import="javax.servlet.*" %>
 <%@page import="model.*" %>
 
 <%!int count = 0; %>
@@ -22,23 +23,33 @@
 <body>
 <%@include file="/WEB-INF/navbar.jsp" %> 
 <table class="tg" style="width:70%; height:auto; margin-left:auto; margin-right:auto; border-collapse : collapse;">
-
-
 <c:forEach var="book" items="${bookList}">
 <% if(count % 4 == 0) { %>
   <tr>
 <% } %>
-    <td class="tg-0lax" style="width:1%">
-	<a href="<c:url value='/book/detail'>
-					   <c:param name='bookId' value='${book.bookId}'/>
-			 		 </c:url>">
-    <!--  이미지 일단 보류 -->
+    <td class="tg-0lax">
+    <%
+	HttpSession session1 = request.getSession();	
+	String userId = (String) session.getAttribute("userId");
+	if(userId == null) {
+	%>
+	<a href="javascript:alert('메롱ㅋ');" onfocus="this.blur()">
+	<%
+	}
+	else {
+	%>
+	<a href="<c:url value='/book/detail'> 
+		<c:param name='bookId' value='${book.bookId}'/>
+		</c:url>">
+	<%
+	}
+	%>
     <img src="${pageContext.request.contextPath}/upload/${book.image}" width="100" height="150">
     <br>
     ${book.title}
     <br>
     ${book.price}원</a>
-    </td>
+    <td>
 <% if(count % 4 == 3){ %>
   </tr>
 <% }
@@ -47,6 +58,7 @@
   </c:forEach>
 <% count = 0; %>
 </table>
+
 
 </body>
 </html>
