@@ -8,6 +8,13 @@ public class Chat {
 	private String senderId;
 	private String receiverId;
 	
+	public Chat(String contents, String senderId, String receiverId) {
+		super();
+		this.contents = contents;
+		this.senderId = senderId;
+		this.receiverId = receiverId;
+	}
+	
 	public Chat(int chatId, String createdAt, String contents, String senderId, String receiverId) {
 		super();
 		this.chatId = chatId;
