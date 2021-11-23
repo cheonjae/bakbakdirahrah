@@ -1,5 +1,28 @@
 package model.service;
 
-public class ChatManager {
+import java.sql.SQLException;
+import java.util.List;
 
+import model.Chat;
+import model.dao.ChatDAO;
+
+public class ChatManager {
+	private static ChatManager chatMan = new ChatManager();
+	private ChatDAO chatDAO;
+	
+	private ChatManager() {
+		try {
+			chatDAO = new ChatDAO();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}			
+	}
+	
+	public static ChatManager getInstance() {
+		return chatMan;
+	}
+	
+	public List<Chat> findChatContents(String userId, String buddyId) throws SQLException {
+				return chatDAO.findChatContents(userId, buddyId);
+		}
 }
