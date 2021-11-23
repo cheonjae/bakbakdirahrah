@@ -1,0 +1,18 @@
+	.div1 {
+		border: 1px solid gold;
+		width: 570px;
+		height: 600px;
+		margin: 0 auto;
+	}
+	.div2 {
+    	width: 500px;
+		margin: 0 auto;
+    	max-height: 400px;
+    }
+	h1, hr {
+		margin: 0 auto;
+	}
+	table {
+		margin: 0 auto;
+    }
+    
