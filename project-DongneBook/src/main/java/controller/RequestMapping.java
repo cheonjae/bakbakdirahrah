@@ -33,6 +33,8 @@ public class RequestMapping {
         mappings.put("/book/cate", new CateBookListController());
         mappings.put("/book/update", new UpdateBookController()); 
         
+        mappings.put("/chat/view", new ViewChatController());
+        
         logger.info("Initialized Request Mapping!");
     }
 
