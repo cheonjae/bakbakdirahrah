@@ -30,13 +30,16 @@
 function bookRemove() {
 	return confirm("정말 삭제하시겠습니까?");		
 }
+function chat_popup() {
+	window.open("<%= request.getContextPath() %>/chat/chatView.jsp", "chat", "width=640" "height=400");
+}
+
 </script>
 
 </head>
 <body class="detail-body">
 <%@include file="/WEB-INF/navbar.jsp" %> 
     <section class="detail-section">
-	<center>
             <div id="detail">
                 <div id="book">
                     <!-- 책 정보 -->
@@ -65,14 +68,14 @@ function bookRemove() {
                         </tr>
                         <tr>
                             <td>
-                                <button class="detail-button">
-                                    <span class="detail-button-text">찜</span>
-                                </button>
                             </td>
                             <td>
-                                <button class="detail-button">
-                                    <span class="detail-button-text">채팅</span>
-                                </button>
+                                <a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >찜</a> 
+                                <a class="btn btn-primary"
+                            	href="<c:url value='/chat/view'>
+                            		 <c:param name='userId' value='<%=userId%>'/>
+                            		 <c:param name='buddyId' value='${book.userId}'/>
+                            	</c:url>" role="button" onclick="window.open(this.href, '_blank', 'width=570, height=600'); return false;">채팅</a> 
                             </td>
                         </tr>
                     </table>
