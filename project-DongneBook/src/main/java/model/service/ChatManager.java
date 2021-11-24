@@ -23,6 +23,10 @@ public class ChatManager {
 	}
 	
 	public List<Chat> findChatContents(String userId, String buddyId) throws SQLException {
-				return chatDAO.findChatContents(userId, buddyId);
-		}
+		return chatDAO.findChatContents(userId, buddyId);
+	}
+	
+	public List<String> findBuddyId(String userId) throws SQLException {
+		return chatDAO.findBuddyId(userId);
+	}
 }
