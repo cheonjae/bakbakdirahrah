@@ -21,6 +21,8 @@ public class RequestMapping {
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/register/form", new ForwardController("/user/userRegisterForm.jsp"));
         mappings.put("/user/register", new RegisterUserController());
+        // 마이페이지가 아직 안만들어져서 임시로 채팅방목록을 마이페이지 버튼과 연결 
+        mappings.put("/user/myPage", new ListChatController());
      
         mappings.put("/book/register/form", new ForwardController("/book/bookRegisterForm.jsp"));
         mappings.put("/book/register", new RegisterBookController());
@@ -30,7 +32,8 @@ public class RequestMapping {
         mappings.put("/book/cate", new CateBookListController());
         mappings.put("/book/update", new UpdateBookController()); 
         
-        //채팅
+        // 채팅
+        mappings.put("/chat/view/room", new ForwardController("/chat/chatView.jsp"));
         mappings.put("/chat/view", new ViewChatController());
         mappings.put("/chat/list", new ListChatController());
         mappings.put("/chat/roomDelete", new DeleteChatController());
