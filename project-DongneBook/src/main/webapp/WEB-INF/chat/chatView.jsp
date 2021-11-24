@@ -16,7 +16,7 @@ String buddyId = (String)request.getAttribute("buddyId");
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="refresh" CONTENT="5">
+<meta http-equiv="refresh" CONTENT="15">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>동네북</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
