@@ -8,7 +8,7 @@ HttpSession session1 = request.getSession();
 String userId = (String) session.getAttribute("userId");
 
 User user = (User)request.getAttribute("user");
-String buddyId = (String)request.getAttribute("buddyId");
+String buddyId = (String)request.getParameter("buddyId");
 
 %>
 <!DOCTYPE html>
