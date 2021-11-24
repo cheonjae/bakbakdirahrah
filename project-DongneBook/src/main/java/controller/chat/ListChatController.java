@@ -1,7 +1,4 @@
-package 
-controller.chat
-
-;
+package controller.chat;
 
 import java.util.List;
 import java.util.stream.Collectors;
