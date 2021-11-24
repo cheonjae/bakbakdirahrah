@@ -8,6 +8,9 @@ public class Chat {
 	private String senderId;
 	private String receiverId;
 	
+	public Chat() {
+	}
+
 	public Chat(String contents, String senderId, String receiverId) {
 		super();
 		this.contents = contents;
@@ -15,21 +18,13 @@ public class Chat {
 		this.receiverId = receiverId;
 	}
 	
-	public Chat(int chatId, String createdAt, String contents, String senderId, String receiverId) {
+	public Chat(String createdAt, String contents, int chatId, String senderId, String receiverId) {
 		super();
-		this.chatId = chatId;
 		this.createdAt = createdAt;
 		this.contents = contents;
+		this.chatId = chatId;
 		this.senderId = senderId;
 		this.receiverId = receiverId;
-	}
-
-	public int getChatId() {
-		return chatId;
-	}
-
-	public void setChatId(int chatId) {
-		this.chatId = chatId;
 	}
 
 	public String getCreatedAt() {
@@ -48,6 +43,14 @@ public class Chat {
 		this.contents = contents;
 	}
 
+	public int getChatId() {
+		return chatId;
+	}
+
+	public void setChatId(int chatId) {
+		this.chatId = chatId;
+	}
+	
 	public String getSenderId() {
 		return senderId;
 	}
