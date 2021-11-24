@@ -25,6 +25,7 @@ public class ListChatController implements Controller {
     	}
     	buddyList = buddyList.stream().distinct().collect(Collectors.toList());
 		
+    	request.setAttribute("userId", userId);
 		request.setAttribute("buddyList", buddyList);
 		return "/chat/chatList.jsp"; 
     }
