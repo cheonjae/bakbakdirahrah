@@ -30,8 +30,11 @@ public class RequestMapping {
         mappings.put("/book/cate", new CateBookListController());
         mappings.put("/book/update", new UpdateBookController()); 
         
+        //채팅
         mappings.put("/chat/view", new ViewChatController());
         mappings.put("/chat/list", new ListChatController());
+        mappings.put("/chat/roomDelete", new DeleteChatController());
+        mappings.put("/chat/create", new CreateChatController());
         
         logger.info("Initialized Request Mapping!");
     }
