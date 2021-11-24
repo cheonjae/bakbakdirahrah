@@ -14,6 +14,53 @@ public class ChatDAO {
 		jdbcUtil = new JDBCUtil();	
 	}
 	
+	public Chat create(Chat chat) throws SQLException {
+		String sql = "INSERT INTO chat VALUES (SYSTIMESTAMP, ?, CHATSEQ.nextval, ?, ?)";
+		Object [] param = new Object[] { chat.getContents(), chat.getSenderId(), chat.getReceiverId()}; 
+		
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
+		
+		String key[] = {"chat_id"}; 
+		try {
+			jdbcUtil.executeUpdate(key);     // insert 문 실행
+			ResultSet rs = jdbcUtil.getGeneratedKeys();    // 생성된 PK 값을 포함한 result set 객체 반환
+		   	
+			//int generatedKey = 0;
+			if(rs.next()) {
+				//generatedKey = rs.getInt("book_id"); - 틀린 구문
+				int generatedKey = rs.getInt(1);
+		   		chat.setChatId(generatedKey);
+		   	}
+			return chat;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {		
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return null;
+	}
+	
+	//채팅내역 삭제(방 나가기)
+	public int deleteRoom(String userId, String buddyId) throws SQLException {
+		String sql = "DELETE FROM chat WHERE (sender_id=? AND receiver_id=?) OR (sender_id=? AND receiver_id=?)";	
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, buddyId, buddyId, userId});	// JDBCUtil에 delete문과 매개 변수 설정
+
+		try {				
+			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+	}
+	
 	public List<Chat> findChatContents(String userId, String buddyId) throws SQLException {
         String sql = "SELECT sender_id, receiver_id, contents "  
         		   + "FROM chat "
