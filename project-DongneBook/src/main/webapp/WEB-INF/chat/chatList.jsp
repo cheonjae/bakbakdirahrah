@@ -1,7 +1,9 @@
 <%@page contentType="text/html; charset=utf-8"%>
-<%@page import="java.util.ArrayList" %>
-<%@page import="java.util.List" %>
-<%@page import="model.*" %>
+<%@page import="java.util.*" %>
+<%@page import="javax.servlet.*" %>
+<%@page import="model.Chat" %>
+<%@page import="model.service.ChatManager" %>
+<%@page import="model.dao.ChatDAO" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -18,15 +20,29 @@
 <body>
 	<%@include file="/WEB-INF/navbar.jsp" %>
 	<section>
-		<h3>채팅방 목록</h3>
-		<i>유저 정보: ${userId}</i>
-		<table>
-			<c:forEach var="buddyId" items="${buddyList}}">
-				<tr>
-					<td>${buddyId}</td>
-				</tr>
-			</c:forEach>
-		</table>
+		<div id="article" style="margin: 0 15% 5%; text-align: center;">
+			<div id="detail" style="text-align: center;">
+				<div align="left" style="margin-top: 50px;">
+					<span id="page-info" style="text-align: left; font-size: 18pt; font-weight: bold;
+												color: white; background-color: rgb(147, 176, 255); margin-left: 20px;">
+						&nbsp;&nbsp;👉&nbsp;채팅방 목록 &nbsp;
+					</span>
+				</div>
+				<br><br>
+				<div id="book" style="display: inline-block;">
+					<c:forEach var="buddyId" items="${buddyList}">
+						<c:if test="${buddyId != userId}">
+							<div style="text-align: center; display:table-cell; vertical-align: middle; background: linear-gradient(to right, rgba(147, 176, 255, 0.5), rgba(46, 191, 145, 0.5)); height: 50px; width: 300px; border-radius: 15px;">
+								<a href="<c:url value='/chat/view/room'><c:param name='buddyId' value="${buddyId}"/></c:url> ">
+									${buddyId}
+								</a>
+							</div>
+							<br>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
 	</section>
 </body>
 </html>
