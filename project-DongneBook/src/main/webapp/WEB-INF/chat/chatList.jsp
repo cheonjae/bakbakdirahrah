@@ -1,4 +1,7 @@
 <%@page contentType="text/html; charset=utf-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
+<%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -18,10 +21,7 @@
 		<h3>채팅방 목록</h3>
 		<i>유저 정보: ${userId}</i>
 		<table>
-			<%
-				Object list = request.getAttribute("buddyList");
-			%>
-			<c:forEach var="buddyId" items="${list}">
+			<c:forEach var="buddyId" items="${buddyList}}">
 				<tr>
 					<td>${buddyId}</td>
 				</tr>
