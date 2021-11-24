@@ -22,6 +22,14 @@ public class ChatManager {
 		return chatMan;
 	}
 	
+	public Chat create(Chat chat) throws SQLException {
+		return chatDAO.create(chat);
+	}
+	
+	public int deleteRoom(String userId, String buddyId) throws SQLException {
+		return chatDAO.deleteRoom(userId, buddyId);
+	}
+	
 	public List<Chat> findChatContents(String userId, String buddyId) throws SQLException {
 		return chatDAO.findChatContents(userId, buddyId);
 	}
