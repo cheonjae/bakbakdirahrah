@@ -2,26 +2,30 @@ package model;
 
 public class Transaction {
 
-	private int bookId;
-	private String sellerId;
-	private String buyerId;
 	private int lastPrice;
 	private String meetingDate;
 	private String meetingPlace;
 	private String meetingMemo;
+	private int bookId;
+	private String sellerId;
+	private String buyerId;
+	private int sellerCheck;
+	private int buyerCheck;
 	
 	public Transaction() {	}
 
-	public Transaction(int bookId, String sellerId, String buyerId, int lastPrice, String meetingDate,
-			String meetingPlace, String meetingMemo) {
+	public Transaction(int lastPrice, String meetingDate, String meetingPlace, String meetingMemo, int bookId,
+			String sellerId, String buyerId, int sellerCheck, int buyerCheck) {
 		super();
-		this.bookId = bookId;
-		this.sellerId = sellerId;
-		this.buyerId = buyerId;
 		this.lastPrice = lastPrice;
 		this.meetingDate = meetingDate;
 		this.meetingPlace = meetingPlace;
 		this.meetingMemo = meetingMemo;
+		this.bookId = bookId;
+		this.sellerId = sellerId;
+		this.buyerId = buyerId;
+		this.sellerCheck = sellerCheck;
+		this.buyerCheck = buyerCheck;
 	}
 
 	public int getBookId() {
@@ -80,4 +84,19 @@ public class Transaction {
 		this.meetingMemo = meetingMemo;
 	}
 	
+	public int getSellerCheck() {
+		return sellerCheck;
+	}
+	
+	public void setSellerCheck(int sellerCheck) {
+		this.sellerCheck = sellerCheck;
+	}
+	
+	public int getBuyerCheck() {
+		return buyerCheck;
+	}
+	
+	public void setBuyerCheck(int buyerCheck) {
+		this.buyerCheck = buyerCheck;
+	}
 }
