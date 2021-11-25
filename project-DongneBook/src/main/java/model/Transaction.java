@@ -28,30 +28,6 @@ public class Transaction {
 		this.buyerCheck = buyerCheck;
 	}
 
-	public int getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
-
-	public String getSellerId() {
-		return sellerId;
-	}
-
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
-	}
-
-	public String getBuyerId() {
-		return buyerId;
-	}
-
-	public void setBuyerId(String buyerId) {
-		this.buyerId = buyerId;
-	}
-
 	public int getLastPrice() {
 		return lastPrice;
 	}
@@ -82,6 +58,30 @@ public class Transaction {
 
 	public void setMeetingMemo(String meetingMemo) {
 		this.meetingMemo = meetingMemo;
+	}
+	
+	public int getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public String getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public String getBuyerId() {
+		return buyerId;
+	}
+
+	public void setBuyerId(String buyerId) {
+		this.buyerId = buyerId;
 	}
 	
 	public int getSellerCheck() {
