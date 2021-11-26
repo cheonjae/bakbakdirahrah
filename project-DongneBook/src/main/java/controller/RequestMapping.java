@@ -37,6 +37,9 @@ public class RequestMapping {
         mappings.put("/chat/roomDelete", new DeleteChatController());
         mappings.put("/chat/create", new CreateChatController());
         
+        mappings.put("/transaction/create", new CreateTransactionController());
+        mappings.put("/transaction/update", new UpdateTransactionController());
+        
         logger.info("Initialized Request Mapping!");
     }
 
