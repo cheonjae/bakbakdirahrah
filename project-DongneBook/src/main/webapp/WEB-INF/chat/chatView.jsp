@@ -41,19 +41,28 @@ $(document).ready(function() {
 <body>
 <br><br><br><br>
 <div class="div1">
-<h1><%=buddyId %></h1><br> <hr>
+<table class="table1">
+	<tr>
+		<td>&emsp;&emsp;</td>
+		<td><h1><%=buddyId %></h1></td>
+		<td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+		<td><a href="<c:url value='/chat/roomDelete'>
+		<c:param name='buddyId' value="<%=buddyId%>"/>
+		</c:url>" class="btn btn-Danger" role="button" style="background-color: red;" onclick="return removeCheck();">
+			<span class="glyphicon glyphicon-remove" style="color: white;" aria-hidden="true"></span>
+		</a></td>
+	</tr>
+</table><br><hr>
 <div id="div2" class="div2" style="overflow: scroll;">
-<table>
+<table class="table2">
 <c:forEach var="chat" items="${chatList}">
   <tr>
  <c:if test="${chat.senderId eq user.userId}">
-	<td>&emsp;</td>
-	<td>&emsp;</td>
-	<td style="text-align:right;">${chat.contents}</td>
+	<td width=240 style="word-break:break-all">&emsp;</td>
+	<td width=240 style="text-align:right; word-break:break-all">${chat.contents}</td>
  </c:if>
  <c:if test="${chat.receiverId eq user.userId}">
 	<td style="text-align:left;">${chat.contents}</td>
-	<td>&emsp;</td>
 	<td>&emsp;</td>
  </c:if>
    </tr>
@@ -62,15 +71,12 @@ $(document).ready(function() {
 </div>
 <form id="form" name="form" method="POST" action="<c:url value='/chat/create'/>">
 	<br>
-	&emsp;&emsp;<textarea cols="55" name="contents" onkeyup="if(window.event.keyCode==13){chatCreate()}"></textarea>
+	&emsp;&emsp;<textarea cols="50" rows="3" name="contents" onkeyup="if(window.event.keyCode==13){chatCreate()}"></textarea>
 	<input type="hidden" name ="userId" value="<%= request.getParameter("userId")%>">
 	<input type="hidden" name ="buddyId" value="<%= request.getParameter("buddyId")%>">
 	<input type="button" name="enterEvent" class="btn btn-primary" value="전송" onClick="chatCreate()" >
-
-			<a href="<c:url value='/chat/roomDelete'>
-		<c:param name='buddyId' value="<%=buddyId%>"/>
-		</c:url>" class="btn btn-Danger" role="button" style="background-color: red;" onclick="return removeCheck();">
-			<span class="glyphicon glyphicon-remove" style="color: white;" aria-hidden="true"></span>
+	<a href="<c:url value='/transaction/create'>
+		</c:url>" class="btn btn-Danger" role="button" style="background-color: skyblue;">거래
 		</a>
 </form>
 </div>
