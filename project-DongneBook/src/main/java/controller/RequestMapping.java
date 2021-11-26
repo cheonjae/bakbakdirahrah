@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import controller.user.*;
 import controller.book.*;
 import controller.chat.*;
+import controller.transaction.CreateTransactionController;
+import controller.transaction.UpdateTransactionController;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -21,7 +23,7 @@ public class RequestMapping {
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/register/form", new ForwardController("/user/userRegisterForm.jsp"));
         mappings.put("/user/register", new RegisterUserController());
-        // 마이페이지가 아직 안만들어져서 임시로 채팅방목록을 마이페이지 버튼과 연결 
+        // 마이페이지가 아직 안만들어져서 임시로 채팅방목록을 마이페이지 버튼과 연결
         mappings.put("/user/myPage", new ListChatController());
      
         mappings.put("/book/register/form", new ForwardController("/book/bookRegisterForm.jsp"));
