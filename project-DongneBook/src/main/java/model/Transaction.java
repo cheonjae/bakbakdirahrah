@@ -28,6 +28,20 @@ public class Transaction {
 		this.sellerId = sellerId;
 		this.buyerId = buyerId;
 	}
+	
+	// meetingMemo는 nullable -> 값 없이 생성 가능 
+	public Transaction(int bookId, String sellerId, String buyerId, int lastPrice, String meetingDate,
+			String meetingPlace, int sellerCheck, int buyerCheck) {
+		super();
+		this.bookId = bookId;
+		this.sellerId = sellerId;
+		this.buyerId = buyerId;
+		this.lastPrice = lastPrice;
+		this.meetingDate = meetingDate;
+		this.meetingPlace = meetingPlace;
+		this.sellerCheck = sellerCheck;
+		this.buyerCheck = buyerCheck;
+	}
 
 	public Transaction(int bookId, String sellerId, String buyerId, int lastPrice, String meetingDate,
 			String meetingPlace, String meetingMemo, int sellerCheck, int buyerCheck) {
