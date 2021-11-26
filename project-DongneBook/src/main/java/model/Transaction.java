@@ -21,6 +21,13 @@ public class Transaction {
 		this.meetingPlace = meetingPlace;
 		this.meetingMemo = meetingMemo;
 	}
+	
+		
+	public Transaction(int bookId, String sellerId, String buyerId) { //for delete
+		this.bookId = bookId;
+		this.sellerId = sellerId;
+		this.buyerId = buyerId;
+	}
 
 	public Transaction(int bookId, String sellerId, String buyerId, int lastPrice, String meetingDate,
 			String meetingPlace, String meetingMemo, int sellerCheck, int buyerCheck) {
