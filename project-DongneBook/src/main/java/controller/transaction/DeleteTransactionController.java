@@ -25,7 +25,7 @@ public class DeleteTransactionController implements Controller{
 	 
 	 
 	 		TransactionManager tmanager = TransactionManager.getInstance();
-	 		tmanager.deleteTransaction(deletebookId, deletesellerId, deletbuyerId); //도대체 여기 오류 왜 나는거죠? 순서 맞는데? int String String 일단 올립니다..
+	 		tmanager.deleteTransaction(deletebookId, deletesellerId, deletbuyerId); 
 		 return "redirect:/user/mypage";
 	 }
 }
