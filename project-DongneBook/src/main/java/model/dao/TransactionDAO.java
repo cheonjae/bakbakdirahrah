@@ -11,6 +11,25 @@ public class TransactionDAO {
 		jdbcUtil = new JDBCUtil();	
 	}
 	
+	public int deleteTransaction(int bookId, String sellerId, String buyerId) throws SQLException{
+		//sellerId(param) and buyerId(param)가 둘다 들어잇는 트잭을 D E L E T E 틀렸으면 말해줘
+		String sql = "DELETE FROM transaction WHERE sellerId=? AND buyerId=?";	
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {sellerId, buyerId});
+		
+		try {				
+			int result = jdbcUtil.executeUpdate();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	
+		}		
+		return 0;
+	}
+	
 	public int update(Transaction transaction) throws SQLException {
 		String sql = "UPDATE transaction "
 				+ "SET last_price=?, meeting_date=?, meeting_place=?, meeting_memo=? "
