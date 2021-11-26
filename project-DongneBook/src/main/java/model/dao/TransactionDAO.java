@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Transaction;
@@ -9,6 +10,28 @@ public class TransactionDAO {
 	
 	public TransactionDAO() {			
 		jdbcUtil = new JDBCUtil();	
+	}
+	
+	public Transaction create(Transaction transaction) throws SQLException {
+		String sql = "INSERT INTO book VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object [] param = new Object[] { transaction.getBookId(), transaction.getSellerId(), transaction.getBuyerId(),
+				transaction.getLastPrice(), transaction.getMeetingDate(), transaction.getMeetingPlace(), 
+				transaction.getMeetingMemo(), transaction.getSellerCheck(),transaction.getBuyerCheck()}; 
+		
+		jdbcUtil.setSqlAndParameters(sql, param);
+		
+		String key[] = {"book_id", "seller_id", "buyer_id"}; 
+		try {
+			jdbcUtil.executeUpdate(key);
+			return transaction;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {		
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return null;	
 	}
 	
 	public int deleteTransaction(int bookId, String sellerId, String buyerId) throws SQLException{
