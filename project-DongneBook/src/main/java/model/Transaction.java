@@ -13,16 +13,19 @@ public class Transaction {
 	private int buyerCheck;
 	
 	public Transaction() {	}
-	
-	public Transaction(int lastPrice, String meetingDate, String meetingPlace, String meetingMemo) { //for update
+		
+	public Transaction(int bookId, String sellerId, String buyerId, int lastPrice, String meetingDate,
+			String meetingPlace, String meetingMemo) {
 		super();
+		this.bookId = bookId;
+		this.sellerId = sellerId;
+		this.buyerId = buyerId;
 		this.lastPrice = lastPrice;
 		this.meetingDate = meetingDate;
 		this.meetingPlace = meetingPlace;
 		this.meetingMemo = meetingMemo;
 	}
-	
-		
+
 	public Transaction(int bookId, String sellerId, String buyerId) { //for delete
 		this.bookId = bookId;
 		this.sellerId = sellerId;
