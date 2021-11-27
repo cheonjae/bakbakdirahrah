@@ -85,21 +85,21 @@ function chat_popup() {
 							</tr>
 							<tr>
 								<td> 판매자: 
-									<input type="checkbox" name="sellerCheck" value="판매자(${transaction.sellerId}) 수락"
+									<input name="sellerCheck" type="hidden" value="${transaction.sellerCheck}"/>
+									<input type="checkbox" name="sellerCheck2" value="판매자(${transaction.sellerId}) 수락"
 										<c:if test="${1 eq transaction.sellerCheck}">
 											checked
 										</c:if>
 										disabled
 									>
 									&nbsp;구매자: 
-									<input name="sellerCheck" type="hidden" value="${transaction.sellerCheck}"/>
-									<input type="checkbox" name="buyerCheck" value="구매자(${transaction.buyerId}) 수락"
+									<input name="buyerCheck" type="hidden" value="${transaction.buyerCheck}"/>
+									<input type="checkbox" name="buyerCheck2" value="구매자(${transaction.buyerId}) 수락"
 										<c:if test="${1 eq transaction.buyerCheck}">
 											checked
 										</c:if> 
 										disabled
 									>
-									<input name="buyerCheck" type="hidden" value="${transaction.buyerCheck}"/>
 								</td>
 							</tr>
 						</table>
