@@ -13,7 +13,9 @@
 	@SuppressWarnings("unchecked") 
 	Book book = (Book)request.getAttribute("book");
 	HttpSession session1 = request.getSession();	
+	
 	String userId = (String) session.getAttribute("userId");
+	String bookId = (String)session.getAttribute("bookId");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -30,9 +32,13 @@
 function bookRemove() {
 	return confirm("정말 삭제하시겠습니까?");		
 }
+function wishAdd() {
+	return alert("찜이 등록되엇습니다.");
+}
 function chat_popup() {
 	window.open("<%= request.getContextPath() %>/chat/chatView.jsp", "chat", "width=640" "height=400");
 }
+
 
 </script>
 
@@ -70,7 +76,12 @@ function chat_popup() {
                             <td>
                             </td>
                             <td>
-                                <a href="<c:url value='/user/main' />" class="btn btn-primary" role="button" >찜</a> 
+                                <a class="btn btn-primary" role="button"
+                                href="<c:url value='/user/wishAdd'>
+                                <c:param name='userId' value='<%=userId %>'/> 
+                                <c:param name='bookId' value="${book.bookId}"/> 
+                                 </c:url>">찜</a> 
+                                 
                                 <a class="btn btn-primary"
                             	href="<c:url value='/chat/view'>
                             		 <c:param name='userId' value='<%=userId%>'/>
