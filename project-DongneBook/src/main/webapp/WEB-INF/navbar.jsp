@@ -51,9 +51,14 @@
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li class="nav-item active">
-						<a class="nav-link" href="<c:url value='/user/myPage' />">마이페이지</a>
-					</li>
+					<li class="nav-item dropdown">
+              					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">마이페이지</a>
+              					<div class="dropdown-menu">
+                					<a class="dropdown-item" href="<c:url value='/user/register' />">회원 정보 수정</a>
+                					<a class="dropdown-item" href="<c:url value='/user/register' />">위시 리스트</a>
+                					<a class="dropdown-item" href="<c:url value='/user/register' />">거래 내역</a>
+              					</div>
+            				</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="<c:url value='/user/logout'/>">${userId}(로그아웃)</a>
 					</li>
