@@ -2,6 +2,12 @@
 
 <%@page contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+HttpSession session1 = request.getSession();	
+String userId = (String) session.getAttribute("userId");
+String sellerId = request.getParameter("sellerId");
+String bookId = request.getParameter("bookId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +24,10 @@
 			<div id="detail" style="text-align: center;">
 				<br><br>
 				<div id="book" style="display: inline-block;">
-					<form name="tran-regi" method="POST"
-						action="<c:url value='/transaction/update' /> "enctype="multipart/form-data">
+					<form name="tran-regi" method="POST" action="<c:url value='/transaction/update' />">
+					<input type="hidden" name="bookId" value="<%=bookId%>"/>	  
+					<input type="hidden" name="sellerId" value="<%=sellerId%>"/>	  
+					<input type="hidden" name="buyerId" value="<%=userId%>"/>
 						<c:if test="${registerFailed}">
 							<font color="red"><c:out value="${exception.getMessage()}" /></font>
 						</c:if>
@@ -30,7 +38,7 @@
 							</tr>
 							<tr>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									<input type="text" style="width: 240;" name="lastPrice">
+									<input type="text" style="width: 240;" name="lastPrice" value="${transaction.lastPrice}">
 								</td>
 							</tr>
 							<tr>
@@ -38,7 +46,7 @@
 							</tr>
 							<tr>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									<input type="text" style="width: 240;" name="meetingDate">
+									<input type="text" style="width: 240;" name="meetingDate" value="${transaction.meetingDate}">
 								</td>
 							</tr>
 							<tr>
@@ -46,7 +54,7 @@
 							</tr>
 							<tr>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									<input type="text" style="width: 240;" name="meetingPlace">
+									<input type="text" style="width: 240;" name="meetingPlace" value="${transaction.meetingPlace}">
 								</td>
 							</tr>
 							<tr>
@@ -54,16 +62,7 @@
 							</tr>
 							<tr>	
 								<td>
-								<textarea name="meetingMemo" cols="50" rows="8"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td><br><h4>수락 체크박스</h4></td>
-							</tr>
-							<tr>
-								<td>
-									<input type="checkbox" name="buyerId" value="${transaction.buyderId}"> ${transaction.buyderId}
-									<input type="checkbox" name="sellerId" value="${transaction.sellerId}"> ${transaction.sellerId}
+								<textarea name="meetingMemo" cols="50" rows="8">${transaction.meetingMemo}</textarea>
 								</td>
 							</tr>
 						</table>
