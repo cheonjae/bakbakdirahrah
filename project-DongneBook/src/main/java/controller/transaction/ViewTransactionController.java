@@ -21,30 +21,30 @@ public class ViewTransactionController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(ViewTransactionController.class);
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception { 	
-      TransactionManager tmanager = TransactionManager.getInstance();
+    	TransactionManager tmanager = TransactionManager.getInstance();
     	UserManager umanager = UserManager.getInstance();
     	BookManager bmanager = BookManager.getInstance();
     	
     	String userId = request.getParameter("userId");
-    	String buddyId = request.getParameter("buddyId");
+    	String sellerId = request.getParameter("sellerId");
     	int bookId = Integer.parseInt(request.getParameter("bookId"));
     	
     	log.debug("userId : {}", userId);
-    	log.debug("buddyId : {}", buddyId);
+    	log.debug("sellerId : {}", sellerId);
     	log.debug("bookId : {}", bookId);
     	
     	Transaction transaction = null;
-    	transaction = tmanager.view(bookId, userId, buddyId);
+    	transaction = tmanager.view(bookId, userId, sellerId);
     	
     	User user = null;
-		  user = umanager.findUser(userId);
+		user = umanager.findUser(userId);
 		
-		  log.debug("transaction : {}", transaction);
+		log.debug("transaction : {}", transaction);
 		
-      request.setAttribute("user", user);			
-		  request.setAttribute("buddyId", buddyId);
-		  request.setAttribute("transaction", transaction);
+    	request.setAttribute("user", user);			
+		request.setAttribute("sellerId", sellerId);
+		request.setAttribute("transaction", transaction);
 		
-		  return "/transaction/transactionView.jsp"; 
+		return "/transaction/transactionView.jsp"; 
     }
 }
