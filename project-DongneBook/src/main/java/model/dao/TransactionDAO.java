@@ -76,7 +76,7 @@ public class TransactionDAO {
 		return 0;
 	}
 	
-		public int checkUpdate(String bookId, String userId, String buddyId) {
+	public int checkUpdate(String bookId, String userId, String buddyId) {
 		String sql = "SELECT seller_id, buyer_id "
 				+ "FROM transaction "
 				+ "WHERE (seller_id=? AND buyer_id=?) OR (buyer_id=? AND seller_id=?)";
@@ -109,5 +109,37 @@ public class TransactionDAO {
 			jdbcUtil.close();
 		}
 		return 0;
+	}
+	
+	public Transaction view(int bookId, String userId, String buddyId) throws SQLException {
+        	String sql = "SELECT seller_id, buyer_id, last_price, meeting_date, "
+        			+ "meeting_place, meeting_memo, seller_check, buyer_check "
+        			+ "FROM transaction "
+        			+ "WHERE book_id=? AND ((seller_id=? AND buyer_id=?) OR (seller_id=? AND buyer_id=?))";  
+        
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId, buddyId, userId});	// JDBCUtil에 query문과 매개 변수 설정
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+			if (rs.next()) {						// 책 정보 발견
+				Transaction transaction = new Transaction(		// User 객체를 생성하여 학생 정보를 저장
+					bookId,
+					rs.getString("seller_id"),
+					rs.getString("buyer_id"),
+					rs.getInt("last_price"),
+					rs.getString("meeting_date"),
+					rs.getString("meeting_place"),
+					rs.getString("meeting_memo"),
+					rs.getInt("seller_check"),
+					rs.getInt("buyer_check")
+					);
+				return transaction;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
 	}
 }
