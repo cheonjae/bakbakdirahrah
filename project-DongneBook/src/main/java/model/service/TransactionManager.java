@@ -32,4 +32,9 @@ public class TransactionManager {
 	public Transaction create(Transaction transaction) throws SQLException {
 		return transactionDAO.create(transaction);
 	}
+	
+	public int update(Transaction transaction) throws SQLException, BookNotFoundException {
+		//null처리 어떻게 할 것인가~
+		return transactionDAO.update(transaction);
+	}
 }
