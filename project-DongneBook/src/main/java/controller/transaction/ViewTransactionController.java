@@ -37,14 +37,14 @@ public class ViewTransactionController implements Controller {
     	transaction = tmanager.view(bookId, userId, sellerId);
     	
     	User user = null;
-		user = umanager.findUser(userId);
+	user = umanager.findUser(userId);
 		
-		log.debug("transaction : {}", transaction);
+	log.debug("transaction : {}", transaction);
 		
     	request.setAttribute("user", user);			
-		request.setAttribute("sellerId", sellerId);
-		request.setAttribute("transaction", transaction);
+	request.setAttribute("sellerId", sellerId);
+	request.setAttribute("transaction", transaction);
 		
-		return "/transaction/transactionView.jsp"; 
+	return "/transaction/transactionView.jsp"; 
     }
 }
