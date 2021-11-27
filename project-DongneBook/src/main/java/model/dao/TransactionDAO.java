@@ -75,4 +75,39 @@ public class TransactionDAO {
 		}		
 		return 0;
 	}
+	
+		public int checkUpdate(String bookId, String userId, String buddyId) {
+		String sql = "SELECT seller_id, buyer_id "
+				+ "FROM transaction "
+				+ "WHERE (seller_id=? AND buyer_id=?) OR (buyer_id=? AND seller_id=?)";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, buddyId, userId, buddyId});	
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();				
+			String seller = null, buyer = null;	
+			while (rs.next()) {
+				seller = rs.getString("seller_id");
+				buyer = rs.getString("buyer_id");
+			}
+			jdbcUtil.close();
+			
+			if (userId.equals(seller)) {
+				sql = "UPDATE transeaction SET seller_check=1 "
+						+ "WHERE book_id=? AND seller_id=? AND buyer_id=?";
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId});
+				jdbcUtil.executeQuery();
+			} else if (userId.equals(buyer)) {
+				sql = "UPDATE transeaction SET seller_check=1 "
+						+ "WHERE book_id=? AND seller_id=? AND buyer_id=?";
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, buddyId, userId});
+				jdbcUtil.executeQuery();
+			}
+			return 1;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return 0;
+	}
 }
