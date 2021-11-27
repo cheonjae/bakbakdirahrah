@@ -45,9 +45,9 @@ public class RequestMapping {
         
        
         
-      //  mappings.put("/transaction/create", new CreateTransactionController());
-       // mappings.put("/transaction/update", new UpdateTransactionController());
-       // mappings.put("/transaction/view", new ViewTransactionController());
+       mappings.put("/transaction/create", new CreateTransactionController());
+       mappings.put("/transaction/update", new UpdateTransactionController());
+       mappings.put("/transaction/view", new ViewTransactionController());
         
         logger.info("Initialized Request Mapping!");
     }
