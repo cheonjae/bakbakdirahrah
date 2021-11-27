@@ -41,4 +41,8 @@ public class TransactionManager {
 	public Transaction view(int bookId, String userId, String buddyId) throws SQLException {
 		return transactionDAO.view(bookId, userId, buddyId);
 	}
+	
+	public int checkUpdate(int bookId, String userId, String buddyId) throws SQLException {
+		return transactionDAO.checkUpdate(bookId, userId, buddyId);
+	}
 }
