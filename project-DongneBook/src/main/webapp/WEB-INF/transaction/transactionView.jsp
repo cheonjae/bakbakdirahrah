@@ -7,10 +7,10 @@
 	@SuppressWarnings("unchecked") 
 	Transaction transaction = (Transaction)request.getAttribute("transaction");
 	HttpSession session1 = request.getSession();	
-	String userId = (String) session.getAttribute("userId");
-	String sellerId = (String) session.getAttribute("sellerId");
+	String userId = (String) session1.getAttribute("userId");
+	String sellerId = request.getParameter("sellerId");
 	
-	int bookId = Integer.parseInt(request.getParameter("bookId"));
+	String bookId = request.getParameter("bookId");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -69,7 +69,7 @@ function chat_popup() {
 							</tr>
 							<tr>
 								<td width="250" bgcolor="ffffff" style="padding-left: 10">
-									<input type="text" style="width: 240;" name="meetingPlace" value="${transaction.meetingDate}" readonly>
+									<input type="text" style="width: 240;" name="meetingPlace" value="${transaction.meetingPlace}" readonly>
 								</td>
 							</tr>
 							<tr>
@@ -109,7 +109,12 @@ function chat_popup() {
 								<td>
 									<c:choose>
 										<c:when test="${empty transaction}">
-											<a href="<c:url value='/transaction/create' />" class="btn btn-info" role="button" >등록</a>&nbsp;
+											<a href="<c:url value='/transaction/update' >
+												<c:param name='bookId' value="<%=bookId %>"/>
+												<c:param name='sellerId' value="<%=sellerId %>"/>
+												<c:param name='buyerId' value="<%=userId %>"/>
+												</c:url>"
+												 class="btn btn-info" role="button" >등록</a>&nbsp;
 										</c:when>
 										<c:otherwise>
 											<a class="btn btn-info" href="<c:url value='/transaction/update' >
