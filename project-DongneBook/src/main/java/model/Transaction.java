@@ -129,4 +129,10 @@ public class Transaction {
 		this.buyerCheck = buyerCheck;
 	}
 	
+	@Override
+	public String toString() {
+		return "Transaction [bookId=" + bookId + ", sellerId=" + sellerId + ", buyerId=" + buyerId + ", lastPrice="
+				+ lastPrice + ", meetingDate=" + meetingDate + ", meetingPlace=" + meetingPlace + ", meetingMemo="
+				+ meetingMemo + ", sellerCheck=" + sellerCheck + ", buyerCheck=" + buyerCheck + "]";
+	}
 }
