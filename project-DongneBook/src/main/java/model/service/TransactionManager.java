@@ -37,4 +37,8 @@ public class TransactionManager {
 		//null처리 어떻게 할 것인가~
 		return transactionDAO.update(transaction);
 	}
+	
+	public Transaction view(int bookId, String userId, String buddyId) throws SQLException {
+		return transactionDAO.view(bookId, userId, buddyId);
+	}
 }
