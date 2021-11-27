@@ -76,7 +76,7 @@ function chat_popup() {
                             <td>
                             </td>
                             <td>
-                                <a class="btn btn-primary" role="button"
+                                <a class="btn btn-primary" role="button" onClick="confirm('찜 하시겠습니까?')"
                                 href="<c:url value='/user/wishAdd'>
                                 <c:param name='userId' value='<%=userId %>'/> 
                                 <c:param name='bookId' value="${book.bookId}"/> 
