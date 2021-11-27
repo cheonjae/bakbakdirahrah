@@ -75,10 +75,6 @@ $(document).ready(function() {
 	<input type="hidden" name ="userId" value="<%= request.getParameter("userId")%>">
 	<input type="hidden" name ="buddyId" value="<%= request.getParameter("buddyId")%>">
 	<input type="button" name="enterEvent" class="btn btn-primary" value="전송" onClick="chatCreate()" >
-	<a href="<c:url value='/transaction/update'>
-		</c:url>" class="btn btn-Danger" role="button"  style="background-color: skyblue;
-		" onclick="window.open(this.href, '_blank', 'width=570, height=700'); return false;">거래
-		</a>
 </form>
 </div>
 </body>
