@@ -75,38 +75,47 @@ public class TransactionDAO {
 		return 0;
 	}
 	
-	public int checkUpdate(String bookId, String userId, String buddyId) {
+	public int checkUpdate(int bookId, String userId, String buddyId) throws SQLException {
 		String sql = "SELECT seller_id, buyer_id "
 				+ "FROM transaction "
-				+ "WHERE (seller_id=? AND buyer_id=?) OR (buyer_id=? AND seller_id=?)";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, buddyId, userId, buddyId});	
+				+ "WHERE (book_id=? AND seller_id=? AND buyer_id=?) OR (book_id=? AND buyer_id=? AND seller_id=?)";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId, bookId, userId, buddyId});	
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();				
-			String seller = null, buyer = null;	
+			String seller = "";
+			String buyer = "";	
 			while (rs.next()) {
 				seller = rs.getString("seller_id");
 				buyer = rs.getString("buyer_id");
 			}
+			
 			jdbcUtil.close();
 			
+			int result = 0;
 			if (userId.equals(seller)) {
-				sql = "UPDATE transeaction SET seller_check=1 "
+				sql = "UPDATE transaction SET seller_check=1 "
 						+ "WHERE book_id=? AND seller_id=? AND buyer_id=?";
 				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId});
-				jdbcUtil.executeQuery();
+				
+				result = jdbcUtil.executeUpdate();
 			} else if (userId.equals(buyer)) {
-				sql = "UPDATE transeaction SET seller_check=1 "
+				sql = "UPDATE transaction SET buyer_check=1 "
 						+ "WHERE book_id=? AND seller_id=? AND buyer_id=?";
 				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, buddyId, userId});
-				jdbcUtil.executeQuery();
+				
+				result = jdbcUtil.executeUpdate();
 			}
-			return 1;					
+			
+			return result;					
 		} catch (Exception ex) {
+			jdbcUtil.rollback();
 			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();
 		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
 		return 0;
 	}
 	
