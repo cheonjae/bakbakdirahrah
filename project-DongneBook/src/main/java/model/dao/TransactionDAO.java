@@ -12,18 +12,17 @@ public class TransactionDAO {
 		jdbcUtil = new JDBCUtil();	
 	}
 	
-	public Transaction create(Transaction transaction) throws SQLException {
-		String sql = "INSERT INTO book VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object [] param = new Object[] { transaction.getBookId(), transaction.getSellerId(), transaction.getBuyerId(),
-				transaction.getLastPrice(), transaction.getMeetingDate(), transaction.getMeetingPlace(), 
-				transaction.getMeetingMemo(), transaction.getSellerCheck(),transaction.getBuyerCheck()}; 
+	public int create(Transaction transaction) throws SQLException {
+		String sql = "INSERT INTO transaction VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object [] param = new Object[] {transaction.getLastPrice(), transaction.getMeetingDate(), transaction.getMeetingPlace(), 
+				transaction.getMeetingMemo(),transaction.getBookId(), transaction.getSellerId(), transaction.getBuyerId(),
+				transaction.getSellerCheck(), transaction.getBuyerCheck()}; 
 		
 		jdbcUtil.setSqlAndParameters(sql, param);
 		
-		String key[] = {"book_id", "seller_id", "buyer_id"}; 
 		try {
-			jdbcUtil.executeUpdate(key);
-			return transaction;
+			int result = jdbcUtil.executeUpdate();
+			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
@@ -31,7 +30,7 @@ public class TransactionDAO {
 			jdbcUtil.commit();
 			jdbcUtil.close();
 		}		
-		return null;	
+		return 0;	
 	}
 	
 	public int deleteTransaction(int bookId, String sellerId, String buyerId) throws SQLException{
