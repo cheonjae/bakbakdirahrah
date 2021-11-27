@@ -34,8 +34,10 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <c:if test="${not empty userId}">
+	<a href="<c:url value='/chat/list' />" class="btn btn-info" role="button" >채팅</a>
+    	&nbsp;
     	<a href="<c:url value='/book/register/form' />" class="btn btn-info" role="button" >판매 등록</a>
-	</c:if>
+    </c:if>
     <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
     	
         <ul class="navbar-nav text-right">
