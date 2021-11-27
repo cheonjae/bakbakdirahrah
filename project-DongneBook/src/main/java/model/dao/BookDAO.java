@@ -79,7 +79,8 @@ public class BookDAO {
 		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
 		// 쿼리문이~ 확실치 않아요~
         String sql = "SELECT book_id, title, price, image "  
-        		   + "FROM book"; 
+        		   + "FROM book "
+			   + "WHERE sold=0"; 
 		jdbcUtil.setSqlAndParameters(sql, null, 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
