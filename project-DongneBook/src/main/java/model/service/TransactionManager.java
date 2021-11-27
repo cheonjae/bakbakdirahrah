@@ -29,7 +29,7 @@ public class TransactionManager {
 		return transactionDAO.deleteTransaction(bookId,sellerId,buyerId);
 	}
 	
-	public Transaction create(Transaction transaction) throws SQLException {
+	public int create(Transaction transaction) throws SQLException {
 		return transactionDAO.create(transaction);
 	}
 	
