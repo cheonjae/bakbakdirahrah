@@ -5,6 +5,7 @@ public class Wishlist {
 	private String userId;
 	private int bookId;
 	
+	//add, delete할때 모두 사용
 	public Wishlist(String userId, int bookId) {
 		super();
 		this.userId = userId;
