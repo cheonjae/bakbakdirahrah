@@ -8,7 +8,7 @@
 	Transaction transaction = (Transaction)request.getAttribute("transaction");
 	HttpSession session1 = request.getSession();	
 	String userId = (String) session.getAttribute("userId");
-	String buddyId = (String) session.getAttribute("buddyId");
+	String sellerId = (String) session.getAttribute("sellerId");
 	
 	int bookId = Integer.parseInt(request.getParameter("bookId"));
 %>
@@ -24,10 +24,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
 	<script>
-  function chat_popup() {
-	  window.open("<%= request.getContextPath() %>/chat/chatView.jsp", "chat", "width=640" "height=400");
-  }
-  </script>
+function bookRemove() {
+	return confirm("정말 삭제하시겠습니까?");		
+}
+function chat_popup() {
+	window.open("<%= request.getContextPath() %>/chat/chatView.jsp", "chat", "width=640" "height=400");
+}
+</script>
+
 </head>
 <body>
 	<section>
