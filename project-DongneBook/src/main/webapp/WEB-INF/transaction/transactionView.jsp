@@ -130,7 +130,7 @@ function chat_popup() {
 												<c:param name='sellerId' value="<%=sellerId %>"/>
 												<c:param name='userId' value="<%=userId %>"/>
 												</c:url>"
-											class="btn btn-info" role="button" onClick="alert('거래를 수락하시겠습니까?')">수락</a>
+											class="btn btn-info" role="button" onClick="confirm('거래를 수락하시겠습니까?');">수락</a>
 										</c:otherwise>
 									</c:choose> 
 								</td>
