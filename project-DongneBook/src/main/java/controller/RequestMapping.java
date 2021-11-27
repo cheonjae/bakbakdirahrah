@@ -9,6 +9,7 @@ import controller.user.*;
 import controller.book.*;
 import controller.chat.*;
 import controller.transaction.*;
+import controller.wishlist.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -29,19 +30,24 @@ public class RequestMapping {
         mappings.put("/book/register", new RegisterBookController());
         mappings.put("/book/delete", new DeleteBookController());
         mappings.put("/book/detail", new BookDetailController());
+
+       mappings.put("/user/wishAdd", new AddWishlistController());
+       //mappings.put("/user/wishList", new DeleteWishlistController());
         mappings.put("/book/search", new SearchBookListController());
         mappings.put("/book/cate", new CateBookListController());
         mappings.put("/book/update", new UpdateBookController()); 
+
         
         mappings.put("/chat/view", new ViewChatController());
         mappings.put("/chat/list", new ListChatController());
         mappings.put("/chat/roomDelete", new DeleteChatController());
         mappings.put("/chat/create", new CreateChatController());
         
-        mappings.put("/transaction/create", new CreateTransactionController());
-        mappings.put("/transaction/update", new UpdateTransactionController());
-        mappings.put("/transaction/view", new ViewTransactionController());
-        mappings.put("/transaction/check", new CheckController());
+       
+        
+      //  mappings.put("/transaction/create", new CreateTransactionController());
+       // mappings.put("/transaction/update", new UpdateTransactionController());
+       // mappings.put("/transaction/view", new ViewTransactionController());
         
         logger.info("Initialized Request Mapping!");
     }
