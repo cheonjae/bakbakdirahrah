@@ -78,8 +78,8 @@ public class TransactionDAO {
 	public int checkUpdate(int bookId, String userId, String buddyId) throws SQLException {
 		String sql = "SELECT seller_id, buyer_id "
 				+ "FROM transaction "
-				+ "WHERE (book_id=? AND seller_id=? AND buyer_id=?) OR (book_id=? AND buyer_id=? AND seller_id=?)";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId, bookId, userId, buddyId});	
+    			+ "WHERE book_id=? AND ((seller_id=? AND buyer_id=?) OR (seller_id=? AND buyer_id=?))";  
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId, buddyId, userId});	
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();				
