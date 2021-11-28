@@ -40,7 +40,13 @@ public class RequestMapping {
         mappings.put("/transaction/create", new CreateTransactionController());
         mappings.put("/transaction/update", new UpdateTransactionController());
         mappings.put("/transaction/view", new ViewTransactionController());
-        //mappings.put("/transaction/check", new CheckController());
+        mappings.put("/transaction/check", new CheckController());
+        mappings.put("/transaction/check2", new CheckController());
+        
+        mappings.put("/mypage/history", new ForwardController("/mypage/history.jsp"));
+        mappings.put("/mypage/sell", new sellDetailController());
+        mappings.put("/transaction/buy", new ListTransactionController());
+        mappings.put("/transaction/sell", new ListTransactionController());
         
         mappings.put("/user/wishlist", new ViewWishlistController());
         //mappings.put("/user/wishAdd", new AddWishlistController());
