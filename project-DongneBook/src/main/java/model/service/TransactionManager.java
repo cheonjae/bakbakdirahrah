@@ -45,4 +45,12 @@ public class TransactionManager {
 	public int checkUpdate(int bookId, String userId, String buddyId) throws SQLException {
 		return transactionDAO.checkUpdate(bookId, userId, buddyId);
 	}
+	
+	public List<Transaction> buyList(String userId) throws SQLException {
+		return transactionDAO.buyList(userId);
+	}
+	
+	public List<Transaction> sellDetail(String userId, int bookId) throws SQLException {
+		return transactionDAO.sellDetail(userId, bookId);
+	}
 }
