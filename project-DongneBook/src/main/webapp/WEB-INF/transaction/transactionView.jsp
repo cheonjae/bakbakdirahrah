@@ -8,7 +8,7 @@
 	Transaction transaction = (Transaction)request.getAttribute("transaction");
 	HttpSession session1 = request.getSession();	
 	String userId = (String) session1.getAttribute("userId");
-	String sellerId = request.getParameter("sellerId");
+	String buddyId = request.getParameter("buddyId");
 	
 	String bookId = request.getParameter("bookId");
 %>
@@ -23,7 +23,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
-	<script>
+<script>
 function chat_popup() {
 	window.open("<%= request.getContextPath() %>/chat/chatView.jsp", "chat", "width=640" "height=400");
 }
@@ -111,7 +111,7 @@ function chat_popup() {
 										<c:when test="${empty transaction}">
 											<a href="<c:url value='/transaction/update' >
 												<c:param name='bookId' value="<%=bookId %>"/>
-												<c:param name='sellerId' value="<%=sellerId %>"/>
+												<c:param name='buddyId' value="<%=buddyId %>"/>
 												<c:param name='buyerId' value="<%=userId %>"/>
 												</c:url>"
 												 class="btn btn-info" role="button" >등록</a>&nbsp;
@@ -125,12 +125,12 @@ function chat_popup() {
 												role="button">
 												수정
 											</a>&nbsp;
-											<a href="<c:url value='/transaction/check' >
-												<c:param name='bookId' value="${transaction.bookId}"/>
-												<c:param name='sellerId' value="<%=sellerId %>"/>
-												<c:param name='userId' value="<%=userId %>"/>
-												</c:url>"
-											class="btn btn-info" role="button" onClick="confirm('거래를 수락하시겠습니까?');">수락</a>
+												<a href="<c:url value='/transaction/check' >
+													<c:param name='bookId' value="${transaction.bookId}"/>
+													<c:param name='sellerId' value="<%=buddyId %>"/>
+													<c:param name='userId' value="<%=userId %>"/>
+													</c:url>"
+												 	class="btn btn-info" role="button" onClick="confirm('거래를 수락하시겠습니까?');">수락</a>
 										</c:otherwise>
 									</c:choose> 
 								</td>
