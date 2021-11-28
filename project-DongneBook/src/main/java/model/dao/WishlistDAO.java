@@ -1,7 +1,11 @@
 package model.dao;
 
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.Book;
 import model.Wishlist;
 
 public class WishlistDAO {
