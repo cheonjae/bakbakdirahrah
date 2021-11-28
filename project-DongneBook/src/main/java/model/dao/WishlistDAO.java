@@ -55,7 +55,7 @@ public class WishlistDAO {
 	}
 	
 	// 찜한 상품 리스트
-	public List<Book> wishBookList(int userId) throws SQLException {
+	public List<Book> wishBookList(String userId) throws SQLException {
 		String sql = "SELECT book_id, title, price, image "
 				   + "FROM book "
 				   + "WHERE book_id IN (SELECT book_id FROM wishlist WHERE user_id=?)";
