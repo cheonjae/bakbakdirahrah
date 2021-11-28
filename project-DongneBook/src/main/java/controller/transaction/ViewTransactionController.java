@@ -26,25 +26,25 @@ public class ViewTransactionController implements Controller {
     	BookManager bmanager = BookManager.getInstance();
     	
     	String userId = request.getParameter("userId");
-    	String sellerId = request.getParameter("sellerId");
+    	String buddyId = request.getParameter("buddyId");
     	int bookId = Integer.parseInt(request.getParameter("bookId"));
     	
     	log.debug("userId : {}", userId);
-    	log.debug("sellerId : {}", sellerId);
+    	log.debug("buddyId : {}", buddyId);
     	log.debug("bookId : {}", bookId);
     	
     	Transaction transaction = null;
-    	transaction = tmanager.view(bookId, userId, sellerId);
+    	transaction = tmanager.view(bookId, userId, buddyId);
     	
     	User user = null;
-	user = umanager.findUser(userId);
+		user = umanager.findUser(userId);
 		
-	log.debug("transaction : {}", transaction);
+		log.debug("transaction : {}", transaction);
 		
     	request.setAttribute("user", user);			
-	request.setAttribute("sellerId", sellerId);
-	request.setAttribute("transaction", transaction);
+		request.setAttribute("buddyId", buddyId);
+		request.setAttribute("transaction", transaction);
 		
-	return "/transaction/transactionView.jsp"; 
+		return "/transaction/transactionView.jsp"; 
     }
 }
