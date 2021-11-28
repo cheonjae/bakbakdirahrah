@@ -150,4 +150,81 @@ public class TransactionDAO {
 		}
 		return null;
 	}
+	
+		public List<Transaction> buyList(String userId) throws SQLException {
+        String sql = "SELECT * "  
+        		   + "FROM transaction "
+        		   + "WHERE buyer_id=? and buyer_check=1 AND seller_check=1 "; 
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();	
+			List<Transaction> transactionList = new ArrayList<Transaction>();	
+			while (rs.next()) {
+				Transaction transaction = new Transaction(			
+					rs.getInt("book_id"),
+					rs.getString("seller_id"),
+					rs.getString("buyer_id"),
+					rs.getInt("last_price"),
+					rs.getString("meeting_date"),
+					rs.getString("meeting_place"),
+					rs.getString("meeting_memo"));
+					transactionList.add(transaction);	
+			}	
+			return transactionList;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+	
+	public  List<Transaction> sellDetail(String userId, int bookId) throws SQLException {
+        String sql = "SELECT b.title, b.author, b.price, b.publisher, b.image, b.category_id, b.description, "
+        		+ "b.page_discoloration, b.writing, b.page_damage, b.cover_damage, "
+        		+ "seller_id, buyer_id, last_price, meeting_date, meeting_place, meeting_memo, seller_check, buyer_check "  
+        		   + "FROM book b LEFT OUTER JOIN transaction t "
+        		   + "ON b.book_id = t.book_id "
+        		   + "WHERE b.user_id=? and b.book_id=?"; 
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, bookId});	
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();	
+			List<Transaction> transactionList = new ArrayList<Transaction>();	
+			while (rs.next()) {					
+				Book book = new Book();
+				book.setTitle(rs.getString("title"));
+				book.setAuthor(rs.getString("author"));
+				book.setPrice(rs.getInt("price"));
+				book.setPublisher(rs.getString("publisher"));
+				book.setImage(rs.getString("image"));
+				book.setCateId(rs.getInt("category_id"));
+				book.setDescription(rs.getString("description"));
+				book.setPageDiscoloration(rs.getInt("page_discoloration"));
+				book.setWriting(rs.getInt("writing"));
+				book.setPageDamage(rs.getInt("page_damage"));
+				book.setCoverDamage(rs.getInt("cover_damage"));
+				
+				Transaction transaction = new Transaction();
+				transaction.setSellerId(rs.getString("seller_id"));
+				transaction.setBuyerId(rs.getString("buyer_id"));
+				transaction.setLastPrice(rs.getInt("last_price"));
+				transaction.setMeetingDate(rs.getString("meeting_date"));
+				transaction.setMeetingPlace(rs.getString("meeting_place"));
+				transaction.setMeetingMemo(rs.getString("meeting_memo"));
+				transaction.setSellerCheck(rs.getInt("seller_check"));
+				transaction.setBuyerCheck(rs.getInt("buyer_check"));
+				
+				transaction.book = book;
+				transactionList.add(transaction);
+			}	
+			return transactionList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 }
