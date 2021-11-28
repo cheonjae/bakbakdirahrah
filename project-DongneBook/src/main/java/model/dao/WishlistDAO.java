@@ -50,5 +50,32 @@ public class WishlistDAO {
 		return 0;
 	}
 	
+	// 찜한 상품 리스트
+	public List<Book> wishBookList(int userId) throws SQLException {
+		String sql = "SELECT book_id, title, price, image "
+				   + "FROM book "
+				   + "WHERE book_id IN (SELECT book_id FROM wishlist WHERE user_id=?)";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId}, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<Book> wishBookList = new ArrayList<Book>();
+			while (rs.next()) {
+				Book book = new Book(
+					rs.getInt("book_id"),
+					rs.getString("title"),
+					rs.getInt("price"),
+					rs.getString("image"));
+					wishBookList.add(book);	
+			}	
+			return wishBookList;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 	
 }
