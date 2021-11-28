@@ -71,4 +71,8 @@ public class BookManager {
 	public int deleteBook(int bookId, String userId) throws SQLException, BookNotFoundException {
 		return bookDAO.deleteBook(bookId, userId);
 	}
+	
+	public List<Book> sellList(String userId) throws SQLException {
+		return bookDAO.sellList(userId);
+	}
 }
