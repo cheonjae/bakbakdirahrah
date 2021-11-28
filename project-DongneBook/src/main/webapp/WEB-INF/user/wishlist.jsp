@@ -38,6 +38,11 @@
 			 <tr>
 		<% } %>
 		<td class="tg-0lax" style="width:1%">
+			<div>
+				<a href="<c:url value='/user/wishDelete'><c:param name='bookId' value='${book.bookId}'/></c:url>">
+				삭제
+				</a>
+			</div>
 			<a href="<c:url value='/book/detail'><c:param name='bookId' value='${book.bookId}'/></c:url>">
 		    <img src="${pageContext.request.contextPath}/upload/${book.image}" width="100" height="150">
 		    <br>
