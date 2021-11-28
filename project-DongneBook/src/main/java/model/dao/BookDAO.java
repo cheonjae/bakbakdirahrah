@@ -280,4 +280,30 @@ public class BookDAO {
 		}
 		return null;
 	}
+	
+	public List<Book> sellList(String userId) throws SQLException {
+        String sql = "SELECT book_id, title, price, image, sold "
+        		+ "FROM book "
+        		+ "WHERE user_id=?"; 
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();	
+			List<Book> sellList = new ArrayList<Book>();	
+			while (rs.next()) {
+				Book book = new Book();
+				book.setBookId(rs.getInt("book_id"));
+				book.setTitle(rs.getString("title"));
+				book.setPrice(rs.getInt("price"));
+				book.setImage(rs.getString("image"));
+				sellList.add(book);
+			}					
+			return sellList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 }
