@@ -40,11 +40,11 @@ public class RequestMapping {
         mappings.put("/transaction/create", new CreateTransactionController());
         mappings.put("/transaction/update", new UpdateTransactionController());
         mappings.put("/transaction/view", new ViewTransactionController());
-        mappings.put("/transaction/check", new CheckController());
+        //mappings.put("/transaction/check", new CheckController());
         
         mappings.put("/user/wishlist", new ViewWishlistController());
-        mappings.put("/user/wishAdd", new AddWishlistController());
-        //mappings.put("/user/wishList", new DeleteWishlistController());
+        //mappings.put("/user/wishAdd", new AddWishlistController());
+        //mappings.put("/user/wishDelete", new DeleteWishlistController());
         
         logger.info("Initialized Request Mapping!");
     }
