@@ -127,7 +127,7 @@ function chat_popup() {
 											</a>&nbsp;
 												<a href="<c:url value='/transaction/check' >
 													<c:param name='bookId' value="${transaction.bookId}"/>
-													<c:param name='sellerId' value="<%=buddyId %>"/>
+													<c:param name='buddyId' value="<%=buddyId %>"/>
 													<c:param name='userId' value="<%=userId %>"/>
 													</c:url>"
 												 	class="btn btn-info" role="button" onClick="confirm('거래를 수락하시겠습니까?');">수락</a>
