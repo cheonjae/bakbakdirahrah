@@ -151,25 +151,29 @@ public class TransactionDAO {
 		return null;
 	}
 	
-		public List<Transaction> buyList(String userId) throws SQLException {
-        String sql = "SELECT * "  
-        		   + "FROM transaction "
-        		   + "WHERE buyer_id=? and buyer_check=1 AND seller_check=1 "; 
+	public List<Transaction> buyList(String userId) throws SQLException {
+        String sql = "SELECT b.title, "
+        		+ "t.book_id, seller_id, last_price, meeting_date, meeting_place, meeting_memo "  
+     		   + "FROM book b LEFT OUTER JOIN transaction t "
+     		   + "ON b.book_id = t.book_id "
+     		   + "WHERE buyer_id=? and buyer_check=1 AND seller_check=1";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();	
 			List<Transaction> transactionList = new ArrayList<Transaction>();	
 			while (rs.next()) {
-				Transaction transaction = new Transaction(			
-					rs.getInt("book_id"),
-					rs.getString("seller_id"),
-					rs.getString("buyer_id"),
-					rs.getInt("last_price"),
-					rs.getString("meeting_date"),
-					rs.getString("meeting_place"),
-					rs.getString("meeting_memo"));
-					transactionList.add(transaction);	
+				Book book = new Book();
+				book.setTitle(rs.getString("title"));
+				Transaction transaction = new Transaction();
+				transaction.setBookId(rs.getInt("book_id"));
+				transaction.setSellerId(rs.getString("seller_id"));
+				transaction.setLastPrice(rs.getInt("last_price"));
+				transaction.setMeetingDate(rs.getString("meeting_date"));
+				transaction.setMeetingPlace(rs.getString("meeting_place"));
+				transaction.setMeetingMemo(rs.getString("meeting_memo"));
+				transaction.book = book;
+				transactionList.add(transaction);
 			}	
 			return transactionList;					
 		} catch (Exception ex) {
