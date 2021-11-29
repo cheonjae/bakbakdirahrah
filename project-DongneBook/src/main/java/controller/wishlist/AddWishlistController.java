@@ -25,8 +25,10 @@ public class AddWishlistController implements Controller{
 		WishlistManager wishlistmanager = WishlistManager.getInstance();
 		wishlistmanager.add(wishlist);
 		
+		List<Book> bookList = wishlistmanager.wishBookList(userId);
+		request.setAttribute("wishBookList", bookList);
 
-		return "redirect:/user/main";
+		return "/user/wishlist.jsp";
 	}
 
 }
