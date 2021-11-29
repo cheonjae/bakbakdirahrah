@@ -15,7 +15,6 @@ public class Book {
 	private String description;
 	private String image;
 	private int sold;
-	public Book book;
 
 //	condition info
 	private int pageDiscoloration; // 페이지 변색 - 0(없음) or 1(있음)
@@ -185,15 +184,6 @@ public class Book {
 
 	public void setWriting(int writing) {
 		this.writing = writing;
-	}
-	
-	public Book getBook() {
-		return book;
-	}
-
-
-	public void setBook(Book book) {
-		this.book = book;
 	}
 
 	@Override
