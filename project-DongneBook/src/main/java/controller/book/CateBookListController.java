@@ -29,7 +29,7 @@ public class CateBookListController implements Controller {
     		bookList = bmanager.cateBookList(Integer.parseInt(cateId), user.getLocation());
     	} 
 		
-		// commList 객체를 request에 저장하여 커뮤니티 리스트 화면으로 이동(forwarding)
+		// bookList 객체를 request에 저장하여 메인 화면으로 이동(forwarding)
 		request.setAttribute("bookList", bookList);				
 		return "/user/main.jsp";   
     }
