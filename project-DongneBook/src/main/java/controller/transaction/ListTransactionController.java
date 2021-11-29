@@ -21,21 +21,21 @@ public class ListTransactionController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception { 	
 		
-		// buyList´Â Æ®Àè ½á¾ßÇØ¼­ Æ®Àè¿¡ ¸¸µé¾úÀ½
+		// buyListëŠ” íŠ¸ì­ ì¨ì•¼í•´ì„œ íŠ¸ì­ì— ë§Œë“¤ì—ˆìŒ
 		TransactionManager tmanager = TransactionManager.getInstance();
 		List<Transaction> buyList = tmanager.buyList(UserSessionUtils.getLoginUserId(request.getSession()));
 		
-		// sellList´Â ±×³É Ã¥¸¸ °¡Á®¿À¸é µÅ¼­ 
+		// sellListëŠ” ê·¸ëƒ¥ ì±…ë§Œ ê°€ì ¸ì˜¤ë©´ ë¼ì„œ 
 		BookManager bmanager = BookManager.getInstance();	
 		List<Book> sellList = bmanager.sellList(UserSessionUtils.getLoginUserId(request.getSession()));
 		
 		if(request.getServletPath().equals("/transaction/sell")) {
 			request.setAttribute("sellList", sellList);
+			return "/mypage/sellList.jsp";
 		} else {
 			request.setAttribute("buyList", buyList);
+			log.debug("transaction : { }", buyList );
+			return "/mypage/buyList.jsp";
 		}
-
-		
-	return "/mypage/history.jsp";
 	}
 }
