@@ -15,7 +15,7 @@
 	List<Transaction> sellDetail = (List<Transaction>)request.getAttribute("sellDetail");
 	HttpSession session1 = request.getSession();	
 	String userId = (String) session.getAttribute("userId");
-	String sellerId = request.getParameter("sellerId");
+	String buddyId = request.getParameter("buddyId");
 	
 	String bookId = request.getParameter("bookId");
 %>
@@ -99,45 +99,27 @@ if (sellDetail != null) {
 %>
 	
 	<table class="menu4">
-	 <c:forEach var="sellDetail" items="${sellDetail}">  
 		<tr>
 		  <td width="190" align="center" bgcolor="#93B0FF" height="22">책제목</td>
 		  <td width="200" align="center" bgcolor="#93B0FF">구매자</td>
+		  <td width="200" align="center" bgcolor="#93B0FF">최종가격</td>	  
 		  <td width="200" align="center" bgcolor="#93B0FF">만나는날짜</td>
 		  <td width="200" align="center" bgcolor="#93B0FF">만나는장소</td>
 		  <td width="200" align="center" bgcolor="#93B0FF">메모</td>
-								<td rowspan="2"> 판매자: 
-									<input name="sellerCheck" type="hidden" value="${sellDetail.sellerCheck}"/>
-									<input type="checkbox" name="sellerCheck2" value="판매자(${sellDetail.sellerId}) 수락"
-										<c:if test="${1 eq sellDetail.sellerCheck}">
-											checked
-										</c:if>
-										disabled
-									>
-									&nbsp;구매자: 
-									<input name="buyerCheck" type="hidden" value="${sellDetail.buyerCheck}"/>
-									<input type="checkbox" name="buyerCheck2" value="구매자(${sellDetail.buyerId}) 수락"
-										<c:if test="${1 eq sellDetail.buyerCheck}">
-											checked
-										</c:if> 
-										disabled
-									>
-								</td>
-								<td>
-		  <a href="<c:url value='/transaction/check2' >
-												<c:param name='bookId' value="<%=bookId %>"/>
-												<c:param name='sellerId' value="${sellDetail.buyerId}"/>
-												<c:param name='userId' value="${sellDetail.sellerId}"/>
-												</c:url>"
-											class="btn btn-info" role="button" onClick="alert('거래를 수락하시겠습니까?')">수락</a>
-										</td>
+		  <td width="200" align="center" bgcolor="#93B0FF">판매자 체크</td>
+		  <td width="200" align="center" bgcolor="#93B0FF">구매자 체크</td>
+		  <td width="200" align="center"></td>
 		</tr>
+	 <c:forEach var="sellDetail" items="${sellDetail}">  
   		<tr>
 		  <td width="190" align="center" bgcolor="ffffff" height="20">
 		  	<%=transaction.getBook().getTitle() %>
 		  </td>
 		  <td width="200" bgcolor="ffffff" style="padding-left: 10">
 			  ${sellDetail.buyerId}
+		  </td>
+		  <td width="200" bgcolor="ffffff" style="padding-left: 10">
+			  ${sellDetail.lastPrice}
 		  </td>
 		  <td width="200" align="center" bgcolor="ffffff" height="20">
 		     ${sellDetail.meetingDate} 
@@ -148,6 +130,32 @@ if (sellDetail != null) {
 		  <td width="200" align="center" bgcolor="ffffff" height="20">
 			 ${sellDetail.meetingMemo}
 		  </td>
+		  <td> 
+			<input name="sellerCheck" type="hidden" value="${sellDetail.sellerCheck}"/>
+			<input type="checkbox" name="sellerCheck2" value="판매자(${sellDetail.sellerId}) 수락"
+				<c:if test="${1 eq sellDetail.sellerCheck}">
+				checked
+				</c:if>
+				disabled
+			>
+			</td>
+			<td>
+				<input name="buyerCheck" type="hidden" value="${sellDetail.buyerCheck}"/>
+				<input type="checkbox" name="buyerCheck2" value="구매자(${sellDetail.buyerId}) 수락"
+					<c:if test="${1 eq sellDetail.buyerCheck}">
+					checked
+					</c:if> 
+					disabled
+				>
+		</td>
+		<td>
+				  <a href="<c:url value='/transaction/check2' >
+												<c:param name='bookId' value="<%=bookId %>"/>
+												<c:param name='buddyId' value="${sellDetail.buyerId}"/>
+												<c:param name='userId' value="${sellDetail.sellerId}"/>
+												</c:url>"
+											class="btn btn-info" role="button" onClick="alert('거래를 수락하시겠습니까?')">수락</a>
+										</td>
 		</tr>
 	  </c:forEach> 
 <%
