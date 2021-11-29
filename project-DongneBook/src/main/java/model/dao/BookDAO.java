@@ -81,7 +81,7 @@ public class BookDAO {
 		String keyword = "%" + location + "%";
         	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
-				+ "WHERE b.user_id = u.user_id AND u.location LIKE ? ";
+				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? ";
         
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword}, 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
@@ -204,7 +204,7 @@ public class BookDAO {
 		String keyword2 = "%" + title + "%";
         	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
-				+ "WHERE b.user_id = u.user_id AND u.location LIKE ? AND title LIKE ? ";
+				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? AND title LIKE ? ";
 	  
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword1, keyword2},		// JDBCUtil에 query문과 매개 변수 설정
 				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
@@ -235,7 +235,7 @@ public class BookDAO {
 		String keyword = "%" + location + "%";
         	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
-				+ "WHERE b.user_id = u.user_id AND u.location LIKE ? AND category_id=?";
+				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? AND category_id=?";
 
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword, cateId},	// JDBCUtil에 query문과 매개 변수 설정
 				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
