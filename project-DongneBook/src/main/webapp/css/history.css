@@ -1,0 +1,45 @@
+#menu1 ul {
+ width: 500px;
+ margin: 0 auto;
+ overflow: hidden;
+}
+
+#menu1 ul li {
+ float: left;
+ width: 50%;
+ height: 50px;
+ line-height: 50px;
+ text-align: center;
+ background: #93B0FF;
+}
+
+#menu1 ul li a {
+ display: block;
+}
+
+#menu1 ul li a:hover {
+ background: #82C8E6;
+ color: #fff;
+}
+
+#menu2 {
+  width : 1200x;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #ffff;
+}
+
+#menu2 tr, td {
+	width: 400px;
+	padding: 40px;
+}
+
+#menu3 td {
+        text-align: center;
+} 
+
+#menu4 {
+	height: 10px;
+	margin:auto; 
+	text-align: center;
+}
