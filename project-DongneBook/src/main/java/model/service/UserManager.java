@@ -43,6 +43,7 @@ public class UserManager {
 
 	// 회원정보 삭제 - 삭제 시 해당 회원의 책과 채팅 DB까지 삭제 고려 
 	public int remove(String userId) throws SQLException, UserNotFoundException {
+		userDAO.deleteUserBook(userId);
 		return userDAO.remove(userId);
 	}
 
