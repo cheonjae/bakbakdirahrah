@@ -36,7 +36,7 @@ public class User {
 		this.location = updateUser.location;
 		this.phone = updateUser.phone;
 		this.email = updateUser.email;
-    }
+	}
 	
 	public String getUserId() {
 		return userId;
@@ -95,8 +95,8 @@ public class User {
 	}
 	
 	public boolean isSameUser(String userid) {
-        return this.userId.equals(userid);
-    }
+        	return this.userId.equals(userid);
+    	}
 
 	@Override
 	public String toString() {
