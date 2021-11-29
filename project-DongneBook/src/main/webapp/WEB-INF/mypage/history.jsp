@@ -2,10 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.*" %>
 <%@page import="model.*" %>
-<%int count = 0;%>
-<%
-	List<Transaction> sellList = (List<Transaction>)request.getAttribute("sellList"); 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,50 +28,5 @@ ul {
  </ul>
 </div>
 <br>
-<table id="menu2">
-<c:forEach var="buy" items="${buyList}">
- <% if(count % 3 == 0) { %>
-  <tr>
-<% } %>
-<td>
-판매자: ${buy.sellerId } <br>
-최종가격: ${buy.lastPrice} <br>
-만나는날짜: ${buy.meetingDate } <br>
-만나는장소: ${buy.meetingPlace } <br>
-메모: ${buy.meetingMemo }
-</td>
-<% if(count % 3 == 2){ %>
-  </tr> <br>
-<% }
-    	count++;
-    %>
-  </c:forEach>
-<% count = 0; %>
-</table>
-
-<table id="menu3">
-<c:forEach var="sell" items="${sellList}">
-<% if(count % 4 == 0) { %>
-  <tr>
-<% } %>
-    <td>
-    
-	<a href="<c:url value='/mypage/sell'> 
-		<c:param name='bookId' value='${sell.bookId}'/>
-		</c:url>">
-    <img src="${pageContext.request.contextPath}/upload/${sell.image}" width="100" height="150">
-    <br>
-    ${sell.title} <c:if test="${sell.sold eq 1}">(판매완료)</c:if>
-    <br>
-    ${sell.price}원</a>
-    </td>
-<% if(count % 4 == 3){ %>
-  </tr>
-<% }
-    	count++;
-    %>
-  </c:forEach>
-<% count = 0; %>
-</table>
 </body>
 </html>
