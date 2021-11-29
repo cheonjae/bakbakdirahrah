@@ -7,11 +7,11 @@ import model.User;
 import model.dao.UserDAO;
 
 /**
- * »ç¿ëÀÚ °ü¸® API¸¦ »ç¿ëÇÏ´Â °³¹ßÀÚµéÀÌ Á÷Á¢ Á¢±ÙÇÏ°Ô µÇ´Â Å¬·¡½º.
- * UserDAO¸¦ ÀÌ¿ëÇÏ¿© µ¥ÀÌÅÍº£ÀÌ½º¿¡ µ¥ÀÌÅÍ Á¶ÀÛ ÀÛ¾÷ÀÌ °¡´ÉÇÏµµ·Ï ÇÏ¸ç,
- * µ¥ÀÌÅÍº£ÀÌ½ºÀÇ µ¥ÀÌÅÍµéÀ» ÀÌ¿ëÇÏ¿© ºñÁö´Ï½º ·ÎÁ÷À» ¼öÇàÇÏ´Â ¿ªÇÒÀ» ÇÑ´Ù.
- * ºñÁö´Ï½º ·ÎÁ÷ÀÌ º¹ÀâÇÑ °æ¿ì¿¡´Â ºñÁö´Ï½º ·ÎÁ÷¸¸À» Àü´ãÇÏ´Â Å¬·¡½º¸¦ 
- * º°µµ·Î µÑ ¼ö ÀÖ´Ù.
+ * ì‚¬ìš©ì ê´€ë¦¬ APIë¥¼ ì‚¬ìš©í•˜ëŠ” ê°œë°œìë“¤ì´ ì§ì ‘ ì ‘ê·¼í•˜ê²Œ ë˜ëŠ” í´ë˜ìŠ¤.
+ * UserDAOë¥¼ ì´ìš©í•˜ì—¬ ë°ì´í„°ë² ì´ìŠ¤ì— ë°ì´í„° ì¡°ì‘ ì‘ì—…ì´ ê°€ëŠ¥í•˜ë„ë¡ í•˜ë©°,
+ * ë°ì´í„°ë² ì´ìŠ¤ì˜ ë°ì´í„°ë“¤ì„ ì´ìš©í•˜ì—¬ ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ì„ ìˆ˜í–‰í•˜ëŠ” ì—­í• ì„ í•œë‹¤.
+ * ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ì´ ë³µì¡í•œ ê²½ìš°ì—ëŠ” ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ë§Œì„ ì „ë‹´í•˜ëŠ” í´ë˜ìŠ¤ë¥¼ 
+ * ë³„ë„ë¡œ ë‘˜ ìˆ˜ ìˆë‹¤.
  */
 public class UserManager {
 	private static UserManager userMan = new UserManager();
@@ -32,52 +32,31 @@ public class UserManager {
 	
 	public int create(User user) throws SQLException, ExistingUserException {
 		if (userDAO.existingUser(user.getUserId()) == true) {
-			throw new ExistingUserException(user.getUserId() + "´Â Á¸ÀçÇÏ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			throw new ExistingUserException(user.getUserId() + "ëŠ” ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 		}
 		return userDAO.create(user);
 	}
 
-	// »ç¿ëÀÚ Á¤º¸º¯°æ - Á¦¾àÁ¶°Ç È®ÀÎ 
-	public int update(User user) throws SQLException, UserNotFoundException, UserInfoException {
-		String oldPassword = findUser(user.getUserId()).getPassword();
-		if (user.getPassword() != oldPassword) {
-			if (user.getPassword().length() < 6 || user.getPassword().length() > 13) { // ºñ¹Ğ¹øÈ£ Á¦¾àÁ¶°Ç È®ÀÎ 
-				throw new UserInfoException("ºñ¹Ğ¹øÈ£°¡ ³Ê¹« ±æ°Å³ª Âª½À´Ï´Ù.");
-			}
-		}
-		String oldEmail = findUser(user.getUserId()).getEmail();
-		if (user.getEmail() != oldEmail) {
-			if (user.getEmail().length() < 5) { // ÀÌ¸ŞÀÏ Á¦¾àÁ¶°Ç È®ÀÎ 
-				throw new UserInfoException("ÀÌ¸ŞÀÏ ÁÖ¼Ò°¡ ³Ê¹« Âª½À´Ï´Ù.");
-			}
-		}
-		String oldPhone = findUser(user.getUserId()).getPhone();
-		if (user.getPhone() != oldPhone) {
-			if (user.getPhone().length() != 11) { // ÀüÈ­¹øÈ£ Á¦¾àÁ¶°Ç È®ÀÎ 
-				throw new UserInfoException("ÀûÀıÇÏÁö ¾ÊÀº ÀüÈ­¹øÈ£ÀÔ´Ï´Ù.");
-			}
-		}
-//		location Á¦¾àÁ¶°Ç È®ÀÎ?
+	public int update(User user) throws SQLException, UserNotFoundException {
 		return userDAO.update(user);
-	}	
+	}		
 
-	// È¸¿øÁ¤º¸ »èÁ¦ - »èÁ¦ ½Ã ÇØ´ç È¸¿øÀÇ Ã¥°ú Ã¤ÆÃ DB±îÁö »èÁ¦ °í·Á 
+	// íšŒì›ì •ë³´ ì‚­ì œ - ì‚­ì œ ì‹œ í•´ë‹¹ íšŒì›ì˜ ì±…ê³¼ ì±„íŒ… DBê¹Œì§€ ì‚­ì œ ê³ ë ¤ 
 	public int remove(String userId) throws SQLException, UserNotFoundException {
 		return userDAO.remove(userId);
 	}
 
-	public User findUser(String userId)
-		throws SQLException, UserNotFoundException {
+	public User findUser(String userId) throws SQLException, UserNotFoundException {
 		User user = userDAO.findUser(userId);
 		
 		if (user == null) {
-			throw new UserNotFoundException(userId + "´Â Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			throw new UserNotFoundException(userId + "ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 		}		
 		return user;
 	}
 
 	public List<User> findUserList() throws SQLException {
-			return userDAO.findUserList();
+		return userDAO.findUserList();
 	}
 	
 	public List<User> findUserList(int currentPage, int countPerPage)
@@ -85,12 +64,11 @@ public class UserManager {
 		return userDAO.findUserList(currentPage, countPerPage);
 	}
 
-	public boolean login(String userId, String password)
-		throws SQLException, UserNotFoundException, PasswordMismatchException {
+	public boolean login(String userId, String password) throws SQLException, UserNotFoundException, PasswordMismatchException {
 		User user = findUser(userId);
 
 		if (!user.matchPassword(password)) {
-			throw new PasswordMismatchException("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			throw new PasswordMismatchException("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		}
 		return true;
 	}
