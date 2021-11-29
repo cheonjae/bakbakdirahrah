@@ -81,30 +81,30 @@ function userCreate() {
 	        	<input type="password" name="password2" class="form-control" placeholder="비밀번호 확인">
 	        </div> 
 	    </div> 
-	    <div class="form-group row">   
+		<div class="form-group row">   
 	        <label for="name" class="col-lg-2 col-form-label">이름</label>
 	        <div class="col-lg-10">
 	        	<input type="text" name="name" class="form-control" placeholder="이름"
 	        		<c:if test="${registerFailed}">value="${user.name}"</c:if> > 
 	        </div>
 	    </div>
-	    <div class="form-group row">   
+		<div class="form-group row">   
 	        <label for="location" class="col-lg-2 col-form-label">주소</label>
 	        <div class="col-lg-10">
-			<select name="location" id="location" class="form-control">
-			<% 
-				String[] region = {"강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", 
-							"금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", 
-							"성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"};
+				<select name="location" id="location" class="form-control">
+				<% 
+					String[] region = {"강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", 
+									"금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", 
+									"성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"};
 				
-				for(int i = 0; i < 25; i++) {
-			%>
-					<c:set var="currLo" value="<%=region[i] %>" />
-					<option value="<%=region[i] %>"><%=region[i] %></option>	
-			<% 
-				}
-			%>	
-			</select>
+					for(int i = 0; i < 25; i++) {
+				%>
+						<c:set var="currLo" value="<%=region[i] %>" />
+						<option value="<%=region[i] %>"><%=region[i] %></option>	
+				<% 
+					}
+				%>	
+				</select>
 	    	</div>
 	    </div>
 	    <div class="form-group row">  
