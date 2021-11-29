@@ -37,7 +37,7 @@ public class WishlistDAO {
 	
 	//삭제
 	public int delete(String userId, int bookId) throws SQLException {
-		String sql = "DELETE FROM wishlist WHERE userId=? AND bookId=? ";
+		String sql = "DELETE FROM wishlist WHERE user_Id=? AND book_Id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId,bookId}); 
 		
 		try {				
