@@ -2,7 +2,10 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.Book;
 import model.Transaction;
 
 public class TransactionDAO {
