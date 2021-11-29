@@ -14,7 +14,7 @@ public class CateBookListController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
     	BookManager bmanager = BookManager.getInstance();
-		String cateId = request.getParameter("cateId");
+	String cateId = request.getParameter("cateId");
 		
     	String userId = UserSessionUtils.getLoginUserId(request.getSession());
 
@@ -29,8 +29,8 @@ public class CateBookListController implements Controller {
     		bookList = bmanager.cateBookList(Integer.parseInt(cateId), user.getLocation());
     	} 
 		
-		// bookList 객체를 request에 저장하여 메인 화면으로 이동(forwarding)
-		request.setAttribute("bookList", bookList);				
-		return "/user/main.jsp";   
+	// bookList 객체를 request에 저장하여 메인 화면으로 이동(forwarding)
+	request.setAttribute("bookList", bookList);				
+	return "/user/main.jsp";   
     }
 }
