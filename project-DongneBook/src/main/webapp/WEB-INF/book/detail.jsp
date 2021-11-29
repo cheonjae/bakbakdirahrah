@@ -26,20 +26,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
-	<script>
+<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
+<script>
 function bookRemove() {
 	return confirm("정말 삭제하시겠습니까?");		
 }
 function wishAdd() {
 	return alert("찜이 등록되엇습니다.");
 }
-function chat_popup() {
-	window.open("<%= request.getContextPath() %>/chat/chatView.jsp", "chat", "width=640" "height=400");
+function wishQuestion() {
+	return confirm("찜 하시겠습니까?");
 }
-
 </script>
-
 </head>
 <body class="detail-body">
 <%@include file="/WEB-INF/navbar.jsp" %> 
@@ -74,7 +72,7 @@ function chat_popup() {
                             <td>
                             </td>
                             <td>
-                               	<a class="btn btn-primary" role="button" onClick="confirm('찜 하시겠습니까?')"
+                               	<a class="btn btn-primary" role="button" onClick="return wishQuestion();"
                                 href="<c:url value='/user/wishAdd'>
                                 <c:param name='userId' value='<%=userId %>'/> 
                                 <c:param name='bookId' value="${book.bookId}"/> 
