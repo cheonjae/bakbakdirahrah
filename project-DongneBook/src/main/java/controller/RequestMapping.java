@@ -52,8 +52,8 @@ public class RequestMapping {
         mappings.put("/transaction/sell", new ListTransactionController());
         
         mappings.put("/user/wishlist", new ViewWishlistController());
-        //mappings.put("/user/wishAdd", new AddWishlistController());
-        //mappings.put("/user/wishDelete", new DeleteWishlistController());
+        mappings.put("/user/wishAdd", new AddWishlistController());
+        mappings.put("/user/wishDelete", new DeleteWishlistController());
         
         logger.info("Initialized Request Mapping!");
     }
