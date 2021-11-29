@@ -35,17 +35,16 @@ public class BookManager {
 		return bookDAO.update(book);
 	}
 	
-	public List<Book> mainBookList()
-			throws SQLException {
-				return bookDAO.mainBookList();
-		}
+	public List<Book> mainBookList(String location) throws SQLException {
+		return bookDAO.mainBookList(location);
+	}
 	
 	public Book findBookDetails(int book_id) throws SQLException {
 		return bookDAO.findBookDetails(book_id);
 	}
 	
-	public List<Book> searchBookList(String title) throws SQLException, BookNotFoundException {
-		List<Book> book = bookDAO.searchBookList(title);
+	public List<Book> searchBookList(String title, String location) throws SQLException, BookNotFoundException {
+		List<Book> book = bookDAO.searchBookList(title, location);
 		if (book == null) {
 			throw new BookNotFoundException(title + "의 검색 결과가 없습니다.");
 		}
@@ -60,8 +59,8 @@ public class BookManager {
 		return book;
 	}
 	
-	public List<Book> cateBookList(int cateId) throws SQLException {
-		return bookDAO.cateBookList(cateId);
+	public List<Book> cateBookList(int cateId, String location) throws SQLException {
+		return bookDAO.cateBookList(cateId, location);
 	}
 	
 	public List<Category> findCategoryList() throws SQLException {
