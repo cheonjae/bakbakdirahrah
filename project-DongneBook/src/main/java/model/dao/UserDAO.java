@@ -207,4 +207,21 @@ public class UserDAO {
 		return false;
 	}
 
+	public int deleteUserBook(String userId) throws SQLException {
+		String sql = "DELETE FROM book WHERE user_id=?";	
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
+
+		try {				
+			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+	}
 }
