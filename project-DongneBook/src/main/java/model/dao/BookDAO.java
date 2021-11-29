@@ -79,7 +79,7 @@ public class BookDAO {
 		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
 		// 쿼리문이~ 확실치 않아요~
 		String keyword = "%" + location + "%";
-        String sql = "SELECT book_id, title, price, image "
+        	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
 				+ "WHERE b.user_id = u.user_id AND u.location LIKE ? ";
         
@@ -109,11 +109,12 @@ public class BookDAO {
 	
 	//책 상세정보 보기에서 사용할 Find. (user_id를 포함한 책 정보 전부)
 	public Book findBookDetails(int bookId) throws SQLException  {
-        String sql = "SELECT user_id, title, author, publisher, "
+        	String sql = "SELECT user_id, title, author, publisher, "
         		+ "price, description, image, sold, category_id, "
 			+ "page_discoloration, cover_damage, page_damage, writing "
-        			+ "FROM BOOK "
-        			+ "WHERE book_id=?";              
+        		+ "FROM BOOK "
+        		+ "WHERE book_id=?";    
+		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
@@ -201,7 +202,7 @@ public class BookDAO {
 	public List<Book> searchBookList(String title, String location) throws SQLException {
 		String keyword1 = "%" + location + "%";
 		String keyword2 = "%" + title + "%";
-        String sql = "SELECT book_id, title, price, image "
+        	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
 				+ "WHERE b.user_id = u.user_id AND u.location LIKE ? AND title LIKE ? ";
 	  
@@ -232,7 +233,7 @@ public class BookDAO {
 	//카테고리 아이디별로 책들을 나열(분류)
 	public List<Book> cateBookList(int cateId, String location) throws SQLException {
 		String keyword = "%" + location + "%";
-        String sql = "SELECT book_id, title, price, image "
+        	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
 				+ "WHERE b.user_id = u.user_id AND u.location LIKE ? AND category_id=?";
 
