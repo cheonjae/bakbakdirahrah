@@ -33,7 +33,7 @@
 					<c:forEach var="buddyId" items="${buddyList}">
 						<c:if test="${buddyId != userId}">
 							<div style="text-align: center; display:table-cell; vertical-align: middle; background: linear-gradient(to right, rgba(147, 176, 255, 0.5), rgba(46, 191, 145, 0.5)); height: 50px; width: 300px; border-radius: 15px;">
-								<a href="<c:url value='/chat/view'><c:param name='buddyId' value="${buddyId}"/><c:param name='userId' value="${userId}"/></c:url> ">
+								<a href="<c:url value='/chat/view'><c:param name='buddyId' value="${buddyId}"/><c:param name='userId' value="${userId}"/></c:url>" onclick="window.open(this.href, '_blank', 'width=570, height=600'); return false;">
 									${buddyId}
 								</a>
 							</div>
