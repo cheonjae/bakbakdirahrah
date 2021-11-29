@@ -11,9 +11,11 @@ public class Transaction {
 	private String meetingMemo;
 	private int sellerCheck;
 	private int buyerCheck;
+	public Book book;
 	
 	public Transaction() {	}
-		
+
+
 	public Transaction(int bookId, String sellerId, String buyerId, int lastPrice, String meetingDate,
 			String meetingPlace, String meetingMemo) {
 		super();
@@ -132,6 +134,16 @@ public class Transaction {
 		this.buyerCheck = buyerCheck;
 	}
 	
+	public Book getBook() {
+		return book;
+	}
+
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Transaction [bookId=" + bookId + ", sellerId=" + sellerId + ", buyerId=" + buyerId + ", lastPrice="
