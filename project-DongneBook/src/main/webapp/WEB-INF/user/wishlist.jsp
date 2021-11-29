@@ -5,7 +5,9 @@
 <%@page import="model.*" %>
 
 <%!int count = 0; %>
-<% Book book = (Book)request.getAttribute("book"); %>
+<% Book book = (Book)request.getAttribute("book");
+	String userId = (String) session.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +41,9 @@
 		<% } %>
 		<td class="tg-0lax" style="width:1%">
 			<div>
-				<a href="<c:url value='/user/wishDelete'><c:param name='bookId' value='${book.bookId}'/></c:url>">
+				<a href="<c:url value='/user/wishDelete'>
+				<c:param name='userId' value='<%=userId %>'/>
+				<c:param name='bookId' value='${book.bookId}'/></c:url>">
 				삭제
 				</a>
 			</div>
