@@ -21,6 +21,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+function acceptQues() {
+	return confirm("거래를 수락하시겠습니까?");		
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
@@ -123,7 +128,7 @@
 													<c:param name='buddyId' value="<%=buddyId %>"/>
 													<c:param name='userId' value="<%=userId %>"/>
 													</c:url>"
-												 	class="btn btn-info" role="button" onClick="confirm('거래를 수락하시겠습니까?');">수락</a>
+												 	class="btn btn-info" role="button" onClick="return acceptQues();">수락</a>
 										</c:otherwise>
 									</c:choose> 
 								</td>
