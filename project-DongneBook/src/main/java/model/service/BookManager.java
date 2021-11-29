@@ -52,7 +52,7 @@ public class BookManager {
 	}
 	
 	public List<Book> findMyBookList(String userId) throws SQLException, BookNotFoundException {
-		List<Book> book = bookDAO.searchBookList(userId);
+		List<Book> book = bookDAO.findMyBookList(userId);
 		if (book == null) {
 			throw new BookNotFoundException("등록한 책이 없습니다.");
 		}
