@@ -43,22 +43,22 @@ public class CheckController implements Controller {
     	Transaction transaction = null;
     	transaction = tmanager.view(bookId, userId, buddyId);
 
-		log.debug("transaction : {}", transaction);
-		
+	log.debug("transaction : {}", transaction);
+
+	request.setAttribute("bookId", bookId);
+
+	if(request.getServletPath().equals("/transaction/check")) {
+		request.setAttribute("user", user);			
+		request.setAttribute("buddyId", buddyId);
+		request.setAttribute("transaction", transaction);
+			
+		return "/transaction/transactionView.jsp"; 
+	} else {
 		List<Transaction> sellDetail = tmanager.sellDetail(UserSessionUtils.getLoginUserId(request.getSession()), bookId);
-
-		request.setAttribute("bookId", bookId);
-
-		if(request.getServletPath().equals("/transaction/check")) {
-			request.setAttribute("user", user);			
-			request.setAttribute("buddyId", buddyId);
-			request.setAttribute("transaction", transaction);
+		
+		request.setAttribute("sellDetail",  sellDetail);
 			
-			return "/transaction/transactionView.jsp"; 
-		} else {
-			request.setAttribute("sellDetail",  sellDetail);
-			
-			return "/mypage/sellDetail.jsp";
-		}
+		return "/mypage/sellDetail.jsp";
+	}
     }
 }
