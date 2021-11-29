@@ -22,13 +22,13 @@ public class DeleteWishlistController implements Controller {
 		String userId =  request.getParameter("userId");
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		
-		//Wishlist wishlist = new Wishlist(userId, bookId);
-		
 		WishlistManager wishlistmanager = WishlistManager.getInstance();
 		wishlistmanager.delete(userId, bookId);
 		
+		List<Book> bookList = wishlistmanager.wishBookList(userId);
+		request.setAttribute("wishBookList", bookList);
 
-		return null;
+		return "/user/wishlist.jsp";
 	}
 
 }
