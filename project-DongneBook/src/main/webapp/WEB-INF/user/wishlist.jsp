@@ -21,6 +21,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/main.css' />" type="text/css">
+<script>
+function wishRemove() {
+	return confirm("정말 삭제하시겠습니까?");		
+}
+</script>
 </head>
 <body>
 <%@include file="/WEB-INF/navbar.jsp" %>
@@ -41,18 +46,19 @@
 		<% } %>
 		<td class="tg-0lax" style="width:1%">
 			<div>
-				<a href="<c:url value='/user/wishDelete'>
+				<a class="btn btn-danger" href="<c:url value='/user/wishDelete'>
 				<c:param name='userId' value='<%=userId %>'/>
-				<c:param name='bookId' value='${book.bookId}'/></c:url>">
+				<c:param name='bookId' value='${book.bookId}'/></c:url>" onClick="return wishRemove();">
 				삭제
 				</a>
 			</div>
-			<a href="<c:url value='/book/detail'><c:param name='bookId' value='${book.bookId}'/></c:url>">
-		    <img src="${pageContext.request.contextPath}/upload/${book.image}" width="100" height="150">
-		    <br>
-		    ${book.title}
-		    <br>
-		    ${book.price}원</a>
+			<br>
+		    	<a href="<c:url value='/book/detail'><c:param name='bookId' value='${book.bookId}'/></c:url>">
+		    	<img src="${pageContext.request.contextPath}/upload/${book.image}" width="100" height="150">
+		    	<br>
+		    	${book.title}
+		    	<br>
+		    	${book.price}원</a>
 		</td>
 		<% if(count % 4 == 3){ %>
 			</tr>
