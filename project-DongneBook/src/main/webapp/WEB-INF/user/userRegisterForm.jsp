@@ -12,11 +12,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 function userCreate() {
-	if (form.userId.value == "") {
-		alert("사용자 ID를 입력하십시오.");
-		form.userId.focus();
-		return false;
-	} 
 	if (form.password.value == "") {
 		alert("비밀번호를 입력하십시오.");
 		form.password.focus();
@@ -27,14 +22,39 @@ function userCreate() {
 		form.name.focus();
 		return false;
 	}
+	if (form.password.value.length < 6) {
+		alert("비밀번호가 너무 짧습니다. 6자리 이상 입력해주세요.");
+		form.name.focus();
+		return false;
+	}
+	if (form.password.value.length > 13) {
+		alert("비밀번호가 너무 깁니다. 13자리 이하로 입력해주세요.");
+		form.name.focus();
+		return false;
+	}
 	if (form.name.value == "") {
 		alert("이름을 입력하십시오.");
+		form.name.focus();
+		return false;
+	}
+	if (form.name.value.length < 2) {
+		alert("이름 형식이 올바르지 않습니다.");
+		form.name.focus();
+		return false;
+	}
+	if (form.name.value.length > 10) {
+		alert("이름이 너무 깁니다. 10자리 이하로 입력해주세요.");
 		form.name.focus();
 		return false;
 	}
 	var emailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 	if(emailExp.test(form.email.value)==false) {
 		alert("이메일 형식이 올바르지 않습니다.");
+		form.email.focus();
+		return false;
+	}
+	if(form.email.value.length < 5) {
+		alert("이메일이 너무 짧습니다.");
 		form.email.focus();
 		return false;
 	}
