@@ -12,6 +12,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 function userCreate() {
+	if (form.userId.value == "") {
+		alert("사용자 ID를 입력하십시오.");
+		form.userId.focus();
+		return false;
+	}
 	if (form.password.value == "") {
 		alert("비밀번호를 입력하십시오.");
 		form.password.focus();
