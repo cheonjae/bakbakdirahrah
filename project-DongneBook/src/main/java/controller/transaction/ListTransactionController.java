@@ -31,11 +31,11 @@ public class ListTransactionController implements Controller {
 		
 		if(request.getServletPath().equals("/transaction/sell")) {
 			request.setAttribute("sellList", sellList);
-			return "/mypage/sellList.jsp";
+			return "/transaction/sellList.jsp";
 		} else {
 			request.setAttribute("buyList", buyList);
 			log.debug("transaction : { }", buyList );
-			return "/mypage/buyList.jsp";
+			return "/transaction/buyList.jsp";
 		}
 	}
 }
