@@ -30,6 +30,6 @@ public class sellDetailController implements Controller {
     		
         	request.setAttribute("bookId", bookId);
         	request.setAttribute("sellDetail", sellDetail);					
-    	return "/mypage/sellDetail.jsp"; 
+    	return "/transaction/sellDetail.jsp"; 
     }
 }
