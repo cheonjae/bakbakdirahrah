@@ -45,8 +45,8 @@ public class RequestMapping {
         mappings.put("/transaction/check", new CheckController());
         mappings.put("/transaction/check2", new CheckController());
         
-        mappings.put("/mypage/history", new ForwardController("/mypage/history.jsp"));
-        mappings.put("/mypage/sell", new sellDetailController());
+        mappings.put("/transaction/history", new ForwardController("/transaction/history.jsp"));
+        mappings.put("/transaction/selldetail", new sellDetailController());
         mappings.put("/transaction/buy", new ListTransactionController());
         mappings.put("/transaction/sell", new ListTransactionController());
         
