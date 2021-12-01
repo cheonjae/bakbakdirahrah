@@ -29,7 +29,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
+<link rel=stylesheet href="<c:url value='/css/detail.css' />" type="text/css">
+<script>
+function acceptQues() {
+	return confirm("거래를 수락하시겠습니까?");		
+}
+</script>
 </head>
 <body class="detail-body">
 <%@include file="/WEB-INF/navbar.jsp" %> 
@@ -154,7 +159,7 @@ if (sellDetail != null) {
 												<c:param name='buddyId' value="${sellDetail.buyerId}"/>
 												<c:param name='userId' value="${sellDetail.sellerId}"/>
 												</c:url>"
-											class="btn btn-info" role="button" onClick="alert('거래를 수락하시겠습니까?')">수락</a>
+											class="btn btn-info" role="button" onClick="return acceptQues();">수락</a>
 										</td>
 		</tr>
 	  </c:forEach> 
