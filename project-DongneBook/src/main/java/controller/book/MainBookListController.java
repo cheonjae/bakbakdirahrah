@@ -36,9 +36,8 @@ public class MainBookListController implements Controller {
     		bookList = bmanager.mainBookList(user.getLocation());
     	} 	
 		request.setAttribute("bookList", bookList);			
-		
-		request.setAttribute("curUserId", 
-				UserSessionUtils.getLoginUserId(request.getSession()));		
+		request.setAttribute("curUserId", UserSessionUtils.getLoginUserId(request.getSession()));	
+	    
 		return "/user/main.jsp";
     }
 }
