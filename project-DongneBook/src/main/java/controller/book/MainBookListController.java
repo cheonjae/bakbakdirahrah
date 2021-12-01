@@ -3,6 +3,7 @@ package controller.book;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +21,15 @@ public class MainBookListController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
     	BookManager bmanager = BookManager.getInstance();
-    	String userId = UserSessionUtils.getLoginUserId(request.getSession());
+    	HttpSession session = request.getSession();	
     	
     	List<Book> bookList = null;
-    	if (userId == null) {
+    	if (!UserSessionUtils.hasLogined(session)) {
     		bookList = bmanager.mainBookList("구");
     	}
     	else {
+    		String userId = UserSessionUtils.getLoginUserId(request.getSession());
+    		
     		UserManager umanager = UserManager.getInstance();
         	User user = umanager.findUser(userId);
         	
