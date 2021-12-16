@@ -57,7 +57,7 @@
 							<a class="dropdown-item" 
 								href="<c:url value='/user/view' >
 								<c:param name='userId' value='${userId}'/>
-								</c:url>">회원 정보 수정</a>
+								</c:url>">회원 정보 조회</a>
                 					<a class="dropdown-item" href="<c:url value='/user/wishlist' />">위시 리스트</a>
                 					<a class="dropdown-item" href="<c:url value='/transaction/history' />">거래 내역</a>
               					</div>
