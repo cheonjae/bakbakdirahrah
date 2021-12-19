@@ -58,7 +58,7 @@ public class CheckController implements Controller {
 		
 		request.setAttribute("sellDetail",  sellDetail);
 			
-		return "/mypage/sellDetail.jsp";
+		return "/transaction/sellDetail.jsp";
 	}
     }
 }
