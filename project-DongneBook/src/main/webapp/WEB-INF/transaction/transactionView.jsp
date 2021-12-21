@@ -8,7 +8,7 @@
 	Transaction transaction = (Transaction)request.getAttribute("transaction");
 	HttpSession session1 = request.getSession();	
 	String userId = (String) session1.getAttribute("userId");
-	String sellerId = request.getParameter("sellerId");
+	String buddyId = request.getParameter("buddyId");
 	
 	String bookId = request.getParameter("bookId");
 %>
@@ -109,7 +109,7 @@ function acceptQues() {
 										<c:when test="${empty transaction}">
 											<a href="<c:url value='/transaction/update' >
 												<c:param name='bookId' value="<%=bookId %>"/>
-												<c:param name='sellerId' value="<%=sellerId %>"/>
+												<c:param name='buddyId' value="<%=buddyId %>"/>
 												<c:param name='buyerId' value="<%=userId %>"/>
 												</c:url>"
 												 class="btn btn-info" role="button" >등록</a>&nbsp;
@@ -117,7 +117,7 @@ function acceptQues() {
 										<c:otherwise>
 											<a class="btn btn-info" href="<c:url value='/transaction/update' >
 												<c:param name='bookId' value="${transaction.bookId}"/>
-												<c:param name='sellerId' value="${transaction.sellerId}"/>
+												<c:param name='buddyId' value="${transaction.sellerId}"/>
 												<c:param name='buyerId' value="${transaction.buyerId}"/>
 												</c:url>"
 												role="button">
@@ -125,7 +125,7 @@ function acceptQues() {
 											</a>&nbsp;
 												<a href="<c:url value='/transaction/check' >
 													<c:param name='bookId' value="${transaction.bookId}"/>
-													<c:param name='sellerId' value="<%=sellerId %>"/>
+													<c:param name='buddyId' value="<%=buddyId %>"/>
 													<c:param name='userId' value="<%=userId %>"/>
 													</c:url>"
 												 	class="btn btn-info" role="button" onClick="return acceptQues();">수락</a>
