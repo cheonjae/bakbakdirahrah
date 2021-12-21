@@ -37,8 +37,11 @@ ul {
 	<%
 if (buyList != null) {	
 	  Iterator<Transaction> buyIter = buyList.iterator();
-
-		Transaction transaction = (Transaction)buyIter.next();
+	  Transaction transaction = null;
+	  
+	  	while(buyIter.hasNext()) {
+			transaction = (Transaction)buyIter.next();
+	  	}
 %>
 		<tr>
 		  <td width="190" align="center" bgcolor="#82C8E6" height="22">책제목</td>
