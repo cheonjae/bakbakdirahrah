@@ -5,6 +5,7 @@
 <%
 HttpSession session1 = request.getSession();	
 String userId = (String) session.getAttribute("userId");
+String buddyId = request.getParameter("buddyId");
 String sellerId = request.getParameter("sellerId");
 String bookId = request.getParameter("bookId");
 %>
@@ -26,7 +27,7 @@ String bookId = request.getParameter("bookId");
 				<div id="book" style="display: inline-block;">
 					<form name="tran-regi" method="POST" action="<c:url value='/transaction/update' />">
 					<input type="hidden" name="bookId" value="<%=bookId%>"/>	  
-					<input type="hidden" name="sellerId" value="<%=sellerId%>"/>	  
+					<input type="hidden" name="buddyId" value="<%=buddyId%>"/>	 	  
 					<input type="hidden" name="buyerId" value="<%=userId%>"/>
 						<c:if test="${registerFailed}">
 							<font color="red"><c:out value="${exception.getMessage()}" /></font>
