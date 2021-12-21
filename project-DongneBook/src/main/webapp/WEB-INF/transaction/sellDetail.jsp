@@ -7,7 +7,7 @@
 	String[] writing = {"없음", "연필/샤프", "볼펜/형광펜"};
 	String[] discolor = {"없음", "있음"};
 	String[] pageDamage = {"없음", "있음"};
-	String[] coverDamage = {"없음", "깨끗하지않음"};
+	String[] coverDamage = {"깨끗함", "깨끗하지않음"};
 %>
 <%
 	@SuppressWarnings("unchecked") 
