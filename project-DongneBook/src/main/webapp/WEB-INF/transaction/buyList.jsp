@@ -45,7 +45,7 @@ if (buyList != null) {
 %>
 		<tr>
 		  <td width="190" align="center" bgcolor="#82C8E6" height="22">책제목</td>
-		  <td width="200" align="center" bgcolor="#82C8E6">구매자</td>
+		  <td width="200" align="center" bgcolor="#82C8E6">판매자</td>
 		  <td width="200" align="center" bgcolor="#82C8E6">최종가격</td>	  
 		  <td width="200" align="center" bgcolor="#82C8E6">만나는날짜</td>
 		  <td width="200" align="center" bgcolor="#82C8E6">만나는장소</td>
@@ -54,7 +54,7 @@ if (buyList != null) {
 	<c:forEach var="buy" items="${buyList}">
   		<tr>
 		  <td width="190" align="center" bgcolor="ffffff" height="20">
-		  	<%=transaction.getBook().getTitle() %>
+		  	 ${buy.book.title}
 		  </td>
 		  <td width="200" bgcolor="ffffff" style="padding-left: 10">
 			  ${buy.sellerId}
