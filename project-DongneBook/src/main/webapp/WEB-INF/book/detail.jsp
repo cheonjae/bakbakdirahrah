@@ -83,14 +83,14 @@ function wishQuestion() {
 	                            	href="<c:url value='/chat/view'>
 	                            		 <c:param name='bookId' value='${book.bookId}'/>
 	                            		 <c:param name='userId' value='<%=userId%>'/>
-	                            		 <c:param name='sellerId' value='${book.userId}'/>
+	                            		 <c:param name='buddyId' value='${book.userId}'/>
 	                            	</c:url>" role="button" onclick="window.open(this.href, '_blank', 'width=570, height=600'); return false;">채팅</a>   
 	                            	
 	                            	<a class="btn btn-primary" 
 	                            	href="<c:url value='/transaction/view'>
 						<c:param name='bookId' value="${book.bookId}"/>
 						<c:param name='userId' value='<%=userId%>'/>
-						<c:param name='sellerId' value="${book.userId}"/>
+						<c:param name='buddyId' value="${book.userId}"/>
 						</c:url>" role="button"
 						onclick="window.open(this.href, '_blank', 'width=570, height=700'); return false;">
 						거래 신청
