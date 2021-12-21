@@ -18,15 +18,14 @@ public class UpdateTransactionController implements Controller{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
 		if (request.getMethod().equals("GET")) {	
-	    	int bookId = Integer.parseInt(request.getParameter("bookId")); 
-	    	String sellerId = request.getParameter("sellerId");
-	    	String buyerId = request.getParameter("buyerId");
+	    		int bookId = Integer.parseInt(request.getParameter("bookId")); 
+	    		String sellerId = request.getParameter("sellerId");
+	    		String buyerId = request.getParameter("buyerId");
 	    	
 			TransactionManager manager = TransactionManager.getInstance();
 			Transaction transaction = manager.view(bookId, sellerId, buyerId);	
 			
-			log.debug("bookId: {} sellerId: {} buyerId: {}"
-					, bookId, sellerId, buyerId);
+			log.debug("bookId: {} sellerId: {} buyerId: {}", bookId, sellerId, buyerId);
 			
 			request.setAttribute("sellerId", sellerId);
 			request.setAttribute("transaction", transaction);		
@@ -45,9 +44,9 @@ public class UpdateTransactionController implements Controller{
 				, bookId, sellerId, buyerId, lastPrice, meetingDate, meetingPlace,  meetingMemo);
 		
 
-	    TransactionManager manager = TransactionManager.getInstance();
-	    Transaction createTransaction = new Transaction(bookId, sellerId, buyerId, lastPrice, meetingDate, meetingPlace, meetingMemo, 0, 0);	
-	    Transaction updateTransaction = new Transaction(bookId, sellerId, buyerId, lastPrice, meetingDate, meetingPlace, meetingMemo);
+	    	TransactionManager manager = TransactionManager.getInstance();
+	    	Transaction createTransaction = new Transaction(bookId, sellerId, buyerId, lastPrice, meetingDate, meetingPlace, meetingMemo, 0, 0);	
+	    	Transaction updateTransaction = new Transaction(bookId, sellerId, buyerId, lastPrice, meetingDate, meetingPlace, meetingMemo);
     	
 		if(manager.view(bookId, sellerId, buyerId) == null) {
 			manager.create(createTransaction);
@@ -57,9 +56,7 @@ public class UpdateTransactionController implements Controller{
 		}
 		
 		Transaction transaction = manager.view(bookId, sellerId, buyerId);
-		
 		request.setAttribute("transaction", transaction);
-
 		return "/transaction/transactionView.jsp";
     }	 	
 }
