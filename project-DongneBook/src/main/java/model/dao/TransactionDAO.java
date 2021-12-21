@@ -175,7 +175,7 @@ public class TransactionDAO {
 				transaction.setMeetingDate(rs.getString("meeting_date"));
 				transaction.setMeetingPlace(rs.getString("meeting_place"));
 				transaction.setMeetingMemo(rs.getString("meeting_memo"));
-				transaction.book = book;
+				transaction.setBook(book);
 				transactionList.add(transaction);
 			}	
 			return transactionList;					
