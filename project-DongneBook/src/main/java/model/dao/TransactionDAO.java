@@ -99,16 +99,41 @@ public class TransactionDAO {
 			if (userId.equals(seller)) {
 				sql = "UPDATE transaction SET seller_check=1 "
 						+ "WHERE book_id=? AND seller_id=? AND buyer_id=?";
-				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId});
 				
-				result = jdbcUtil.executeUpdate();
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId, buddyId});	
 			} else if (userId.equals(buyer)) {
 				sql = "UPDATE transaction SET buyer_check=1 "
 						+ "WHERE book_id=? AND seller_id=? AND buyer_id=?";
-				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, buddyId, userId});
 				
-				result = jdbcUtil.executeUpdate();
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, buddyId, userId});
 			}
+			result = jdbcUtil.executeUpdate();
+			
+			return result;		
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+			
+			soldUpdate(bookId);
+		}	
+		return 0;
+	}
+	
+	public int soldUpdate(int bookId) throws SQLException {
+		String sql = "UPDATE /*+ BYPASS_UJVC */ "
+				+ "(SELECT seller_check, buyer_check, sold FROM transaction t, book b WHERE t.book_id = b.book_id AND t.book_id=?) "
+				+ "SET sold= "
+				+ "CASE WHEN seller_check=1 AND buyer_check=1 THEN 1 "
+				+ "ELSE 0 "
+				+ "END";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	
+		
+		try {
+			int result = jdbcUtil.executeUpdate();
 			
 			return result;					
 		} catch (Exception ex) {
