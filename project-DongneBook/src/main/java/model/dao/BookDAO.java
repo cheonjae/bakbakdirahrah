@@ -9,34 +9,34 @@ import model.Book;
 import model.Category;
 
 /**
- * 梨� 愿�由щ�� �쐞�빐 �뜲�씠�꽣踰좎씠�뒪 �옉�뾽�쓣 �쟾�떞�븯�뒗 DAO �겢�옒�뒪
- * BookInfo �뀒�씠釉붿뿉 梨� �젙蹂대�� 異붽�, �닔�젙, �궘�젣(而⑤뵒�뀡�룷�븿), 寃��깋 �닔�뻾 
+ * 책 관리를 위해 데이터베이스 작업을 전담하는 DAO 클래스
+ * BookInfo 테이블에 책 정보를 추가, 수정, 삭제(컨디션포함), 검색 수행 
 */
 
 public class BookDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public BookDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil 媛앹껜 �깮�꽦
+		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
 		
-	// �깉濡쒖슫 梨� �깮�꽦	
+	// 새로운 책 생성	
 	public Book create(Book book) throws SQLException {
 		String sql = "INSERT INTO book VALUES (?, ?, ?, BOOKSEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object [] param = new Object[] { book.getTitle(), book.getAuthor(), book.getPublisher(),
 					book.getPrice(), book.getDescription(), book.getImage(), book.getUserId(), book.getSold(), 
 					book.getPageDiscoloration(), book.getCoverDamage(), book.getPageDamage(), book.getWriting(), book.getCateId()}; 
 		
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뿉 insert臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 		
 		String key[] = {"book_id"}; 
 		try {
-			jdbcUtil.executeUpdate(key);     // insert 臾� �떎�뻾
-			ResultSet rs = jdbcUtil.getGeneratedKeys();    // �깮�꽦�맂 PK 媛믪쓣 �룷�븿�븳 result set 媛앹껜 諛섑솚
+			jdbcUtil.executeUpdate(key);     // insert 문 실행
+			ResultSet rs = jdbcUtil.getGeneratedKeys();    // 생성된 PK 값을 포함한 result set 객체 반환
 		   	
 			//int generatedKey = 0;
 			if(rs.next()) {
-				//generatedKey = rs.getInt("book_id"); - ��由� 援щЦ
+				//generatedKey = rs.getInt("book_id"); - 틀린 구문
 				int generatedKey = rs.getInt(1);
 		   		book.setBookId(generatedKey);
 		   	}
@@ -46,12 +46,12 @@ public class BookDAO {
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 諛섑솚
+			jdbcUtil.close();	// resource 반환
 		}		
 		return null;	
 	}
 	
-	//梨� �젙蹂� �닔�젙 (user_id�� book_id�뒗 �닔�젙 遺덇��뒫)
+	//책 정보 수정 (user_id와 book_id는 수정 불가능)
 	public int update(Book book) throws SQLException {
 		String sql = "UPDATE book "
 				+ "SET price=?, description=?, sold=? "
@@ -73,10 +73,10 @@ public class BookDAO {
 		return 0;
 	}
 	
-	//硫붿씤�뿉�꽌 �씠�슜�븷 梨� 李얘린. �럹�씠吏��떦 異쒕젰�븷 梨� �닔 異붽�
-	//(梨� �씠誘몄�, �젣紐�, 媛�寃�) -> findUerList 李멸퀬�븿.
+	//메인에서 이용할 책 찾기. 페이지당 출력할 책 수 추가
+	//(책 이미지, 제목, 가격) -> findUerList 참고함.
 	public List<Book> mainBookList(String location) throws SQLException {
-		// BOOK�뿉�꽌 .. book_id瑜� �넻�빐 �씠誘몄�(二쇱냼), �젣紐�, 媛�寃� 媛��졇�삩�떎.
+		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
 
 		if(location.equals("")) {
 			location = "구";
@@ -88,30 +88,30 @@ public class BookDAO {
 				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? ";
         
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword}, 
-				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 媛��뒫
-				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil�뿉 query臾� �꽕�젙
+				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
+				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query �떎�뻾		
-			List<Book> mainBookList = new ArrayList<Book>();	// User�뱾�쓽 由ъ뒪�듃 �깮�꽦
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행		
+			List<Book> mainBookList = new ArrayList<Book>();	// User들의 리스트 생성
 			while (rs.next()) {
-				Book book = new Book(			// User 媛앹껜瑜� �깮�꽦�븯�뿬 �쁽�옱 �뻾�쓽 �젙蹂대�� ���옣
+				Book book = new Book(			// User 객체를 생성하여 현재 행의 정보를 저장
 					rs.getInt("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
-				mainBookList.add(book);				// List�뿉 Book 媛앹껜 ���옣
+				mainBookList.add(book);				// List에 Book 객체 저장
 			}	
 			return mainBookList;					
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 諛섑솚
+			jdbcUtil.close();		// resource 반환
 		}
 		return null;
 	}
 	
-	//梨� �긽�꽭�젙蹂� 蹂닿린�뿉�꽌 �궗�슜�븷 Find. (user_id瑜� �룷�븿�븳 梨� �젙蹂� �쟾遺�)
+	//책 상세정보 보기에서 사용할 Find. (user_id를 포함한 책 정보 전부)
 	public Book findBookDetails(int bookId) throws SQLException  {
         	String sql = "SELECT user_id, title, author, publisher, "
         		+ "price, description, image, sold, category_id, "
@@ -119,12 +119,12 @@ public class BookDAO {
         		+ "FROM BOOK "
         		+ "WHERE book_id=?";    
 		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil�뿉 query臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query �떎�뻾
-			if (rs.next()) {						// 梨� �젙蹂� 諛쒓껄
-				Book book = new Book(		// User 媛앹껜瑜� �깮�꽦�븯�뿬 �븰�깮 �젙蹂대�� ���옣
+			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+			if (rs.next()) {						// 책 정보 발견
+				Book book = new Book(		// User 객체를 생성하여 학생 정보를 저장
 					bookId,
 					rs.getString("user_id"),
 					rs.getString("title"),
@@ -145,21 +145,21 @@ public class BookDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 諛섑솚
+			jdbcUtil.close();		// resource 반환
 		}
 		return null;
 	}
 	
 	
 	/**
-	 * 遺� ID�뿉 �빐�떦�븯�뒗 �궗�슜�옄瑜� �궘�젣. 
+	 * 북 ID에 해당하는 사용자를 삭제. 
 	 */
 	public int deleteBook(int bookId, String userId) throws SQLException {
 		String sql = "DELETE FROM wishlist WHERE book_id=?";	
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil�뿉 delete臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete 臾� �떎�뻾
+			int result = jdbcUtil.executeUpdate();	// delete 문 실행
 			
 			jdbcUtil.commit();
 			jdbcUtil.close();
@@ -176,42 +176,42 @@ public class BookDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 諛섑솚
+			jdbcUtil.close();	// resource 반환
 		}		
 		return 0;
 	}
 	
-	//留덉씠�럹�씠吏��뿉 �궡媛� �벑濡앺븳 梨낅뱾�쓣 �럹�씠吏�蹂꾨줈(4 * 4) �굹�뿴
+	//마이페이지에 내가 등록한 책들을 페이지별로(4 * 4) 나열
 	public List<Book> findMyBookList(String userId) throws SQLException {
 		String sql = "SELECT book_id, title, price, image "
         			+ "FROM book "
         			+ "WHERE user_id=?";   
 
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId},		// JDBCUtil�뿉 query臾� �꽕�젙
-				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 媛��뒫
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId},		// JDBCUtil에 query문 설정
+				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);					
 		
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();				// query �떎�뻾			
-			List<Book> myBookList = new ArrayList<Book>();	// �궡 �벑濡� 梨낅뱾�쓽 由ъ뒪�듃 �깮�꽦
+			ResultSet rs = jdbcUtil.executeQuery();				// query 실행			
+			List<Book> myBookList = new ArrayList<Book>();	// 내 등록 책들의 리스트 생성
 			while(rs.next()) {
-				Book book = new Book(			// Book 媛앹껜瑜� �깮�꽦�븯�뿬 梨� �젙蹂대�� ���옣
+				Book book = new Book(			// Book 객체를 생성하여 책 정보를 저장
 				rs.getInt("book_id"),
 				rs.getString("title"),
 				rs.getInt("price"),
 				rs.getString("image"));
-				myBookList.add(book);			// 由ъ뒪�듃�뿉 Book 媛앹껜 ���옣
+				myBookList.add(book);			// 리스트에 Book 객체 저장
 			} 	
 			return myBookList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 諛섑솚
+			jdbcUtil.close();		// resource 반환
 		}
 		return null;
 	}
 	
-	//�젣紐⑹쑝濡� 寃��깋�븳 梨낅뱾�쓣 �굹�뿴
+	//제목으로 검색한 책들을 나열
 	public List<Book> searchBookList(String title, String location) throws SQLException {
 		String keyword1 = "%" + location + "%";
 		String keyword2 = "%" + title + "%";
@@ -219,57 +219,57 @@ public class BookDAO {
 				+ "FROM book b, users u "
 				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? AND title LIKE ? ";
 	  
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword1, keyword2},		// JDBCUtil�뿉 query臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
-				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 媛��뒫
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword1, keyword2},		// JDBCUtil에 query문과 매개 변수 설정
+				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);					
 		
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();				// query �떎�뻾	
-				List<Book> searchBookList = new ArrayList<Book>();	// �궡 �벑濡� 梨낅뱾�쓽 由ъ뒪�듃 �깮�꽦
+			ResultSet rs = jdbcUtil.executeQuery();				// query 실행	
+				List<Book> searchBookList = new ArrayList<Book>();	// 내 등록 책들의 리스트 생성
 			while(rs.next()) {
-				Book book = new Book(			// Book 媛앹껜瑜� �깮�꽦�븯�뿬 梨� �젙蹂대�� ���옣
+				Book book = new Book(			// Book 객체를 생성하여 책 정보를 저장
 					rs.getInt("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
-				searchBookList.add(book);			// 由ъ뒪�듃�뿉 Book 媛앹껜 ���옣
+				searchBookList.add(book);			// 리스트에 Book 객체 저장
 			}		
 			return searchBookList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 諛섑솚
+			jdbcUtil.close();		// resource 반환
 		}
 		return null;
 	}
 	
-	//移댄뀒怨좊━ �븘�씠�뵒蹂꾨줈 梨낅뱾�쓣 �굹�뿴(遺꾨쪟)
+	//카테고리 아이디별로 책들을 나열(분류)
 	public List<Book> cateBookList(int cateId, String location) throws SQLException {
 		String keyword = "%" + location + "%";
         	String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
 				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? AND category_id=?";
 
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword, cateId},	// JDBCUtil�뿉 query臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
-				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 媛��뒫
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword, cateId},	// JDBCUtil에 query문과 매개 변수 설정
+				ResultSet.TYPE_SCROLL_INSENSITIVE,		// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);					
 		
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();				// query �떎�뻾			
-			List<Book> cateBookList = new ArrayList<Book>();	// �궡 �벑濡� 梨낅뱾�쓽 由ъ뒪�듃 �깮�꽦
+			ResultSet rs = jdbcUtil.executeQuery();				// query 실행			
+			List<Book> cateBookList = new ArrayList<Book>();	// 내 등록 책들의 리스트 생성
 			while(rs.next()) {
-				Book book = new Book(			// Book 媛앹껜瑜� �깮�꽦�븯�뿬 梨� �젙蹂대�� ���옣
+				Book book = new Book(			// Book 객체를 생성하여 책 정보를 저장
 					rs.getInt("book_id"),
 					rs.getString("title"),
 					rs.getInt("price"),
 					rs.getString("image"));
-				cateBookList.add(book);			// 由ъ뒪�듃�뿉 Book 媛앹껜 ���옣
+				cateBookList.add(book);			// 리스트에 Book 객체 저장
 			} 	
 			return cateBookList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 諛섑솚
+			jdbcUtil.close();		// resource 반환
 		}
 		return null;
 	}
@@ -278,23 +278,23 @@ public class BookDAO {
 		String sql = "SELECT category_id, cd_name "
      		   + "FROM category "
      		   + "ORDER BY cd_name";        
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil�뿉 query臾� �꽕�젙
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query �떎�뻾			
-			List<Category> categoryList = new ArrayList<Category>();	// Community�뱾�쓽 由ъ뒪�듃 �깮�꽦
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Category> categoryList = new ArrayList<Category>();	// Community들의 리스트 생성
 			while (rs.next()) {
-				Category cate = new Category(			// Community 媛앹껜瑜� �깮�꽦�븯�뿬 �쁽�옱 �뻾�쓽 �젙蹂대�� ���옣
+				Category cate = new Category(			// Community 객체를 생성하여 현재 행의 정보를 저장
 						rs.getInt("cateId"),
 						rs.getString("cateName"));
-				categoryList.add(cate);				// List�뿉 Community 媛앹껜 ���옣
+				categoryList.add(cate);				// List에 Community 객체 저장
 			}		
 			return categoryList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 諛섑솚
+			jdbcUtil.close();		// resource 반환
 		}
 		return null;
 	}
@@ -324,5 +324,4 @@ public class BookDAO {
 		}
 		return null;
 	}
-	
 }
