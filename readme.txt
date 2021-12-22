@@ -1,8 +1,5 @@
 유의사항
 * 인코딩: UTF-8
-* 만약 메인 화면에서 아무 책도 보이지 않는다면, 한글이 깨져 문제가 발생한 것이므로 아래 코드를 참고해주세요.
-  위치: src/main/java/controller/book/MainBookListController.java, line28
-       bookList = bmanager.mainBookList("구");
 * 회원가입, 로그인 페이지에서 창이 일정 너비 이하인 경우 입력창이 화면 밑에 위치합니다. (전체 화면 권장)
 * 본인 컴퓨터에서 등록한 책의 사진만 보여집니다.
 
