@@ -77,19 +77,26 @@ public class BookDAO {
 	//(책 이미지, 제목, 가격) -> findUerList 참고함.
 	public List<Book> mainBookList(String location) throws SQLException {
 		// BOOK에서 .. book_id를 통해 이미지(주소), 제목, 가격 가져온다.
-
+		// 쿼리문이~ 확실치 않아요~
 		if(location.equals("")) {
-			location = "구";
-		}
-		
-		String keyword = "%" + location + "%";
-        	String sql = "SELECT book_id, title, price, image "
+        		String sql = "SELECT book_id, title, price, image "
 				+ "FROM book b, users u "
-				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? ";
-        
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword}, 
-				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
-				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
+				+ "WHERE b.user_id = u.user_id AND b.sold = 0";
+        	
+    			jdbcUtil.setSqlAndParameters(sql, new Object[] {}, 
+    				ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
+    				ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
+		}
+		else {
+			String keyword = "%" + location + "%";
+	        	String sql = "SELECT book_id, title, price, image "
+				+ "FROM book b, users u "
+				+ "WHERE b.user_id = u.user_id AND b.sold = 0 AND u.location LIKE ? ";			
+	        	
+	    		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword}, 
+	    			ResultSet.TYPE_SCROLL_INSENSITIVE,	// cursor scroll 가능
+	    			ResultSet.CONCUR_READ_ONLY);		// JDBCUtil에 query문 설정
+		}
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행		
