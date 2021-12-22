@@ -25,7 +25,7 @@ public class MainBookListController implements Controller {
     	
     	List<Book> bookList = null;
     	if (!UserSessionUtils.hasLogined(session)) {
-    		bookList = bmanager.mainBookList("±¸");
+    		bookList = bmanager.mainBookList("êµ¬");
     	}
     	else {
     		String userId = UserSessionUtils.getLoginUserId(request.getSession());
