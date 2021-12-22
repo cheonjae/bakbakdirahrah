@@ -151,11 +151,20 @@ public class BookDAO {
 	 * 북 ID에 해당하는 사용자를 삭제. 
 	 */
 	public int deleteBook(int bookId, String userId) throws SQLException {
-		String sql = "DELETE FROM book WHERE book_id=? AND user_id=?";	
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId});	// JDBCUtil에 delete문과 매개 변수 설정
+		String sql = "DELETE FROM wishlist WHERE book_id=?";	
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
 			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			
+			jdbcUtil.commit();
+			jdbcUtil.close();
+			
+			sql = "DELETE FROM book WHERE book_id=? AND user_id=?";	
+			jdbcUtil.setSqlAndParameters(sql, new Object[] {bookId, userId});
+			
+			result = jdbcUtil.executeUpdate();
+			
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
